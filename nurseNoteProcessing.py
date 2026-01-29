@@ -13,6 +13,8 @@ def preprocessing(texts):
         text = re.sub(r"\s+([.,!?;:])", r"\1", text)
         text = re.sub(r"([.,!?;])\s*", r"\1 ", text)
         text = text.replace(':`', '')
+        text = text.replace('[', '')
+        text = text.replace(']', '')
         temp_list.append(text)
     return temp_list
 
@@ -27,7 +29,6 @@ for folder in os.listdir(f'./{INPUT_FOLDER}/'):
                             if file[0] != '.' and 'xlsx' in file:
                                 if 'dailyNurseNotes' in file:
                                     nurse_notes[sub_sub_folder.split(' ')[0]] = preprocessing(list(pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/{file}')['Note'].dropna()))
-
 
 if not os.path.exists(f'./{OUTPUT_FOLDER}/'):
     os.makedirs(f'./{OUTPUT_FOLDER}/', exist_ok=False)  
