@@ -37,6 +37,7 @@ def preprocessing(texts, min_words = 5):
 
 # Process all T1 files (this can be adjusted later for T2 also).
 nurse_notes = {}
+nurse_notes_processed = {}
 for folder in os.listdir(f'./{INPUT_FOLDER}/'):
     if '.' not in folder:
         for sub_folder in os.listdir(f'./{INPUT_FOLDER}/{folder}'):
@@ -46,7 +47,9 @@ for folder in os.listdir(f'./{INPUT_FOLDER}/'):
                         for file in os.listdir(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}'):
                             if file[0] != '.' and 'xlsx' in file:
                                 if 'dailyNurseNotes' in file:
-                                    nurse_notes[sub_sub_folder.split(' ')[0]] = preprocessing(list(pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/{file}')['Note'].dropna()))
+                                    nurse_notes_processed[sub_sub_folder.split(' ')[0]] = preprocessing(list(pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/{file}')['Note'].dropna()))
+                                    nurse_notes[sub_sub_folder.split(' ')[0]] = list(pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/{file}')['Note'].dropna())
+
 
 # If saving folder does not exist, make it.
 if not os.path.exists(f'./{OUTPUT_FOLDER}/'):
@@ -55,4 +58,9 @@ if not os.path.exists(f'./{OUTPUT_FOLDER}/'):
 # Save JSON output.
 json_str = json.dumps(nurse_notes, indent=4)
 with open(f'./{OUTPUT_FOLDER}/nurseNotes.json', "w") as f:
+    f.write(json_str)
+
+# Save JSON output.
+json_str = json.dumps(nurse_notes_processed, indent=4)
+with open(f'./{OUTPUT_FOLDER}/nurseNotesProcessed.json', "w") as f:
     f.write(json_str)

@@ -483,3 +483,8 @@ class Matave:
                 width=1920,     
                 height=1080         
             )
+
+            fig.write_html(
+                file_name + ".html",
+                full_html=True
+            )
