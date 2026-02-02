@@ -20,9 +20,13 @@ nlp = spacy.load(
 )
 
 # Make function to remove punctuation, make lowercase, remove stopwords, punctuation, lemmatize, remove documents with less than 5 tokens.
-def preprocessing(texts, min_words = 5):
-    cleaned_texts = []
-    for doc in nlp.pipe(texts, batch_size=1000):
+def preprocessing(notes, dates, times, min_words=5):
+    cleaned_notes = []
+    cleaned_dates = []
+    cleaned_times = []
+
+    for note, date, time in zip(notes, dates, times):
+        doc = nlp(note)
         tokens = [
             token.lemma_.lower()
             for token in doc
@@ -32,8 +36,13 @@ def preprocessing(texts, min_words = 5):
             and token.is_alpha
         ]
         if len(tokens) >= min_words:
-            cleaned_texts.append(" ".join(tokens))
-    return cleaned_texts
+            cleaned_notes.append(" ".join(tokens))
+            cleaned_dates.append(date)
+            cleaned_times.append(time)
+
+    return cleaned_notes, cleaned_dates, cleaned_times
+
+
 
 # Process all T1 files (this can be adjusted later for T2 also).
 nurse_notes = {}
@@ -47,8 +56,12 @@ for folder in os.listdir(f'./{INPUT_FOLDER}/'):
                         for file in os.listdir(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}'):
                             if file[0] != '.' and 'xlsx' in file:
                                 if 'dailyNurseNotes' in file:
-                                    nurse_notes_processed[sub_sub_folder.split(' ')[0]] = preprocessing(list(pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/{file}')['Note'].dropna()))
-                                    nurse_notes[sub_sub_folder.split(' ')[0]] = list(pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/{file}')['Note'].dropna())
+                                    temp_df = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/{file}')
+                                    temp_df = temp_df.dropna(subset=['Note', 'Date', 'Time'])
+                                    temp_notes, temp_dates, temp_times = list(temp_df['Note']), list(temp_df['Date'].astype(str)), list(temp_df['Time'].astype(str))
+                                    processed_temp_notes, processed_temp_dates, processed_temp_times = preprocessing(list(temp_df['Note']), list(temp_df['Date'].astype(str)), list(temp_df['Time'].astype(str)))
+                                    nurse_notes_processed[sub_sub_folder.split(' ')[0]] = {'Date': processed_temp_dates, 'Time': processed_temp_times, 'Note': processed_temp_notes}
+                                    nurse_notes[sub_sub_folder.split(' ')[0]] = {'Date': temp_dates, 'Time': temp_times, 'Note': temp_notes}
 
 
 # If saving folder does not exist, make it.
