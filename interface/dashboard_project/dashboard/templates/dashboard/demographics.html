@@ -1,0 +1,15 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Demographics Comparison{% endblock %}
+
+{% block content %}
+
+<h1>Demographics Comparison</h1>
+
+{% for graph in graphs %}
+    <div style="margin-bottom: 60px;">
+        {{ graph|safe }}
+    </div>
+{% endfor %}
+
+{% endblock %}
