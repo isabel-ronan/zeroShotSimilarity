@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h1>Person Dashboard</h1>
+
+<form method="get">
+    <label for="person">Select Person:</label>
+    <select id="person" name="person" onchange="this.form.submit()">
+        {% for p in persons %}
+            <option value="{{ p }}" {% if p == selected_person %}selected{% endif %}>
+                {{ p }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
+
+<hr>
+
+<div>
+    {{ graph|safe }}
+</div>
+
+</body>
+</html>
