@@ -1,0 +1,29 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Medication Timeline{% endblock %}
+
+{% block content %}
+
+<h1>Medication Timeline</h1>
+<form method="get" style="margin-bottom:20px;">
+    <label>Select Patient:</label>
+    <select name="patient" onchange="this.form.submit()">
+
+        <option value="all" {% if selected_patient == "all" %}selected{% endif %}>
+            All Patients
+        </option>
+
+        {% for p in patients %}
+        <option value="{{ p }}" {% if selected_patient == p %}selected{% endif %}>
+            Patient {{ p }}
+        </option>
+        {% endfor %}
+
+    </select>
+</form>
+
+<div>
+    {{ graph|safe }}
+</div>
+
+{% endblock %}

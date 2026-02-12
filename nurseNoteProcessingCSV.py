@@ -87,6 +87,13 @@ def main():
                             meds = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/meds_{sub_sub_folder.split(' ')[0]}.xlsx')
                             meds = meds.dropna(subset=['Medications in Use in previous 6 to 9 months'])
                             meds = meds[['Medications in Use in previous 6 to 9 months', 'Regular, PRN, or short course', 'Date started (all meds)', 'Date discontinued']]
+                            meds_columns = [(column.split('\n')[0]).replace("'", '') for column in meds.columns]
+                            meds.columns = meds_columns
+                            meds.columns = [
+                                "".join([str(x) for x in col if "Unnamed" not in str(x)]).strip()
+                                for col in meds.columns
+                                ]
+                            meds = meds.drop(columns=[column for column in meds.columns if 'Unnamed' in column])
                             # -------- Demographics --------
                             t1 = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/t1_{sub_sub_folder.split(' ')[0]}.xlsx')   
                             t1_columns = [(column.split('\n')[0]).replace("'", '') for column in t1.columns]
@@ -96,7 +103,6 @@ def main():
                                 for col in t1.columns
                                 ]
                             t1 = t1.drop(columns=[column for column in t1.columns if 'Unnamed' in column])
-                            print(t1)
                             all_data[sub_sub_folder.split(' ')[0]] = {'Temporal Information': big_df, 'Medications': meds, 'Demographics': t1}                      
 
 

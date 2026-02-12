@@ -6,7 +6,6 @@ from django.shortcuts import render
 from django.conf import settings
 import glob
 
-
 def dashboard_view(request):
     person = request.GET.get('person', 'P1')
     file_path = os.path.join(
@@ -114,7 +113,7 @@ def demographics_view(request):
         ))
 
         fig.update_layout(
-            title=f'{variable} Comparison',
+            title=f'{variable}',
             xaxis_title='Patient',
             yaxis_title=variable,
             template='plotly_white',
@@ -131,4 +130,141 @@ def demographics_view(request):
 
     return render(request, 'dashboard/demographics.html', {
         'graphs': graphs
+    })
+
+def medications_view(request):
+
+    def patient_sort_key(pid):
+        return int(''.join(filter(str.isdigit, pid)) or 0)
+
+    selected_patient = request.GET.get("patient", "all")
+
+    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedCSV')
+    file_pattern = os.path.join(data_folder, 'medications*.csv')
+
+    files = sorted(
+        glob.glob(file_pattern),
+        key=lambda x: patient_sort_key(
+            os.path.basename(x).replace('medications', '').replace('.csv', '')
+        )
+    )
+
+    fig = go.Figure()
+
+    symbol_map = {
+        "regular": "circle",
+        "prn": "diamond",
+        "short course": "square",
+        "unknown": "x"
+    }
+
+    color_map = {
+        "regular": "green",
+        "prn": "orange",
+        "short course": "purple",
+        "unknown": "gray"
+    }
+
+    shown_legends = set()
+
+    for file_path in files:
+        filename = os.path.basename(file_path)
+        patient_id = filename.replace('medications', '').replace('.csv', '')
+
+        if selected_patient != "all" and selected_patient != patient_id:
+            continue
+
+        df = pd.read_csv(file_path)
+
+        # remove unnamed columns
+        df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+
+        # strip spaces
+        df.columns = df.columns.str.strip()
+
+        # parse dates
+        df['Date started (all meds)'] = pd.to_datetime(df['Date started (all meds)'], errors='coerce')
+        df['Date discontinued'] = pd.to_datetime(df['Date discontinued'], errors='coerce')
+        df['Date discontinued'] = df['Date discontinued'].fillna(pd.Timestamp.today())
+
+        # sort meds
+        df = df.sort_values('Date started (all meds)')
+
+        for _, row in df.iterrows():
+            start = row['Date started (all meds)']
+            end = row['Date discontinued']
+
+            if pd.isna(start) or pd.isna(end):
+                continue
+
+            med_name = str(row.get("Medications in Use in previous 6 to 9 months", "Unknown Med")).strip()
+            if med_name == "":
+                med_name = "Unknown Med"
+
+            med_type_raw = row.get("Regular, PRN, or short course")
+            if pd.isna(med_type_raw) or str(med_type_raw).strip() == "":
+                med_type = "unknown"
+            else:
+                med_type = str(med_type_raw).strip().lower()
+
+            symbol = symbol_map.get(med_type, "x")
+            line_color = color_map.get(med_type, "gray")
+            legend_group = med_type.title()
+
+            label = f'{patient_id} — {med_name}'
+
+            fig.add_trace(go.Scatter(
+                x=[start, end],
+                y=[label, label],
+                mode="lines",
+                line=dict(width=3, color=line_color),
+                showlegend=False,
+                legendgroup=legend_group
+            ))
+
+            show_legend = legend_group not in shown_legends
+            shown_legends.add(legend_group)
+
+            fig.add_trace(go.Scatter(
+                x=[start],
+                y=[label],
+                mode='markers',
+                marker=dict(size=12, symbol=symbol, color=line_color),
+                name=legend_group,
+                legendgroup=legend_group,
+                showlegend=show_legend,
+                hovertemplate=f"{med_name}<br>Start: {start:%Y-%m-%d}<extra></extra>"
+            ))
+
+            fig.add_trace(go.Scatter(
+                x=[end],
+                y=[label],
+                mode='markers',
+                marker=dict(size=12, symbol='triangle-down', color=line_color),
+                name='',  
+                legendgroup=legend_group,
+                showlegend=False,
+                hovertemplate=f"{med_name}<br>End: {end:%Y-%m-%d}<extra></extra>"
+            ))
+
+
+    fig.update_layout(
+        title='Medication Timeline',
+        xaxis_title='Date',
+        yaxis_title='Patient / Medication',
+        template='plotly_white',
+        xaxis=dict(type="date")
+    )
+
+    graph_div = opy.plot(fig, auto_open=False, output_type='div')
+
+    patient_ids = [
+        os.path.basename(f).replace('medications','').replace('.csv','')
+        for f in files
+    ]
+
+    return render(request, 'dashboard/medications.html', {
+        'graph': graph_div,
+        'patients': sorted(patient_ids, key=patient_sort_key),
+        'selected_patient': selected_patient
     })
