@@ -1,0 +1,44 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Individual Dashboard{% endblock %}
+
+{% block content %}
+
+<h1>Sentiment Analysis</h1>
+
+
+<form method="get" style="margin-bottom:20px;">
+
+    <label>Patient:</label>
+    <select name="patient" onchange="this.form.submit()">
+
+        <option value="all" {% if selected_patient == "all" %}selected{% endif %}>
+            All Patients
+        </option>
+
+        {% for p in patients %}
+        <option value="{{p}}" {% if selected_patient == p %}selected{% endif %}>
+            {{p}}
+        </option>
+        {% endfor %}
+
+    </select>
+
+    <label style="margin-left:20px;">Note Type:</label>
+    <select name="note_type" onchange="this.form.submit()">
+
+        {% for n in note_types %}
+        <option value="{{n}}" {% if selected_note_type == n %}selected{% endif %}>
+            {{n}}
+        </option>
+        {% endfor %}
+
+    </select>
+
+</form>
+
+<div>
+    {{ graph|safe }}
+</div>
+
+{% endblock %}

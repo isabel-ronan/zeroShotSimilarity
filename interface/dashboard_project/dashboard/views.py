@@ -5,6 +5,8 @@ import plotly.offline as opy
 from django.shortcuts import render
 from django.conf import settings
 import glob
+from textblob import TextBlob
+
 
 def dashboard_view(request):
     person = request.GET.get('person', 'P1')
@@ -267,4 +269,116 @@ def medications_view(request):
         'graph': graph_div,
         'patients': sorted(patient_ids, key=patient_sort_key),
         'selected_patient': selected_patient
+    })
+
+def sentiment_view(request):
+
+    def patient_sort_key(pid):
+        return int(''.join(filter(str.isdigit, pid)) or 0)
+
+    selected_patient = request.GET.get("patient", "P1")
+    selected_note_type = request.GET.get("note_type", "Nurse Note")
+
+    note_columns = [
+        "Nurse Note",
+        "Carer Note",
+        "Multi-Disciplinary Note"
+    ]
+
+    # fallback if URL param invalid
+    if selected_note_type not in note_columns:
+        selected_note_type = "Nurse Note"
+
+    # -------------------------
+    # load files
+    # -------------------------
+    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedINTERFACE')
+
+    files = sorted(
+        glob.glob(os.path.join(data_folder, "temporalInformation*.json")),
+        key=lambda x: patient_sort_key(
+            os.path.basename(x).replace("temporalInformation","").replace(".json","")
+        )
+    )
+
+    fig = go.Figure()
+
+    # -------------------------
+    # loop files
+    # -------------------------
+    for file_path in files:
+
+        filename = os.path.basename(file_path)
+        patient_id = filename.replace("temporalInformation","").replace(".json","")
+
+        if selected_patient != "all" and selected_patient != patient_id:
+            continue
+
+        df = pd.read_json(file_path)
+
+        df.columns = df.columns.str.strip()
+
+        # skip if chosen column doesn't exist
+        if selected_note_type not in df.columns:
+            continue
+
+        # parse datetime
+        df["DateTime"] = pd.to_datetime(df["DateTime"], errors="coerce")
+        df = df.dropna(subset=["DateTime", selected_note_type])
+
+        # compute sentiment
+        sentiments = []
+        hover_text = []
+
+        for note in df[selected_note_type]:
+
+            score = TextBlob(note).sentiment.polarity
+
+            sentiments.append(score)
+
+            hover_text.append(
+                f"<b>{patient_id}</b><br>"
+                f"{selected_note_type}:<br>"
+                f"{note}<br>"
+                f"Sentiment: {score:.2f}"
+            )
+
+        df["Sentiment"] = sentiments
+
+        # plot trace
+        fig.add_trace(go.Scatter(
+            x=df["DateTime"],
+            y=df["Sentiment"],
+            mode="markers+lines",
+            name=patient_id,
+            text=hover_text,
+            hovertemplate="%{text}<extra></extra>"
+        ))
+
+    # -------------------------
+    # layout
+    # -------------------------
+    fig.update_layout(
+        title=f"Sentiment Over Time — {selected_note_type}",
+        xaxis_title="Date",
+        yaxis_title="Sentiment Score",
+        template="plotly_white",
+        xaxis=dict(type="date"),
+        yaxis=dict(range=[-1,1])
+    )
+
+    graph_div = opy.plot(fig, auto_open=False, output_type='div')
+
+    # patient list
+    patient_ids = [
+        os.path.basename(f).replace("temporalInformation","").replace(".json","")
+        for f in files
+    ]
+
+    return render(request, "dashboard/sentiment.html", {
+        "graph": graph_div,
+        "patients": sorted(patient_ids, key=patient_sort_key),
+        "selected_patient": selected_patient,
+        "note_types": note_columns,
+        "selected_note_type": selected_note_type
     })
