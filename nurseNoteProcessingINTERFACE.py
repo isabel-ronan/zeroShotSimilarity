@@ -1,6 +1,7 @@
 # Import packages.
 import os
 import pandas as pd
+from sentence_transformers import SentenceTransformer
 
 import warnings
 
@@ -10,7 +11,10 @@ def main():
 
     # Initialize constant variables.
     INPUT_FOLDER = 'data'
-    OUTPUT_FOLDER = 'dataProcessedCSV'
+    OUTPUT_FOLDER = 'dataProcessedINTERFACE'
+
+    # Make SentenceTransformer model. We are using sentence-transformers/all-MiniLM-L6-v2 as the sentence length in the dataset is relatively short (longest sentence is < 256 words) and this is a lightweight model that can easily run locally (also very popular). 
+    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
     # Process all T1 files (this can be adjusted later for T2 also). 
     # Minor processing of data points to make separate date and time columns where applicable and removing NaN values.
@@ -58,31 +62,38 @@ def main():
                                 carer_notes = carer_notes.dropna(subset=['Date', 'Time', 'Activity'])
                                 carer_notes['Carer Note'] = carer_notes['Activity']
                                 carer_notes = carer_notes.drop(columns=['Activity'])
+                            carer_notes['Carer Note - Embeddings'] = list(model.encode(carer_notes['Carer Note'].values.tolist(), normalize_embeddings=True))
+                            
                             # -------- Nurse Notes --------
                             daily_nurse = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/dailyNurseNotes_{sub_sub_folder.split(' ')[0]}.xlsx')
                             daily_nurse = daily_nurse[['Date', 'Time', 'Note']]
                             daily_nurse['Nurse Note'] = daily_nurse['Note']
                             daily_nurse = daily_nurse.dropna(subset=['Note', 'Date', 'Time'])
                             daily_nurse = daily_nurse.drop(columns=['Note'])
+                            daily_nurse['Nurse Note - Embeddings'] = list(model.encode(daily_nurse['Nurse Note'].values.tolist(), normalize_embeddings=True))
                             # -------- Monthly --------
                             monthly = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/monthly_{sub_sub_folder.split(' ')[0]}.xlsx')
                             monthly = monthly.drop(columns=['Resident Study Number'])
                             # -------- Multi-Disciplinary Notes --------
                             multi = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/multiDisciplinaryNotes_{sub_sub_folder.split(' ')[0]}.xlsx')
                             multi['Multi-Disciplinary Note'] = multi['Note']
-                            multi = multi.drop(columns=['Resident Study Number', 'Delirium Indicated', 'Note'])
+                            multi = multi.drop(columns=['Resident Study Number', 'Delirium Indicated', 'Note', 'Note Type'])
+                            multi = multi.dropna(subset=['Multi-Disciplinary Note'])
+                            multi['Multi-Disciplinary Note - Embeddings'] = list(model.encode(multi['Multi-Disciplinary Note'].values.tolist(), normalize_embeddings=True))
                             # -------- Quarterly --------
                             quarterly = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/quarterly_{sub_sub_folder.split(' ')[0]}.xlsx')
                             quarterly = quarterly.drop(columns=['Resident Study Number'])
                             # Big Concatenation 
-                            big_df = pd.concat([carer_notes, daily_nurse, monthly, multi, quarterly])
+                            big_df = pd.concat([carer_notes, daily_nurse, multi, monthly, quarterly])
                             cleaned_dates = []
                             for date in big_df['Date']:
                                 date = (str(date)).strip()
                                 cleaned_dates.append(date.split(' ')[0])
                             big_df['Date'] = cleaned_dates
                             big_df['DateTime'] = pd.to_datetime(big_df['Date'].astype(str) + ' ' + big_df['Time'].astype(str), format='mixed')
-                            big_df = big_df.sort_values('DateTime')                        
+                            big_columns = [(column.split('\n')[0]).replace("'", '') for column in big_df.columns]
+                            big_df.columns = big_columns
+                            big_df = big_df.sort_values('DateTime')
                             # -------- Meds --------
                             meds = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/meds_{sub_sub_folder.split(' ')[0]}.xlsx')
                             meds = meds.dropna(subset=['Medications in Use in previous 6 to 9 months'])
@@ -112,7 +123,7 @@ def main():
 
     for patient, values in all_data.items():
         for value_type, value in values.items():
-            value.to_csv(f'./{OUTPUT_FOLDER}/{value_type[:1].lower() + value_type.replace(' ', '')[1:]}{patient}.csv')
+            value.to_json(f'./{OUTPUT_FOLDER}/{value_type[:1].lower() + value_type.replace(' ', '')[1:]}{patient}.json', orient='records', date_format='iso')
 
 if __name__ == '__main__':
     main()

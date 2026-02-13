@@ -11,11 +11,11 @@ def dashboard_view(request):
     file_path = os.path.join(
         settings.BASE_DIR,
         'dashboard',
-        'dataProcessedCSV',
-        f'temporalInformation{person}.csv'
+        'dataProcessedINTERFACE',
+        f'temporalInformation{person}.json'
     )
     time_column = 'DateTime'
-    df = pd.read_csv(file_path, parse_dates=[time_column], low_memory=False)
+    df = pd.read_json(file_path)
     df = df.sort_values('DateTime')
 
     columns_to_plot = ['Abbey Pain Scale','MUST','Weight (in KG)','Medley', 'ABC for Challenging Behaviour','Barthel Index','Cannard Assessment (FRASE scale)','Clinical Frailty Scale',"Cornell’s Scale",'Dewing Wandering','Glasgow Coma Scale (GCS)','Mental Test Score','Oral Cavity Assessment']
@@ -55,15 +55,15 @@ def dashboard_view(request):
     return render(request, 'dashboard/dashboard.html', context)
 
 def demographics_view(request):
-    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedCSV')
-    file_pattern = os.path.join(data_folder, 'demographics*.csv')
+    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedINTERFACE')
+    file_pattern = os.path.join(data_folder, 'demographics*.json')
 
     files = sorted(
         glob.glob(file_pattern),
         key=lambda x: int(
             os.path.basename(x)
             .replace('demographics', '')
-            .replace('.csv', '')
+            .replace('.json', '')
             .replace('P', '')
         )
     )
@@ -73,10 +73,10 @@ def demographics_view(request):
     for file_path in files:
         filename = os.path.basename(file_path)
         patient_id = int(
-            filename.replace('demographics', '').replace('.csv', '').replace('P', '')
+            filename.replace('demographics', '').replace('.json', '').replace('P', '')
         )
 
-        df = pd.read_csv(file_path)
+        df = pd.read_json(file_path)
 
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 
@@ -139,13 +139,13 @@ def medications_view(request):
 
     selected_patient = request.GET.get("patient", "all")
 
-    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedCSV')
-    file_pattern = os.path.join(data_folder, 'medications*.csv')
+    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedINTERFACE')
+    file_pattern = os.path.join(data_folder, 'medications*.json')
 
     files = sorted(
         glob.glob(file_pattern),
         key=lambda x: patient_sort_key(
-            os.path.basename(x).replace('medications', '').replace('.csv', '')
+            os.path.basename(x).replace('medications', '').replace('.json', '')
         )
     )
 
@@ -169,12 +169,12 @@ def medications_view(request):
 
     for file_path in files:
         filename = os.path.basename(file_path)
-        patient_id = filename.replace('medications', '').replace('.csv', '')
+        patient_id = filename.replace('medications', '').replace('.json', '')
 
         if selected_patient != "all" and selected_patient != patient_id:
             continue
 
-        df = pd.read_csv(file_path)
+        df = pd.read_json(file_path)
 
         # remove unnamed columns
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
@@ -259,7 +259,7 @@ def medications_view(request):
     graph_div = opy.plot(fig, auto_open=False, output_type='div')
 
     patient_ids = [
-        os.path.basename(f).replace('medications','').replace('.csv','')
+        os.path.basename(f).replace('medications','').replace('.json','')
         for f in files
     ]
 
