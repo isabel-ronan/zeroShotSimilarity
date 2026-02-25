@@ -11,7 +11,7 @@ def main():
 
     # Initialize constant variables.
     INPUT_FOLDER = 'data'
-    OUTPUT_FOLDER = 'dataProcessedINTERFACE'
+    OUTPUT_FOLDER = 'dataProcessed'
 
     # Make SentenceTransformer model. We are using sentence-transformers/all-MiniLM-L6-v2 as the sentence length in the dataset is relatively short (longest sentence is < 256 words) and this is a lightweight model that can easily run locally (also very popular). 
     model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
