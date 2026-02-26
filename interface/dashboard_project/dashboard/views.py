@@ -2,36 +2,52 @@ import os
 import pandas as pd
 import plotly.graph_objs as go
 import plotly.offline as opy
+import plotly.express as px
 from django.shortcuts import render
 from django.conf import settings
 import glob
-from textblob import TextBlob
 
+import plotly.graph_objects as go
+import plotly.offline as opy
+import plotly.express as px   # <-- add this
 
 def dashboard_view(request):
     person = request.GET.get('person', 'P1')
     file_path = os.path.join(
         settings.BASE_DIR,
         'dashboard',
-        'dataProcessedINTERFACE',
+        'dataProcessed',
         f'temporalInformation{person}.json'
     )
     time_column = 'DateTime'
     df = pd.read_json(file_path)
     df = df.sort_values('DateTime')
 
-    columns_to_plot = ['Abbey Pain Scale','MUST','Weight (in KG)','Medley', 'ABC for Challenging Behaviour','Barthel Index','Cannard Assessment (FRASE scale)','Clinical Frailty Scale',"Cornell’s Scale",'Dewing Wandering','Glasgow Coma Scale (GCS)','Mental Test Score','Oral Cavity Assessment']
+    columns_to_plot = [
+        'Abbey Pain Scale','MUST','Weight (in KG)','Medley',
+        'ABC for Challenging Behaviour','Barthel Index',
+        'Cannard Assessment (FRASE scale)','Clinical Frailty Scale',
+        "Cornell’s Scale",'Dewing Wandering',
+        'Glasgow Coma Scale (GCS)','Mental Test Score',
+        'Oral Cavity Assessment'
+    ]
     
     df = df.dropna(subset=columns_to_plot, how='all')
     
     fig = go.Figure()
 
-    for column in columns_to_plot:
+    # Use a large qualitative colour palette
+    colors = px.colors.qualitative.Alphabet
+
+    for i, column in enumerate(columns_to_plot):
         fig.add_trace(go.Scatter(
             x=df[time_column],
             y=df[column],
             mode='markers',
-            marker=dict(size=12),
+            marker=dict(
+                size=12,
+                color=colors[i % len(colors)]  # ensures all are different
+            ),
             name=column
         ))
 
@@ -41,7 +57,7 @@ def dashboard_view(request):
         yaxis_title='Values',
         template='plotly_white',
         xaxis=dict(
-            type='date',  
+            type='date',
             tickformat='%Y-%m-%d %H:%M'
         )
     )
@@ -57,7 +73,7 @@ def dashboard_view(request):
     return render(request, 'dashboard/dashboard.html', context)
 
 def demographics_view(request):
-    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedINTERFACE')
+    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessed')
     file_pattern = os.path.join(data_folder, 'demographics*.json')
 
     files = sorted(
@@ -79,56 +95,54 @@ def demographics_view(request):
         )
 
         df = pd.read_json(file_path)
-
         df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
-
         row = df.iloc[0]
 
         for col in df.columns:
-
             value = pd.to_numeric(row[col], errors='coerce')
+            value = 0 if pd.isna(value) else value   
+            
+            if col not in variable_data:
+                variable_data[col] = []
 
-            if not pd.isna(value):
-
-                if col not in variable_data:
-                    variable_data[col] = []
-
-                variable_data[col].append((patient_id, value))
+            variable_data[col].append((patient_id, value))
 
     graphs = []
+    colors = px.colors.qualitative.Alphabet  # same large palette
 
-    for variable, values in variable_data.items():
+    for idx, (variable, values) in enumerate(variable_data.items()):
+        if (variable == 'Resident Age') or (variable == 'Gender') or (variable == 'Number of Hospital Admissions in Previous 6 to 9 Months - Planned') \
+            or (variable == 'Number of Falls in Previous 6 to 9 Months') or (variable == 'Number of Infections in Previous 6 to 9 Months'): 
+            values = sorted(values, key=lambda x: x[0])
+            patients = [f'Patient {v[0]}' for v in values]
+            y_values = [v[1] for v in values]
 
-        # Sort by patient ID
-        values = sorted(values, key=lambda x: x[0])
+            fig = go.Figure()
 
-        patients = [f'Patient {v[0]}' for v in values]
-        y_values = [v[1] for v in values]
+            fig.add_trace(go.Scatter(
+                x=patients,
+                y=y_values,
+                mode='markers',
+                marker=dict(
+                    size=10,
+                    color=colors[idx % len(colors)]
+                )
+            ))
 
-        fig = go.Figure()
-
-        fig.add_trace(go.Scatter(
-            x=patients,
-            y=y_values,
-            mode='markers',
-            marker=dict(size=10)
-        ))
-
-        fig.update_layout(
-            title=f'{variable}',
-            xaxis_title='Patient',
-            yaxis_title=variable,
-            template='plotly_white',
-            xaxis=dict(
-                type='category',
-                categoryorder='array',
-                categoryarray=patients
+            fig.update_layout(
+                title=f'{variable}',
+                xaxis_title='Patient',
+                yaxis_title=variable,
+                template='plotly_white',
+                xaxis=dict(
+                    type='category',
+                    categoryorder='array',
+                    categoryarray=patients
+                )
             )
-        )
 
-        graph_div = opy.plot(fig, auto_open=False, output_type='div')
-
-        graphs.append(graph_div)
+            graph_div = opy.plot(fig, auto_open=False, output_type='div')
+            graphs.append(graph_div)
 
     return render(request, 'dashboard/demographics.html', {
         'graphs': graphs
@@ -141,7 +155,7 @@ def medications_view(request):
 
     selected_patient = request.GET.get("patient", "all")
 
-    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedINTERFACE')
+    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessed')
     file_pattern = os.path.join(data_folder, 'medications*.json')
 
     files = sorted(
@@ -269,116 +283,4 @@ def medications_view(request):
         'graph': graph_div,
         'patients': sorted(patient_ids, key=patient_sort_key),
         'selected_patient': selected_patient
-    })
-
-def sentiment_view(request):
-
-    def patient_sort_key(pid):
-        return int(''.join(filter(str.isdigit, pid)) or 0)
-
-    selected_patient = request.GET.get("patient", "P1")
-    selected_note_type = request.GET.get("note_type", "Nurse Note")
-
-    note_columns = [
-        "Nurse Note",
-        "Carer Note",
-        "Multi-Disciplinary Note"
-    ]
-
-    # fallback if URL param invalid
-    if selected_note_type not in note_columns:
-        selected_note_type = "Nurse Note"
-
-    # -------------------------
-    # load files
-    # -------------------------
-    data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessedINTERFACE')
-
-    files = sorted(
-        glob.glob(os.path.join(data_folder, "temporalInformation*.json")),
-        key=lambda x: patient_sort_key(
-            os.path.basename(x).replace("temporalInformation","").replace(".json","")
-        )
-    )
-
-    fig = go.Figure()
-
-    # -------------------------
-    # loop files
-    # -------------------------
-    for file_path in files:
-
-        filename = os.path.basename(file_path)
-        patient_id = filename.replace("temporalInformation","").replace(".json","")
-
-        if selected_patient != "all" and selected_patient != patient_id:
-            continue
-
-        df = pd.read_json(file_path)
-
-        df.columns = df.columns.str.strip()
-
-        # skip if chosen column doesn't exist
-        if selected_note_type not in df.columns:
-            continue
-
-        # parse datetime
-        df["DateTime"] = pd.to_datetime(df["DateTime"], errors="coerce")
-        df = df.dropna(subset=["DateTime", selected_note_type])
-
-        # compute sentiment
-        sentiments = []
-        hover_text = []
-
-        for note in df[selected_note_type]:
-
-            score = TextBlob(note).sentiment.polarity
-
-            sentiments.append(score)
-
-            hover_text.append(
-                f"<b>{patient_id}</b><br>"
-                f"{selected_note_type}:<br>"
-                f"{note}<br>"
-                f"Sentiment: {score:.2f}"
-            )
-
-        df["Sentiment"] = sentiments
-
-        # plot trace
-        fig.add_trace(go.Scatter(
-            x=df["DateTime"],
-            y=df["Sentiment"],
-            mode="markers+lines",
-            name=patient_id,
-            text=hover_text,
-            hovertemplate="%{text}<extra></extra>"
-        ))
-
-    # -------------------------
-    # layout
-    # -------------------------
-    fig.update_layout(
-        title=f"Sentiment Over Time — {selected_note_type}",
-        xaxis_title="Date",
-        yaxis_title="Sentiment Score",
-        template="plotly_white",
-        xaxis=dict(type="date"),
-        yaxis=dict(range=[-1,1])
-    )
-
-    graph_div = opy.plot(fig, auto_open=False, output_type='div')
-
-    # patient list
-    patient_ids = [
-        os.path.basename(f).replace("temporalInformation","").replace(".json","")
-        for f in files
-    ]
-
-    return render(request, "dashboard/sentiment.html", {
-        "graph": graph_div,
-        "patients": sorted(patient_ids, key=patient_sort_key),
-        "selected_patient": selected_patient,
-        "note_types": note_columns,
-        "selected_note_type": selected_note_type
     })
