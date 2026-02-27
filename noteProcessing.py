@@ -1,20 +1,80 @@
-# Import packages.
 import os
 import pandas as pd
-from sentence_transformers import SentenceTransformer
+import numpy as np
+import random
+import torch
+from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
+from transformers import pipeline
 
+# Warnings
 import warnings
 
+# Text processing
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+
 def main():
-    # Ignore user warnings (data validation pandas warnings).
+
+    # Ignore user warnings.
     warnings.filterwarnings("ignore", category=UserWarning)
+
+    # Make stopwords.
+    stop_words = set(stopwords.words("english"))
 
     # Initialize constant variables.
     INPUT_FOLDER = 'data'
     OUTPUT_FOLDER = 'dataProcessed'
 
-    # Make SentenceTransformer model. We are using sentence-transformers/all-MiniLM-L6-v2 as the sentence length in the dataset is relatively short (longest sentence is < 256 words) and this is a lightweight model that can easily run locally (also very popular). 
-    model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
+    # Random States
+    def set_random_states(random_state):
+        # Set various random seeds.
+        np.random.seed(random_state)
+        random.seed(random_state)
+        torch.manual_seed(random_state)
+        torch.cuda.manual_seed_all(random_state)
+        os.environ["PYTHONHASHSEED"] = str(random_state)
+        os.environ["TOKENIZERS_PARALLELISM"] = "false"
+        try:
+            torch.use_deterministic_algorithms(True)
+        except Exception:
+            pass
+        return random_state
+    RANDOM_STATE = set_random_states(1618)
+
+    # Make function to remove punctuation, make lowercase, remove stopwords, punctuation, remove documents with less than or equal to 1 token.
+    def preprocessing(notes, min_words=1):
+        cleaned_notes = []
+
+        for note in notes:
+            tokens = word_tokenize(note, language='english')
+            tokens = [token.lower() for token in tokens]
+            tokens = [token for token in tokens if token.isalpha() and token not in stop_words]
+
+            if len(tokens) >= min_words:
+                cleaned_notes.append(" ".join(tokens))
+
+        return cleaned_notes
+
+    # Load classifiers
+    device = 0 if torch.cuda.is_available() else -1
+
+    # https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english
+    pos_neg_class = pipeline(
+        "text-classification",
+        model="distilbert-base-uncased-finetuned-sst-2-english",
+        device=device,
+        truncation=True
+    )
+
+    # https://huggingface.co/agentlans/snowflake-arctic-xs-grammar-classifier
+    grammar_class = pipeline(
+        "text-classification",
+        model="agentlans/snowflake-arctic-xs-grammar-classifier",
+        device=device,
+        truncation=True
+    )
+
+    classifier_dict = {"Positive Negative": pos_neg_class, "Grammar": grammar_class}
 
     # Process all T1 files (this can be adjusted later for T2 also). 
     # Minor processing of data points to make separate date and time columns where applicable and removing NaN values.
@@ -45,7 +105,7 @@ def main():
                                 carer_notes['Time'] = carer_notes['datetime'].dt.time
                                 carer_notes = carer_notes[['Date', 'Time', 'Activity']]
                                 carer_notes = carer_notes.dropna(subset=['Date', 'Time', 'Activity'])
-                                carer_notes['Carer Note'] = carer_notes['Activity']
+                                carer_notes['Carer Note'] = carer_notes['Activity'].values.tolist()
                                 carer_notes = carer_notes.drop(columns=['Activity'])
                             else:
                                 # -------- Carer Notes --------
@@ -60,26 +120,24 @@ def main():
                                 carer_notes['Time'] = carer_notes['datetime'].dt.time
                                 carer_notes = carer_notes[['Date', 'Time', 'Activity']]
                                 carer_notes = carer_notes.dropna(subset=['Date', 'Time', 'Activity'])
-                                carer_notes['Carer Note'] = carer_notes['Activity']
+                                carer_notes['Carer Note'] = carer_notes['Activity'].values.tolist()
                                 carer_notes = carer_notes.drop(columns=['Activity'])
-                            carer_notes['Carer Note - Embeddings'] = list(model.encode(carer_notes['Carer Note'].values.tolist(), normalize_embeddings=True))
                             
                             # -------- Nurse Notes --------
                             daily_nurse = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/dailyNurseNotes_{sub_sub_folder.split(' ')[0]}.xlsx')
                             daily_nurse = daily_nurse[['Date', 'Time', 'Note']]
-                            daily_nurse['Nurse Note'] = daily_nurse['Note']
                             daily_nurse = daily_nurse.dropna(subset=['Note', 'Date', 'Time'])
-                            daily_nurse = daily_nurse.drop(columns=['Note'])
-                            daily_nurse['Nurse Note - Embeddings'] = list(model.encode(daily_nurse['Nurse Note'].values.tolist(), normalize_embeddings=True))
+                            daily_nurse['Nurse Note'] = daily_nurse['Note'].values.tolist()
+                            daily_nurse = daily_nurse.drop(columns=['Note'])   
+                            
                             # -------- Monthly --------
                             monthly = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/monthly_{sub_sub_folder.split(' ')[0]}.xlsx')
                             monthly = monthly.drop(columns=['Resident Study Number'])
                             # -------- Multi-Disciplinary Notes --------
                             multi = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/multiDisciplinaryNotes_{sub_sub_folder.split(' ')[0]}.xlsx')
-                            multi['Multi-Disciplinary Note'] = multi['Note']
+                            multi['Multi-Disciplinary Note'] = multi['Note'].values.tolist()
                             multi = multi.drop(columns=['Resident Study Number', 'Delirium Indicated', 'Note', 'Note Type'])
                             multi = multi.dropna(subset=['Multi-Disciplinary Note'])
-                            multi['Multi-Disciplinary Note - Embeddings'] = list(model.encode(multi['Multi-Disciplinary Note'].values.tolist(), normalize_embeddings=True))
                             # -------- Quarterly --------
                             quarterly = pd.read_excel(f'./{INPUT_FOLDER}/{folder}/{sub_folder}/{sub_sub_folder}/quarterly_{sub_sub_folder.split(' ')[0]}.xlsx')
                             quarterly = quarterly.drop(columns=['Resident Study Number'])
@@ -117,6 +175,15 @@ def main():
                             all_data[sub_sub_folder.split(' ')[0]] = {'Temporal Information': big_df, 'Medications': meds, 'Demographics': t1}                      
 
 
+    for patient, temp_all_data in all_data.items():
+        texts = temp_all_data['Temporal Information']['Nurse Note']
+        mask = texts.notna()
+        for key, classifier in classifier_dict.items():
+            encoded_values = classifier(texts[mask].tolist())
+            encoded_series = pd.Series(index=texts.index, dtype=object)
+            encoded_series[mask] = list(encoded_values)
+            temp_all_data['Temporal Information'][f"Nurse Notes - {key}"] = encoded_series
+
     # If saving folder does not exist, make it.
     if not os.path.exists(f'./{OUTPUT_FOLDER}/'):
         os.makedirs(f'./{OUTPUT_FOLDER}/', exist_ok=False)
@@ -124,6 +191,7 @@ def main():
     for patient, values in all_data.items():
         for value_type, value in values.items():
             value.to_json(f'./{OUTPUT_FOLDER}/{value_type[:1].lower() + value_type.replace(' ', '')[1:]}{patient}.json', orient='records', date_format='iso')
+
 
 if __name__ == '__main__':
     main()

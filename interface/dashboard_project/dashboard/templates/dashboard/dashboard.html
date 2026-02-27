@@ -15,6 +15,15 @@
             </option>
         {% endfor %}
     </select>
+    <label for="normalize">Scale:</label>
+    <select name="normalize" onchange="this.form.submit()">
+            <option value="norm" {% if selected_norm == "norm" %}selected{% endif %}>
+                Normalized
+            </option>
+            <option value="not-norm" {% if selected_norm == "not-norm" %}selected{% endif %}>
+                Not Normalized
+            </option>
+    </select>
 </form>
 
 <hr>

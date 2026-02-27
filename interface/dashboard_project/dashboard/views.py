@@ -13,15 +13,18 @@ import plotly.express as px   # <-- add this
 
 def dashboard_view(request):
     person = request.GET.get('person', 'P1')
+    normalize = request.GET.get('normalize', 'norm')
+
     file_path = os.path.join(
         settings.BASE_DIR,
         'dashboard',
         'dataProcessed',
         f'temporalInformation{person}.json'
     )
+
     time_column = 'DateTime'
     df = pd.read_json(file_path)
-    df = df.sort_values('DateTime')
+    df = df.sort_values(time_column)
 
     columns_to_plot = [
         'Abbey Pain Scale','MUST','Weight (in KG)','Medley',
@@ -31,25 +34,100 @@ def dashboard_view(request):
         'Glasgow Coma Scale (GCS)','Mental Test Score',
         'Oral Cavity Assessment'
     ]
-    
-    df = df.dropna(subset=columns_to_plot, how='all')
-    
-    fig = go.Figure()
 
-    # Use a large qualitative colour palette
+    nurse_columns = [
+        'Nurse Notes - Positive Negative',
+        'Nurse Notes - Grammar'
+    ]
+
+    df_copy = df.copy()
+    df = df.dropna(subset=columns_to_plot, how='all')
+    note_df = df_copy.dropna(subset=nurse_columns, how='all')
+
+    # -------------------------
+    # NORMALIZE CLINICAL SCALES
+    # -------------------------
+    if normalize == 'norm':
+        for column in columns_to_plot:
+            if column in df.columns:
+                try:
+                    col_min = df[column].min()
+                    col_max = df[column].max()
+
+                    if pd.notna(col_min) and pd.notna(col_max) and col_max != col_min:
+                        df[column] = (df[column] - col_min) / (col_max - col_min)
+                    else:
+                        df[column] = 0
+                except:
+                    pass
+    
+
+    # -------------------------
+    # SIGNED NURSE SCORES
+    # -------------------------
+    def signed_score(cell):
+        if isinstance(cell, dict):
+            label = cell.get("label")
+            score = cell.get("score")
+
+            if score is None:
+                return None, None
+
+            # signed value: +1 for positive, -1 for negative
+            if normalize == 'norm':
+                signed_value = 1 if label in ["POSITIVE", "grammatical"] else -1
+            else:
+                signed_value = 100 if label in ["POSITIVE", "grammatical"] else 0
+            return signed_value, score  # tuple
+        return None, None
+
+    fig = go.Figure()
     colors = px.colors.qualitative.Alphabet
 
+    # -------------------------
+    # ADD NURSE TRACES
+    # -------------------------
+    offset = len(columns_to_plot)
+
+    for i, column in enumerate(nurse_columns):
+        if column in note_df.columns:
+            signed_results = note_df[column].apply(signed_score)
+            signed_values = signed_results.apply(lambda x: x[0])
+            probabilities = signed_results.apply(lambda x: x[1])
+            opacity = probabilities * 0.5
+            fig.add_trace(go.Scatter(
+                x=note_df[time_column],
+                y=signed_values,
+                mode='lines+markers',
+                opacity=0.5,
+                marker=dict(
+                    size=8,
+                    color=colors[(offset + i) % len(colors)],
+                    opacity=opacity
+                    
+                ),
+                text=note_df['Nurse Note'],  # display note text
+                hovertemplate='%{text}<br>Score: %{y}<extra></extra>',
+                name=column
+            ))
+
+    # -------------------------
+    # ADD CLINICAL TRACES
+    # -------------------------
     for i, column in enumerate(columns_to_plot):
-        fig.add_trace(go.Scatter(
-            x=df[time_column],
-            y=df[column],
-            mode='markers',
-            marker=dict(
-                size=12,
-                color=colors[i % len(colors)]  # ensures all are different
-            ),
-            name=column
-        ))
+        if column in df.columns:
+            fig.add_trace(go.Scatter(
+                x=df[time_column],
+                y=df[column],
+                mode='markers',
+                marker=dict(
+                    size=8,
+                    color=colors[i % len(colors)]
+                ),
+                name=column
+            ))
+
+
 
     fig.update_layout(
         title=f'Data for {person}',
@@ -63,14 +141,18 @@ def dashboard_view(request):
     )
 
     graph_div = opy.plot(fig, auto_open=False, output_type='div')
-
+    print(normalize)
     context = {
         'graph': graph_div,
         'selected_person': person,
-        'persons': [f'P{i}' for i in range(1, 21)]
+        'persons': [f'P{i}' for i in range(1, 21)],
+        'selected_norm': normalize,
     }
 
     return render(request, 'dashboard/dashboard.html', context)
+
+
+
 
 def demographics_view(request):
     data_folder = os.path.join(settings.BASE_DIR, 'dashboard', 'dataProcessed')
