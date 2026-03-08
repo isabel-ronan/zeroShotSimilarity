@@ -1,7 +1,9 @@
 *data*/
 *Data*/
 output*/
+*model*/
 .*
 **/__pycache__/
 *.pyc
 !.gitignore
+**/.env
