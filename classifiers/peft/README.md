@@ -4,3 +4,7 @@
 - Efficient adaptation of LLMs for various downstream applications without fine-tuning all of the model's parameters.
 - Significant decrease in computational and storage costs compared to fully fine-tuned models. 
 - More accessible to train and store large language models on consumer hardware. 
+
+## Model - `distilbert-base-uncased` or `microsoft/MiniLM-L12-H384-uncased` 
+- `distilbert-base-uncased` - slightly more popular, but larger and slower to train.
+- `sentence-transformers/all-MiniLM-L6-v2` - slightly less common for fine-tuned sentence classification tasks, but smaller and faster to train.

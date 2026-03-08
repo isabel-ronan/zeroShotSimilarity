@@ -1,3 +1,4 @@
+absl-py==2.4.0
 accelerate==1.12.0
 aiohappyeyeballs==2.6.1
 aiohttp==3.13.3
@@ -52,6 +53,7 @@ frozenlist==1.8.0
 fsspec==2026.1.0
 funcy==2.0
 gensim==4.4.0
+grpcio==1.78.0
 h11==0.16.0
 hdbscan==0.8.41
 hf-xet==1.2.0
@@ -90,6 +92,7 @@ kiwisolver==1.4.9
 lark==1.3.1
 llvmlite==0.46.0
 logistro==2.0.1
+Markdown==3.10.2
 MarkupSafe==3.0.3
 matplotlib==3.10.8
 matplotlib-inline==0.2.1
@@ -143,6 +146,7 @@ preshed==3.0.12
 prometheus_client==0.24.1
 prompt_toolkit==3.0.52
 propcache==0.4.1
+protobuf==7.34.0
 psutil==7.0.0
 ptyprocess==0.7.0
 pure_eval==0.2.3
@@ -186,6 +190,9 @@ sqlparse==0.5.5
 srsly==2.5.2
 stack-data==0.6.3
 sympy==1.14.0
+tensorboard==2.20.0
+tensorboard-data-server==0.7.2
+tensorboardX==2.6.4
 terminado==0.18.1
 textblob==0.19.0
 thinc==8.3.10
@@ -213,6 +220,7 @@ weasel==0.4.3
 webcolors==25.10.0
 webencodings==0.5.1
 websocket-client==1.9.0
+Werkzeug==3.1.6
 wheel==0.46.3
 widgetsnbextension==4.0.15
 wordcloud==1.9.6
