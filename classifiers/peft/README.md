@@ -8,3 +8,37 @@
 ## Model - `distilbert-base-uncased` or `sentence-transformers/all-MiniLM-L6-v2` 
 - `distilbert-base-uncased` - slightly more popular, but larger and slower to train.
 - `sentence-transformers/all-MiniLM-L6-v2` - slightly less common for fine-tuned sentence classification tasks, but smaller and faster to train.
+- `distilbert-base-uncased` performance is slightly better but takes double the training time (60mins) compared to `sentence-transformers/all-MiniLM-L6-v2` taking 30 mins.
+
+### `sentence-transformers/all-MiniLM-L6-v2` Results
+#### Confusion Matrix
+
+|263 | 28 |
+| 13 | 275 |
+
+ #### Classification Report
+| metric | label  | precision | recall | f1-score | support |
+| ------ | ------ | ------    | ------ | ------   | ------  |
+|        | 0      | 0.95      | 0.90   | 0.93     | 291     |
+|        | 1      | 0.91      | 0.95   | 0.93     | 288     |
+| ------       | ------ | ------    | ------ | ------   | ------  |
+| accuracy     | ------ | ------    | ------ | 0.93     | 579     |
+| macro avg    | ------ | 0.93   | 0.93      | 0.93   | 579|
+| weighted avg | ------ | 0.93   | 0.93      | 0.93   | 579|
+
+
+### `distilbert-base-uncased` Results
+#### Confusion Matrix
+
+|264 | 27 |
+| 12 | 276 |
+
+ #### Classification Report
+| metric | label  | precision | recall | f1-score | support |
+| ------ | ------ | ------    | ------ | ------   | ------  |
+|        | 0      | 0.96      | 0.91   | 0.93     | 291     |
+|        | 1      | 0.91      | 0.96   | 0.93     | 288     |
+| ------       | ------ | ------    | ------ | ------   | ------  |
+| accuracy     | ------ | ------    | ------ | 0.93     | 579     |
+| macro avg    | ------ | 0.93   | 0.93      | 0.93   | 579|
+| weighted avg | ------ | 0.93   | 0.93      | 0.93   | 579|
