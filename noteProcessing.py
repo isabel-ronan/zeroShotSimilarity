@@ -5,21 +5,16 @@ import random
 import torch
 from transformers import DistilBertTokenizer, DistilBertForSequenceClassification
 from transformers import pipeline
+from peft import PeftModel
+from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 # Warnings
 import warnings
-
-# Text processing
-from nltk.tokenize import word_tokenize
-from nltk.corpus import stopwords
 
 def main():
 
     # Ignore user warnings.
     warnings.filterwarnings("ignore", category=UserWarning)
-
-    # Make stopwords.
-    stop_words = set(stopwords.words("english"))
 
     # Initialize constant variables.
     INPUT_FOLDER = 'data'
@@ -41,20 +36,6 @@ def main():
         return random_state
     RANDOM_STATE = set_random_states(1618)
 
-    # Make function to remove punctuation, make lowercase, remove stopwords, punctuation, remove documents with less than or equal to 1 token.
-    def preprocessing(notes, min_words=1):
-        cleaned_notes = []
-
-        for note in notes:
-            tokens = word_tokenize(note, language='english')
-            tokens = [token.lower() for token in tokens]
-            tokens = [token for token in tokens if token.isalpha() and token not in stop_words]
-
-            if len(tokens) >= min_words:
-                cleaned_notes.append(" ".join(tokens))
-
-        return cleaned_notes
-
     # Load classifiers
     device = 0 if torch.cuda.is_available() else -1
 
@@ -74,7 +55,28 @@ def main():
         truncation=True
     )
 
-    classifier_dict = {"Positive Negative": pos_neg_class, "Grammar": grammar_class}
+    # Fine-Tuned Met/Unmet Needs Model
+    # Load fine-tuned model.
+    # Make constant variables.
+    MODEL_NAME = "distilbert-base-uncased"
+    PEFT_HEAD = "synth_lora_model_distilbert"
+    base_model = AutoModelForSequenceClassification.from_pretrained(
+        MODEL_NAME,
+        num_labels=2
+    )
+
+    model = PeftModel.from_pretrained(base_model, PEFT_HEAD)
+
+    tokenizer = AutoTokenizer.from_pretrained(PEFT_HEAD)
+    palliative_class = pipeline(
+        "text-classification",
+        model=model,
+        device=device,
+        tokenizer=tokenizer,
+        truncation=True
+    )
+
+    classifier_dict = {"Positive Negative": pos_neg_class, "Grammar": grammar_class, "Met Unmet": palliative_class}
 
     # Process all T1 files (this can be adjusted later for T2 also). 
     # Minor processing of data points to make separate date and time columns where applicable and removing NaN values.

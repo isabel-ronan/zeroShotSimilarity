@@ -37,7 +37,8 @@ def dashboard_view(request):
 
     nurse_columns = [
         'Nurse Notes - Positive Negative',
-        'Nurse Notes - Grammar'
+        'Nurse Notes - Grammar',
+        'Nurse Notes - Met Unmet'
     ]
 
     df_copy = df.copy()
@@ -75,9 +76,9 @@ def dashboard_view(request):
 
             # signed value: +1 for positive, -1 for negative
             if normalize == 'norm':
-                signed_value = 1 if label in ["POSITIVE", "grammatical"] else -1
+                signed_value = 1 if label in ["POSITIVE", "grammatical", "LABEL_1"] else -1
             else:
-                signed_value = 100 if label in ["POSITIVE", "grammatical"] else 0
+                signed_value = 100 if label in ["POSITIVE", "grammatical", "LABEL_1"] else 0
             return signed_value, score  # tuple
         return None, None
 
