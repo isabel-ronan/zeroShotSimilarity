@@ -5,27 +5,28 @@
 - Significant decrease in computational and storage costs compared to fully fine-tuned models. 
 - More accessible to train and store large language models on consumer hardware. 
 
-## Model - `distilbert-base-uncased` or `sentence-transformers/all-MiniLM-L6-v2` 
+## Model - `distilbert-base-uncased` or `sentence-transformers/all-MiniLM-L6-v2` or `google/embeddinggemma-300m` or `google/medgemma-1.5-4b-it`
 - `distilbert-base-uncased` - slightly more popular, but larger and slower to train.
 - `sentence-transformers/all-MiniLM-L6-v2` - slightly less common for fine-tuned sentence classification tasks, but smaller and faster to train.
-- `distilbert-base-uncased` performance is slightly better but takes double the training time (60mins) compared to `sentence-transformers/all-MiniLM-L6-v2` taking 30 mins.
+- `distilbert-base-uncased` performance is slightly better but takes double the training time (60mins) compared to `sentence-transformers/all-MiniLM-L6-v2` taking 30 mins. `google/embeddinggemma-300m` performance is better than `distilbert-base-uncased` but is much slower (101 minutes and 15.0seconds) and does not come with token-level explainability. 
 
-### `sentence-transformers/all-MiniLM-L6-v2` Results
+
+### `google/embeddinggemma-300m` Results
 #### Confusion Matrix
 
-|263 | 28 |
+|284 | 7 |
 
-| 13 | 275 |
+| 21 | 267 |
 
  #### Classification Report
 | metric | label  | precision | recall | f1-score | support |
 | ------ | ------ | ------    | ------ | ------   | ------  |
-|        | 0      | 0.95      | 0.90   | 0.93     | 291     |
-|        | 1      | 0.91      | 0.95   | 0.93     | 288     |
+|        | 0      | 0.93      | 0.98   | 0.95     | 291     |
+|        | 1      | 0.97      | 0.93   | 0.95     | 288     |
 | ------       | ------ | ------    | ------ | ------   | ------  |
-| accuracy     | ------ | ------    | ------ | 0.93     | 579     |
-| macro avg    | ------ | 0.93   | 0.93      | 0.93   | 579|
-| weighted avg | ------ | 0.93   | 0.93      | 0.93   | 579|
+| accuracy     | ------ | ------    | ------ | 0.95     | 579     |
+| macro avg    | ------ | 0.95   | 0.95      | 0.95   | 579|
+| weighted avg | ------ | 0.95   | 0.95      | 0.95   | 579|
 
 
 ### `distilbert-base-uncased` Results
@@ -40,6 +41,24 @@
 | ------ | ------ | ------    | ------ | ------   | ------  |
 |        | 0      | 0.96      | 0.91   | 0.93     | 291     |
 |        | 1      | 0.91      | 0.96   | 0.93     | 288     |
+| ------       | ------ | ------    | ------ | ------   | ------  |
+| accuracy     | ------ | ------    | ------ | 0.93     | 579     |
+| macro avg    | ------ | 0.93   | 0.93      | 0.93   | 579|
+| weighted avg | ------ | 0.93   | 0.93      | 0.93   | 579|
+
+
+### `sentence-transformers/all-MiniLM-L6-v2` Results
+#### Confusion Matrix
+
+|263 | 28 |
+
+| 13 | 275 |
+
+ #### Classification Report
+| metric | label  | precision | recall | f1-score | support |
+| ------ | ------ | ------    | ------ | ------   | ------  |
+|        | 0      | 0.95      | 0.90   | 0.93     | 291     |
+|        | 1      | 0.91      | 0.95   | 0.93     | 288     |
 | ------       | ------ | ------    | ------ | ------   | ------  |
 | accuracy     | ------ | ------    | ------ | 0.93     | 579     |
 | macro avg    | ------ | 0.93   | 0.93      | 0.93   | 579|
