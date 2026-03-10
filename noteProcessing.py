@@ -58,8 +58,8 @@ def main():
     # Fine-Tuned Met/Unmet Needs Model
     # Load fine-tuned model.
     # Make constant variables.
-    MODEL_NAME = "distilbert-base-uncased"
-    PEFT_HEAD = "synth_lora_model_distilbert"
+    MODEL_NAME = "emilyalsentzer/Bio_ClinicalBERT"
+    PEFT_HEAD = "./classifiers/peft/synth_lora_model_bioclinicalbert"
     base_model = AutoModelForSequenceClassification.from_pretrained(
         MODEL_NAME,
         num_labels=2
@@ -75,6 +75,7 @@ def main():
         tokenizer=tokenizer,
         truncation=True
     )
+    palliative_class.model.config.max_position_embeddings = 512
 
     classifier_dict = {"Positive Negative": pos_neg_class, "Grammar": grammar_class, "Met Unmet": palliative_class}
 
@@ -181,7 +182,7 @@ def main():
         texts = temp_all_data['Temporal Information']['Nurse Note']
         mask = texts.notna()
         for key, classifier in classifier_dict.items():
-            encoded_values = classifier(texts[mask].tolist())
+            encoded_values = classifier(texts[mask].tolist(), trunaction = True, max_length = 512, batch_size=32)
             encoded_series = pd.Series(index=texts.index, dtype=object)
             encoded_series[mask] = list(encoded_values)
             temp_all_data['Temporal Information'][f"Nurse Notes - {key}"] = encoded_series

@@ -79,3 +79,10 @@
 | accuracy     | ------ | ------    | ------ | 0.93     | 579     |
 | macro avg    | ------ | 0.93   | 0.93      | 0.93   | 579|
 | weighted avg | ------ | 0.93   | 0.93      | 0.93   | 579|
+
+## Explainability
+### [SHAP](https://doi.org/10.48550/arXiv.1705.07874)
+- Using the [SHAP package](https://github.com/shap/shap?tab=readme-ov-file); this is constantly GitHub updated (which cannot be said for LIME). 
+- SHAP provides high accuracy and reliable text explanations. It's the gold standard for 'fair' credit assignment. 
+- SHAP can be computationally expensive for transformers and slow if the input sequence is long.
+- Use 'partition' algorithm as it uses a hierarchy to group tokens and systematically masks them to see the change in output (this method is more efficient for text). It is model-agnostic and works very well with Hugging Face models. 
