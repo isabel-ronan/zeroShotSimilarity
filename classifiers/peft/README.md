@@ -8,7 +8,43 @@
 ## Model - `distilbert-base-uncased` or `sentence-transformers/all-MiniLM-L6-v2` or `google/embeddinggemma-300m` or `google/medgemma-1.5-4b-it` or `emilyalsentzer/Bio_ClinicalBERT`
 - `distilbert-base-uncased` - slightly more popular, but larger and slower to train.
 - `sentence-transformers/all-MiniLM-L6-v2` - slightly less common for fine-tuned sentence classification tasks, but smaller and faster to train.
-- `distilbert-base-uncased` performance is slightly better but takes double the training time (60mins) compared to `sentence-transformers/all-MiniLM-L6-v2` taking 30 mins. `google/embeddinggemma-300m` performance is better than `distilbert-base-uncased` but is much slower (101 minutes and 15.0seconds) and does not come with token-level explainability. `emilyalsentzer/Bio_ClinicalBERT` performs best but took longest to train (289 minutes and 42.6 seconds).
+- `distilbert-base-uncased` performance is slightly better but takes double the training time (60mins) compared to `sentence-transformers/all-MiniLM-L6-v2` taking 30 mins. `google/embeddinggemma-300m` performance is better than `distilbert-base-uncased` but is much slower (101 minutes and 15.0seconds) and does not come with token-level explainability. `emilyalsentzer/Bio_ClinicalBERT` performs best but took longest to train (289 minutes and 42.6 seconds). `nlpie/distil-clinicalbert` performed well and took a shorter amount of time to train (91 minutes and 5.1 seconds). `nlpie/tiny-clinicalbert` took the shortest amount of time to train (24 minutes and 55 seconds) with acceptable performance.
+
+### `nlpie/tiny-clinicalbert` Results
+#### Confusion Matrix
+
+| 269 | 22 |
+
+| 13 | 275 |
+
+ #### Classification Report
+| metric | label  | precision | recall | f1-score | support |
+| ------ | ------ | ------    | ------ | ------   | ------  |
+|        | 0      | 0.95      | 0.92   | 0.94     | 291     |
+|        | 1      | 0.93      | 0.95   | 0.94     | 288     |
+| ------       | ------ | ------    | ------ | ------   | ------  |
+| accuracy     | ------ | ------    | ------ | 0.94     | 579     |
+| macro avg    | ------ | 0.94   | 0.94      | 0.94   | 579|
+| weighted avg | ------ | 0.94   | 0.94      | 0.94   | 579|
+
+### `nlpie/distil-clinicalbert` Results
+#### Confusion Matrix
+
+| 265 | 26 |
+
+| 7 | 281 |
+
+ #### Classification Report
+| metric | label  | precision | recall | f1-score | support |
+| ------ | ------ | ------    | ------ | ------   | ------  |
+|        | 0      | 0.97      | 0.91   | 0.94     | 291     |
+|        | 1      | 0.92      | 0.98   | 0.94     | 288     |
+| ------       | ------ | ------    | ------ | ------   | ------  |
+| accuracy     | ------ | ------    | ------ | 0.94     | 579     |
+| macro avg    | ------ | 0.94   | 0.94      | 0.94   | 579|
+| weighted avg | ------ | 0.94   | 0.94      | 0.94   | 579|
+
+
 
 ### `emilyalsentzer/Bio_ClinicalBERT` Results
 #### Confusion Matrix
