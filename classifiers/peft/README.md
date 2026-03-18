@@ -5,10 +5,29 @@
 - Significant decrease in computational and storage costs compared to fully fine-tuned models. 
 - More accessible to train and store large language models on consumer hardware. 
 
-## Model - `distilbert-base-uncased` or `sentence-transformers/all-MiniLM-L6-v2` or `google/embeddinggemma-300m` or `google/medgemma-1.5-4b-it` or `emilyalsentzer/Bio_ClinicalBERT`
+## Model - `distilbert-base-uncased` or `sentence-transformers/all-MiniLM-L6-v2` or `google/embeddinggemma-300m` or `google/medgemma-1.5-4b-it` or `emilyalsentzer/Bio_ClinicalBERT` or `nlpie/distil-clinicalbert` or `nlpie/tiny-clinicalbert`
 - `distilbert-base-uncased` - slightly more popular, but larger and slower to train.
 - `sentence-transformers/all-MiniLM-L6-v2` - slightly less common for fine-tuned sentence classification tasks, but smaller and faster to train.
 - `distilbert-base-uncased` performance is slightly better but takes double the training time (60mins) compared to `sentence-transformers/all-MiniLM-L6-v2` taking 30 mins. `google/embeddinggemma-300m` performance is better than `distilbert-base-uncased` but is much slower (101 minutes and 15.0seconds) and does not come with token-level explainability. `emilyalsentzer/Bio_ClinicalBERT` performs best but took longest to train (289 minutes and 42.6 seconds). `nlpie/distil-clinicalbert` performed well and took a shorter amount of time to train (91 minutes and 5.1 seconds). `nlpie/tiny-clinicalbert` took the shortest amount of time to train (24 minutes and 55 seconds) with acceptable performance.
+- Using TF-IDF and Logistic Regression as the baseline. 
+
+### Logistic Regression Results
+#### Confusion Matrix
+
+| 514 | 67 |
+
+| 28 | 548 |
+
+ #### Classification Report
+| metric | label  | precision | recall | f1-score | support |
+| ------ | ------ | ------    | ------ | ------   | ------  |
+|        | 0      | 0.95      | 0.88   | 0.92     | 581     |
+|        | 1      | 0.89      | 0.95   | 0.92     | 576     |
+| ------       | ------ | ------    | ------ | ------   | ------ |
+| accuracy     | ------ | ------    | ------ | 0.92     | 1157   |
+| macro avg    | ------ | 0.92      | 0.92   | 0.92     | 1157   |
+| weighted avg | ------ | 0.92      | 0.92   | 0.92     | 1157   |
+
 
 ### `nlpie/tiny-clinicalbert` Results
 #### Confusion Matrix
