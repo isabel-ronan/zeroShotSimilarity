@@ -58,8 +58,8 @@ def main():
     # Fine-Tuned Met/Unmet Needs Model
     # Load fine-tuned model.
     # Make constant variables.
-    MODEL_NAME = "nlpie/tiny-clinicalbert"
-    PEFT_HEAD = "./classifiers/peft/synth_lora_model_tinyclinicalbert"
+    MODEL_NAME = "emilyalsentzer/Bio_ClinicalBERT"
+    PEFT_HEAD = "./classifiers/peft/synth_lora_model_bioclinicalbert"
     base_model = AutoModelForSequenceClassification.from_pretrained(
         MODEL_NAME,
         num_labels=2
