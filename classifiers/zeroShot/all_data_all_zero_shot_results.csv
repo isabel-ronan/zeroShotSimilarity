@@ -1,0 +1,121 @@
+model,hypothesis_template,accuracy,precision,recall,f1
+cross-encoder/nli-MiniLM2-L6-H768,This example is about {}.,0.6598651219090438,0.7746987951807229,0.4466828759986106,0.5666446353822427
+cross-encoder/nli-MiniLM2-L6-H768,The patient's palliative care needs are {}.,0.7212519453570811,0.7801857585139319,0.6127127474817645,0.6863813229571984
+cross-encoder/nli-MiniLM2-L6-H768,"Overall, the patient's care needs are {}.",0.8016600380425385,0.8190862196020634,0.7721431052448767,0.7949222242088325
+cross-encoder/nli-MiniLM2-L6-H768,"From this note, it can be inferred that {}.",0.8001037523776586,0.8127041742286751,0.7777005904828065,0.7948171813986511
+cross-encoder/nli-MiniLM2-L6-H768,This clinical note indicates that the patient's care needs are {}.,0.8009683555248142,0.7987551867219918,0.8023619312261202,0.8005544966210362
+cross-encoder/nli-MiniLM2-L6-H768,"Based on this note, the patient's care needs are {}.",0.777969911810479,0.8141000393855848,0.7179576241750608,0.7630121816168328
+cross-encoder/nli-MiniLM2-L6-H768,The patient's condition suggests that {}.,0.7643091820854228,0.8414414414414414,0.6488364015283085,0.7326926848401647
+cross-encoder/nli-MiniLM2-L6-H768,This note suggests that the patient is experiencing {}.,0.7387169289296213,0.8577405857740585,0.5696422368878082,0.6846169901899395
+cross-encoder/nli-MiniLM2-L6-H768,The patient's current situation reflects {}.,0.7561819125021615,0.7841392649903288,0.7040639110802361,0.7419472913616398
+cross-encoder/nli-MiniLM2-L6-H768,The patient's symptoms and care needs are {}.,0.7184852152861836,0.8026124818577649,0.57624175060785,0.670845127375657
+cross-encoder/nli-MiniLM2-L6-H768,The patient's care is {}.,0.7124329932560954,0.8230605738575983,0.5380340395970823,0.6507036336904012
+cross-encoder/nli-MiniLM2-L6-H768,This note indicates a situation where {}.,0.7655196264914405,0.8504371836171192,0.6418895449808961,0.7315914489311164
+cross-encoder/nli-MiniLM2-L6-H768,The note documents that {}.,0.7508213729897977,0.8372420262664165,0.6200069468565474,0.7124326481740172
+cross-encoder/nli-MiniLM2-L6-H768,The record indicates that {}.,0.8135915614732837,0.7959250739401906,0.8412643278916291,0.817966903073286
+cross-encoder/nli-MiniLM2-L6-H768,The clinical documentation suggests that {}.,0.774338578592426,0.8507130124777184,0.6630774574505036,0.7452664454421237
+typeform/distilbert-base-uncased-mnli,This example is about {}.,0.7260937229811516,0.686438237834725,0.8280653004515457,0.7506297229219143
+typeform/distilbert-base-uncased-mnli,The patient's palliative care needs are {}.,0.7131246757738198,0.736985236985237,0.6589093435220563,0.6957637997432606
+typeform/distilbert-base-uncased-mnli,"Overall, the patient's care needs are {}.",0.700328549195919,0.6473765432098766,0.8742618964918375,0.7439042411703857
+typeform/distilbert-base-uncased-mnli,"From this note, it can be inferred that {}.",0.7549714680961439,0.7595880681818182,0.742966307745745,0.7511852502194908
+typeform/distilbert-base-uncased-mnli,This clinical note indicates that the patient's care needs are {}.,0.7136434376621131,0.6762755837417123,0.8148662730114623,0.7391304347826086
+typeform/distilbert-base-uncased-mnli,"Based on this note, the patient's care needs are {}.",0.709666263185198,0.6912045889101338,0.7533865925668635,0.7209572876848928
+typeform/distilbert-base-uncased-mnli,The patient's condition suggests that {}.,0.7452879128480028,0.7332448573324486,0.7676276484890587,0.7500424232139827
+typeform/distilbert-base-uncased-mnli,This note suggests that the patient is experiencing {}.,0.7359501988587238,0.7283783783783784,0.7488711358110455,0.7384826168864531
+typeform/distilbert-base-uncased-mnli,The patient's current situation reflects {}.,0.6965242953484351,0.6377450980392156,0.9037860368183397,0.7478085931886765
+typeform/distilbert-base-uncased-mnli,The patient's symptoms and care needs are {}.,0.6541587411378177,0.6223893065998329,0.776311219173324,0.6908809891808346
+typeform/distilbert-base-uncased-mnli,The patient's care is {}.,0.7259208023517205,0.7187288708586883,0.738450850989927,0.728456398835018
+typeform/distilbert-base-uncased-mnli,This note indicates a situation where {}.,0.7454608334774339,0.7200500469189866,0.7995831886071553,0.7577353522053983
+typeform/distilbert-base-uncased-mnli,The note documents that {}.,0.738198167041328,0.7352637021716649,0.7408822507815214,0.7380622837370242
+typeform/distilbert-base-uncased-mnli,The record indicates that {}.,0.7731281341864085,0.7389448002439768,0.8416116707189997,0.7869438129262748
+typeform/distilbert-base-uncased-mnli,The clinical documentation suggests that {}.,0.7288604530520492,0.7829089339663358,0.6300798888502952,0.6982294072363356
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,This example is about {}.,0.7068995331143005,0.6582041688936398,0.8555053838138242,0.7439963751699139
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The patient's palliative care needs are {}.,0.5227390627701884,0.5105665068371514,0.9986106286905175,0.6756756756756757
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,"Overall, the patient's care needs are {}.",0.6368666781947087,0.5816048606746281,0.9642236887808266,0.7255619445896497
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,"From this note, it can be inferred that {}.",0.7544527062078505,0.6917214191852825,0.9142063216394581,0.7875523638539796
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,This clinical note indicates that the patient's care needs are {}.,0.7461525159951582,0.6738112835673812,0.9499826328586315,0.7884116460074949
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,"Based on this note, the patient's care needs are {}.",0.5981324572021443,0.5562310030395137,0.9534560611323376,0.7025851036600973
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The patient's condition suggests that {}.,0.732318865640671,0.6592486240727446,0.9569294894060437,0.7806744120147351
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,This note suggests that the patient is experiencing {}.,0.7560089918727304,0.6985930735930735,0.8968391802709275,0.7853992395437263
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The patient's current situation reflects {}.,0.6370395988241397,0.5817610062893082,0.9638763459534561,0.7255850437965747
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The patient's symptoms and care needs are {}.,0.5704651564931696,0.5385065314876194,0.9593608891976381,0.6898101898101898
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The patient's care is {}.,0.6330624243472246,0.5818378378378378,0.9346995484543245,0.7172174840085288
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,This note indicates a situation where {}.,0.6513920110669202,0.5889874200866158,0.9920111149704759,0.7391304347826086
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The note documents that {}.,0.7356043575998616,0.6673277144273674,0.935046891281695,0.7788225083176624
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The record indicates that {}.,0.707764136261456,0.6330870830535035,0.9822855158040986,0.7699428260277702
+MoritzLaurer/DeBERTa-v3-xsmall-mnli-fever-anli-ling-binary,The clinical documentation suggests that {}.,0.692720041500951,0.6219026548672566,0.9763806877387982,0.7598324097851061
+tasksource/deberta-small-long-nli,This example is about {}.,0.7022306761196611,0.9031358885017422,0.4501563042723168,0.6008344923504868
+tasksource/deberta-small-long-nli,The patient's palliative care needs are {}.,0.7890368320940688,0.863019693654267,0.6849600555748524,0.7637490317583269
+tasksource/deberta-small-long-nli,"Overall, the patient's care needs are {}.",0.7829846100639807,0.8822975517890772,0.6509204584925321,0.7491505096941835
+tasksource/deberta-small-long-nli,"From this note, it can be inferred that {}.",0.7995849904893654,0.8706896551724138,0.7016325112886419,0.7770725139449894
+tasksource/deberta-small-long-nli,This clinical note indicates that the patient's care needs are {}.,0.795089054124157,0.8592027141645462,0.7037165682528655,0.7737254153141111
+tasksource/deberta-small-long-nli,"Based on this note, the patient's care needs are {}.",0.7762407055161681,0.8761271950640721,0.6411948593261549,0.7404733253108704
+tasksource/deberta-small-long-nli,The patient's condition suggests that {}.,0.7821200069168252,0.8599377501111605,0.671761028134769,0.7542901716068643
+tasksource/deberta-small-long-nli,This note suggests that the patient is experiencing {}.,0.7674217534151825,0.8835,0.6137547759638764,0.7243287558926009
+tasksource/deberta-small-long-nli,The patient's current situation reflects {}.,0.8049455300017292,0.8251021165985889,0.771795762417506,0.797559224694903
+tasksource/deberta-small-long-nli,The patient's symptoms and care needs are {}.,0.8004495936365208,0.8643852978453739,0.7106634248002779,0.7800228745711018
+tasksource/deberta-small-long-nli,The patient's care is {}.,0.777796991181048,0.8703531598513011,0.6505731156651615,0.7445835817928841
+tasksource/deberta-small-long-nli,This note indicates a situation where {}.,0.8085768632197822,0.8796058269065982,0.7130948245918721,0.787646268943027
+tasksource/deberta-small-long-nli,The note documents that {}.,0.7786615943282034,0.8886728245017015,0.6349426884334839,0.7406807131280388
+tasksource/deberta-small-long-nli,The record indicates that {}.,0.8123811170672661,0.8599518459069021,0.7443556790552275,0.7979892012660584
+tasksource/deberta-small-long-nli,The clinical documentation suggests that {}.,0.768459277191769,0.870548604427334,0.6283431747134421,0.7298769416986081
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,This example is about {}.,0.7463254366245893,0.7406271301976823,0.7547759638763459,0.7476346120763805
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The patient's palliative care needs are {}.,0.5538647760677848,0.5274563820018365,0.9975686002084057,0.6900528592023066
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,"Overall, the patient's care needs are {}.",0.7848867369877226,0.7298285071689626,0.901701979854116,0.8067122436295836
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,"From this note, it can be inferred that {}.",0.8163582915441813,0.7669703203056127,0.9065647794373046,0.830945558739255
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,This clinical note indicates that the patient's care needs are {}.,0.8189521009856476,0.7706855791962175,0.9058700937825633,0.8328277183458407
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,"Based on this note, the patient's care needs are {}.",0.7976828635656233,0.7496348232544552,0.8912816950329976,0.8143446524912726
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The patient's condition suggests that {}.,0.6752550579284109,0.609351103342801,0.9687391455366446,0.7481223175965666
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,This note suggests that the patient is experiencing {}.,0.7964724191596058,0.7513290017720023,0.8836401528308441,0.8121308858739026
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The patient's current situation reflects {}.,0.770361404115511,0.719253604749788,0.8836401528308441,0.7930174563591023
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The patient's symptoms and care needs are {}.,0.7611966107556631,0.7177325581395348,0.8575894407780479,0.7814527615128977
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The patient's care is {}.,0.7942244509770016,0.757548032936871,0.8627995831886072,0.8067554400779474
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,This note indicates a situation where {}.,0.7477088016600381,0.6701006229036895,0.9715178881556096,0.7931376719126613
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The note documents that {}.,0.7962994985301747,0.7670329670329671,0.8485585272664119,0.8057387862796834
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The record indicates that {}.,0.7781428324399101,0.7102212855637513,0.9364362625911775,0.8077902621722847
+MoritzLaurer/deberta-v3-xsmall-zeroshot-v1.1-all-33,The clinical documentation suggests that {}.,0.7326647068995331,0.660563719585642,0.9524140326502257,0.7800853485064011
+cmarkea/distilcamembert-base-nli,This example is about {}.,0.5476396334082656,0.6803840877914952,0.17228204237582495,0.2749445676274945
+cmarkea/distilcamembert-base-nli,The patient's palliative care needs are {}.,0.5531730935500605,0.6860025220680959,0.18895449808961445,0.2962962962962963
+cmarkea/distilcamembert-base-nli,"Overall, the patient's care needs are {}.",0.5512709666263185,0.6815856777493606,0.1851337269885377,0.29117727396886095
+cmarkea/distilcamembert-base-nli,"From this note, it can be inferred that {}.",0.5469479508905413,0.7045813586097947,0.1549149010072942,0.2539863325740319
+cmarkea/distilcamembert-base-nli,This clinical note indicates that the patient's care needs are {}.,0.5479854746671278,0.6568047337278107,0.1927752691906912,0.2980665950590763
+cmarkea/distilcamembert-base-nli,"Based on this note, the patient's care needs are {}.",0.542797855784195,0.6793893129770993,0.1545675581799236,0.25183927560837577
+cmarkea/distilcamembert-base-nli,The patient's condition suggests that {}.,0.5779007435587066,0.6837248322147651,0.28308440430705106,0.40039302382706954
+cmarkea/distilcamembert-base-nli,This note suggests that the patient is experiencing {}.,0.5619920456510462,0.6798336798336798,0.22716220910038207,0.3405363186670138
+cmarkea/distilcamembert-base-nli,The patient's current situation reflects {}.,0.5746152515995159,0.6640563821456539,0.29454671761028134,0.4080846968238691
+cmarkea/distilcamembert-base-nli,The patient's symptoms and care needs are {}.,0.5552481411032336,0.7123098201936376,0.17888155609586662,0.2859522487506941
+cmarkea/distilcamembert-base-nli,The patient's care is {}.,0.571156839010894,0.6692111959287532,0.2740534907954151,0.38886150813208475
+cmarkea/distilcamembert-base-nli,This note indicates a situation where {}.,0.5376102369012623,0.6462196861626248,0.1573463007988885,0.253072625698324
+cmarkea/distilcamembert-base-nli,The note documents that {}.,0.5630295694276327,0.6623616236162362,0.2493921500521014,0.36235175372192785
+cmarkea/distilcamembert-base-nli,The record indicates that {}.,0.5450458239667992,0.628099173553719,0.2111844390413338,0.3160904600987783
+cmarkea/distilcamembert-base-nli,The clinical documentation suggests that {}.,0.5649316963513747,0.6636609558160504,0.25564432094477246,0.3691073219658977
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,This example is about {}.,0.74010029396507,0.7613981762917933,0.696075026050712,0.7272727272727273
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The patient's palliative care needs are {}.,0.7478817222894691,0.807442665512765,0.6481417158735672,0.7190751445086705
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,"Overall, the patient's care needs are {}.",0.7411378177416565,0.7542310522442973,0.7120527961097604,0.7325352867607647
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,"From this note, it can be inferred that {}.",0.7202144215804945,0.7679558011049724,0.627648489058701,0.6907492354740061
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,This clinical note indicates that the patient's care needs are {}.,0.7311084212346532,0.7620744259699129,0.6686349426884335,0.7123034227567068
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,"Based on this note, the patient's care needs are {}.",0.7081099775203181,0.7239563745769086,0.6686349426884335,0.6951968219573853
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The patient's condition suggests that {}.,0.7473629604011759,0.7708174178762414,0.7009378256339006,0.7342186647262143
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,This note suggests that the patient is experiencing {}.,0.73058965934636,0.76283326701154,0.6658562000694686,0.711053412462908
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The patient's current situation reflects {}.,0.7437316271831229,0.7632868450810403,0.703369225425495,0.7321041214750542
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The patient's symptoms and care needs are {}.,0.7473629604011759,0.8096069868995633,0.6439736019451199,0.7173534532791642
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The patient's care is {}.,0.7594674044613522,0.8009708737864077,0.6877387981938173,0.7400485890487759
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,This note indicates a situation where {}.,0.7421753415182432,0.7814274128142741,0.6693296283431747,0.7210477081384471
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The note documents that {}.,0.7655196264914405,0.780066200809121,0.736714136853074,0.7577706323687031
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The record indicates that {}.,0.772436451668684,0.8097502972651606,0.709621396318166,0.7563865235098112
+MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33,The clinical documentation suggests that {}.,0.7618882932733875,0.785986290936786,0.7169155956929489,0.7498637602179836
+MoritzLaurer/deberta-v3-base-zeroshot-v1,This example is about {}.,0.7030952792668166,0.8952380952380953,0.45710316081972907,0.6051965969188319
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The patient's palliative care needs are {}.,0.6998097873076258,0.6526850120224419,0.8485585272664119,0.7378435517970402
+MoritzLaurer/deberta-v3-base-zeroshot-v1,"Overall, the patient's care needs are {}.",0.8260418467923223,0.8799188640973631,0.7533865925668635,0.811751497005988
+MoritzLaurer/deberta-v3-base-zeroshot-v1,"From this note, it can be inferred that {}.",0.8447172747708802,0.8577103647526183,0.8249392150052102,0.8410056657223796
+MoritzLaurer/deberta-v3-base-zeroshot-v1,This clinical note indicates that the patient's care needs are {}.,0.842469306588276,0.8501779359430605,0.8298020145883988,0.8398664088592019
+MoritzLaurer/deberta-v3-base-zeroshot-v1,"Based on this note, the patient's care needs are {}.",0.8212000691682517,0.8676763650856915,0.7561653351858284,0.8080920564216778
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The patient's condition suggests that {}.,0.8376275289642054,0.8742283950617284,0.7870788468218132,0.8283677572655822
+MoritzLaurer/deberta-v3-base-zeroshot-v1,This note suggests that the patient is experiencing {}.,0.8090956251080754,0.8454651615414558,0.7544286210489753,0.7973568281938326
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The patient's current situation reflects {}.,0.8177416565796299,0.8050819124038783,0.8364015283084404,0.8204429301533219
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The patient's symptoms and care needs are {}.,0.8146290852498703,0.8410721026802567,0.7738798193817298,0.8060781476121563
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The patient's care is {}.,0.7973370223067612,0.8661518661518661,0.7012851684612713,0.7750479846449136
+MoritzLaurer/deberta-v3-base-zeroshot-v1,This note indicates a situation where {}.,0.8372816877053433,0.8645598194130926,0.7981938172976728,0.8300523749322738
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The note documents that {}.,0.8232751167214248,0.8473625140291807,0.7867315039944425,0.8159221902017291
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The record indicates that {}.,0.8410859415528272,0.855072463768116,0.8197290725946509,0.8370278418159248
+MoritzLaurer/deberta-v3-base-zeroshot-v1,The clinical documentation suggests that {}.,0.8395296558879475,0.8685304117869286,0.7985411601250434,0.832066594281578
