@@ -14,3 +14,7 @@
 - Use a mixture of small zero-shot classification models running locally (to facilitate the use of this method in small-resource settings or with sensitive data).
 - [Ensembled small models can perform competitively with larger models](https://doi.org/10.18653/v1/2023.arabicnlp-1.51).
 - [Ensembles can perform better than any single model on its own](https://doi.org/10.18653/v1/2024.wassa-1.49).
+
+## Model Selection
+- Models were selected based on their appearance in the [BTZSC benchmark](https://doi.org/10.48550/arXiv.2603.11991) (on 28th March, 2026). 
+- Criteria included that the model was within the top 10 highest performers and had less than 1B parameters, as assessed on the [Hugging Face BTZSC Leaderboard](https://huggingface.co/spaces/btzsc/btzsc-leaderboard). 
