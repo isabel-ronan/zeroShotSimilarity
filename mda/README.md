@@ -4,6 +4,8 @@
 - Open-source implementation of Biber's 67 lexicogrammatical and functional features, as described in ["Variation across Speech and Writing"](https://doi.org/10.1017/CBO9780511621024).
 - These 67 features are widely used for text-type, register, and genre classification tasks in corpus linguistics.
 - Advantages include local running and quick computation (in comparison to more intensive machine learning methods).
+- Theoretically-grounded library which is used for comparison in other Biber-style papers (as the fastest library which does not used advanced neural methods) (such as [Neurobiber](https://doi.org/10.48550/arXiv.2502.18590)). 
+- ["One powerful feature of the BiberAnalyzer is the ability to project your data onto Biber’s original dimensions, allowing for direct comparison with established research."](https://browndw.github.io/pybiber/biber-analyzer.html#comparison-with-bibers-original-dimensions). [Exact quote can be found here.](https://browndw.github.io/pybiber/biber-analyzer.html#comparison-with-bibers-original-dimensions:~:text=One%20powerful%20feature%20of%20the%20BiberAnalyzer%20is%20the%20ability%20to%20project%20your%20data%20onto%20Biber%E2%80%99s%20original%20dimensions%2C%20allowing%20for%20direct%20comparison%20with%20established%20research)
 
 
 # Zero-Shot Classification

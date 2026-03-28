@@ -1,4 +1,50 @@
 # Datasets
+
+## Total Texts Before Empty String Removal (Total: 480651)
+┌────────────────────────────────┬────────┐
+│ tag                            ┆ len    │
+│ ---                            ┆ ---    │
+│ str                            ┆ u32    │
+╞════════════════════════════════╪════════╡
+│ huffPostNews                   ┆ 209527 │
+│ augmentedClinicalNotes         ┆ 30000  │
+│ syntheticCareHomeNurseNotes    ┆ 5783   │
+│ medicalAbstracts               ┆ 14438  │
+│ clinc150                       ┆ 23700  │
+│ atis                           ┆ 4978   │
+│ dementiaAudio                  ┆ 549    │
+│ trumpTweets                    ┆ 56571  │
+│ banking77                      ┆ 13069  │
+│ bbcNews                        ┆ 2225   │
+│ yahoo                          ┆ 87362  │
+│ simSUM                         ┆ 10000  │
+│ 20NewsGroups                   ┆ 18846  │
+│ clinicalDialogueSummarizations ┆ 3603   │
+└────────────────────────────────┴────────┘
+
+## Total Texts After Empty String Removal (Total: 460939)
+┌────────────────────────────────┬────────┐
+│ tag                            ┆ len    │
+│ ---                            ┆ ---    │
+│ str                            ┆ u32    │
+╞════════════════════════════════╪════════╡
+│ simSUM                         ┆ 10000  │
+│ banking77                      ┆ 13069  │
+│ clinc150                       ┆ 23700  │
+│ trumpTweets                    ┆ 56571  │
+│ yahoo                          ┆ 87362  │
+│ atis                           ┆ 4978   │
+│ bbcNews                        ┆ 2225   │
+│ augmentedClinicalNotes         ┆ 30000  │
+│ syntheticCareHomeNurseNotes    ┆ 5783   │
+│ clinicalDialogueSummarizations ┆ 3603   │
+│ dementiaAudio                  ┆ 549    │
+│ huffPostNews                   ┆ 189815 │
+│ medicalAbstracts               ┆ 14438  │
+│ 20NewsGroups                   ┆ 18846  │
+└────────────────────────────────┴────────┘
+
+
 ## Medical Datasets
 
 ### SimSUM
