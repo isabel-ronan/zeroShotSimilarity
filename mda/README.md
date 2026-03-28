@@ -1,5 +1,7 @@
 # Zero-Shot Learning vs MDA for Corpus Descriptions
 
+- Dimension-based method satisfies one of the areas of future work proposed by [Kour et al. in Measuring the Measuring Tools](https://doi.org/10.18653/v1/2022.gem-1.35). There are separate scores for each of Biber's 6 dimensions. 
+
 # pybiber
 - Open-source implementation of Biber's 67 lexicogrammatical and functional features, as described in ["Variation across Speech and Writing"](https://doi.org/10.1017/CBO9780511621024).
 - These 67 features are widely used for text-type, register, and genre classification tasks in corpus linguistics.
