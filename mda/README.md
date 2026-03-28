@@ -16,5 +16,8 @@
 - [Ensembles can perform better than any single model on its own](https://doi.org/10.18653/v1/2024.wassa-1.49).
 
 ## Model Selection
-- Models were selected based on their appearance in the [BTZSC benchmark](https://doi.org/10.48550/arXiv.2603.11991) (on 28th March, 2026). 
-- Criteria included that the model was within the top 10 highest performers and had less than 1B parameters, as assessed on the [Hugging Face BTZSC Leaderboard](https://huggingface.co/spaces/btzsc/btzsc-leaderboard). 
+<!-- - Models were selected based on their appearance in the [BTZSC benchmark](https://doi.org/10.48550/arXiv.2603.11991) (on 28th March, 2026). 
+- Criteria included that the model was within the top 10 highest performers (with the exclusion of a custom-trained deberta model (`deberta-v3-large-nli-triplet`), which we replaced with `cross-encoder/nli-deberta-v3-large` as a substitute), had less than 1B parameters, and were pre-trained for natural language inference or zero-shot classification as assessed on the [Hugging Face BTZSC Leaderboard](https://huggingface.co/spaces/btzsc/btzsc-leaderboard).  -->
+- Taken from the most downloaded zero-shot classification models on the [HuggingFace models page](https://huggingface.co/models?pipeline_tag=zero-shot-classification&sort=downloads).
+- Models considered if >= 1k downloads.
+- Filtered based on [memory calculations](https://huggingface.co/docs/accelerate/en/usage_guides/model_size_estimator).
