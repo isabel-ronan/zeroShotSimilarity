@@ -19,5 +19,27 @@
 <!-- - Models were selected based on their appearance in the [BTZSC benchmark](https://doi.org/10.48550/arXiv.2603.11991) (on 28th March, 2026). 
 - Criteria included that the model was within the top 10 highest performers (with the exclusion of a custom-trained deberta model (`deberta-v3-large-nli-triplet`), which we replaced with `cross-encoder/nli-deberta-v3-large` as a substitute), had less than 1B parameters, and were pre-trained for natural language inference or zero-shot classification as assessed on the [Hugging Face BTZSC Leaderboard](https://huggingface.co/spaces/btzsc/btzsc-leaderboard).  -->
 - Taken from the most downloaded zero-shot classification models on the [HuggingFace models page](https://huggingface.co/models?pipeline_tag=zero-shot-classification&sort=downloads).
-- Models considered if >= 1k downloads.
-- Filtered based on [memory calculations](https://huggingface.co/docs/accelerate/en/usage_guides/model_size_estimator).
+- Models considered if >= 100k downloads and parameters less than 0.1B.
+<!-- - Filtered based on [memory calculations](https://huggingface.co/docs/accelerate/en/usage_guides/model_size_estimator). -->
+- Focused on diverse range of architectures with civersity, capacity, and efficiency. 
+
+# Analysis Scores
+
+## Classification Metrics
+| Metric | Purpose | Pros | Cons | Scale | Interpretation |
+| ------- | ------- | ------- | ------- | ------- | ------- |
+| **Accuracy** | % of correct predictions | Simple; easy to compute | Misleading for imbalanced classes | 0–1 | High = better; low = worse |
+| **Precision** | Correct positives/predicted positives | Measures false positives; good for selective prediction | Ignores false negatives | 0–1 | High = better; low = worse |
+| **Recall (Sensitivity)** | Correct positives/actual positives | Measures false negatives; good for catching positives | Ignores false positives | 0–1 | High = better; low = worse |
+| **F1 Score** | Harmonic mean of precision & recall | Balances precision & recall; best for imbalanced data | Harder to interpret than individual precision/recall | 0–1 | High = better; low = worse |
+| **Cohen’s Kappa** | Chance-corrected agreement | Adjusts for chance; good with uneven label distribution | Less intuitive than accuracy | -1 to 1 | High = better; low = worse |
+| **Matthews Correlation Coefficient (MCC)** | Balanced correlation measure for binary | Handles imbalanced data well | Complex interpretation | -1 to 1 | High = better; low = worse |
+
+## Continuous Scores
+| Metric | Purpose | Pros | Cons | Scale | What High/Low Means |
+| ------- | ------- | ------- | ------- | ------- | ------- |
+| **Pearson Correlation** | Measures linear association between model and Biber scores | Captures linear trends; easy to interpret | Only linear; sensitive to outliers | -1 to 1 | 1 == strong positive correlation; 0 == negative or weak correlation |
+| **Spearman Correlation** | Measures rank-order association | Captures monotonic trends; robust to outliers | Ignores exact differences; less sensitive to linearity | -1 to 1 | 1 == strong monotonic relationship; 0 == weak or inverse relationship |
+| **Mean Squared Error (MSE)** | Measures average squared deviation | Penalizes large errors strongly | Harder to interpret; sensitive to outliers | 0 to infinity  | 0 == better; High == worse |
+| **Root Mean Squared Error (RMSE)** | root MSE, interpretable in same scale as factor (units are units of original data (e.g. dollars of error if using dollars))| Same units as target; easier to interpret | Still sensitive to outliers | 0 to infinity  | 0 == better; High == worse |
+| **Mean Absolute Error (MAE)** | Average absolute deviation | Intuitive; less sensitive to outliers than MSE | Does not penalize large errors as strongly as MSE | 0 to infinity  | 0 == better; High == worse |
