@@ -7,10 +7,10 @@
 - `advanced_text` column is used; these are more 'challenging' compact representations of the textual data designed to replicate real-life note taking settings.
 - 10,000 simulated patient records in the domain of respiratory diseases. 
 
-### Augmented Clinical Notes 
+<!-- ### Augmented Clinical Notes 
 - [Augmented Clinical Notes](https://huggingface.co/datasets/AGBonnet/augmented-clinical-notes/blob/main/report.pdf) which was downloaded from [HuggingFace](https://huggingface.co/datasets/AGBonnet/augmented-clinical-notes) with the relevant methodology found at the [Medinote GitHub repository](https://github.com/EPFL-IC-Make-Team/medinote).
 - 30,000 structured clinical notes. 
-- `full_note` column is used; these represent full notes that are not truncated. 
+- `full_note` column is used; these represent full notes that are not truncated.  -->
 
 ### Clinical Dialogue Summarizations
 - [Clinical Dialogue Summarizations](https://doi.org/10.18653/v1/2023.eacl-main.168), which were downloaded from [GitHub](https://github.com/abachaa/MTS-Dialog/tree/main); specifically, we are using the [full augmented dataset](https://github.com/abachaa/MTS-Dialog/blob/main/Augmented-Data/MTS-Dialog-Augmented-TrainingSet-3-FR-and-ES-3603-Pairs-final.csv). 
@@ -31,7 +31,7 @@
 
 ## Other Datasets
 
-### 20 NewsGroups
+<!-- ### 20 NewsGroups
 - [20 NewsGroups](https://doi.org/10.1016/B978-1-55860-377-6.50048-7) dataset which was downloaded from [Scikit Learn](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.fetch_20newsgroups.html).
 - Contains approximately 18,000 news articles.
 
@@ -41,7 +41,7 @@
 ### BBC News
 - [BBC News](https://doi.org/10.1145/1143844.1143892) dataset which was downloaded from [Kaggle](https://www.kaggle.com/datasets/hgultekin/bbcnewsarchive), but is based on the [original source website](http://mlg.ucd.ie/datasets/bbc.html).
 - Consists of 2225 documents with 5 topical areas from 2004-2005. 
-- Class Labels: 5 (business, entertainment, politics, sport, tech).
+- Class Labels: 5 (business, entertainment, politics, sport, tech). -->
 
 ## HuffPost News
 - [HuffPost](https://doi.org/10.48550/arXiv.2209.11429) dataset which was downloaded from [Kaggle](https://www.kaggle.com/datasets/rmisra/news-category-dataset).
