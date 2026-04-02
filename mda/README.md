@@ -28,12 +28,12 @@
 ## Classification Metrics
 | Metric | Purpose | Pros | Cons | Scale | Interpretation |
 | ------- | ------- | ------- | ------- | ------- | ------- |
-| **Accuracy** | % of correct predictions | Simple; easy to compute | Misleading for imbalanced classes | 0–1 | High = better; low = worse |
-| **Precision** | Correct positives/predicted positives | Measures false positives; good for selective prediction | Ignores false negatives | 0–1 | High = better; low = worse |
-| **Recall (Sensitivity)** | Correct positives/actual positives | Measures false negatives; good for catching positives | Ignores false positives | 0–1 | High = better; low = worse |
-| **F1 Score** | Harmonic mean of precision & recall | Balances precision & recall; best for imbalanced data | Harder to interpret than individual precision/recall | 0–1 | High = better; low = worse |
-| **Cohen’s Kappa** | Chance-corrected agreement | Adjusts for chance; good with uneven label distribution | Less intuitive than accuracy | -1 to 1 | High = better; low = worse |
-| **Matthews Correlation Coefficient (MCC)** | Balanced correlation measure for binary | Handles imbalanced data well | Complex interpretation | -1 to 1 | High = better; low = worse |
+| **Accuracy** | % of correct predictions | Simple; easy to compute | Misleading for imbalanced classes | 0–1 | high = better; low = worse |
+| **Precision** | Correct positives/predicted positives | Measures false positives; good for selective prediction | Ignores false negatives | 0–1 | high = better; low = worse |
+| **Recall (Sensitivity)** | Correct positives/actual positives | Measures false negatives; good for catching positives | Ignores false positives | 0–1 | high = better; low = worse |
+| **F1 Score** | Harmonic mean of precision & recall | Balances precision & recall; best for imbalanced data | Harder to interpret than individual precision/recall | 0–1 | high = better; low = worse |
+| **Cohen’s Kappa** | Chance-corrected agreement (inter-rater reliability). | Adjusts for chance; good with uneven label distribution | Less intuitive than accuracy | -1 to 1 | high = better; low = worse ; 0 = exactly what is expected by chance |
+| **Matthews Correlation Coefficient (MCC)** | Balanced correlation measure for binary classification. | Handles imbalanced data well (considers both true/false positives and negatives), making it better than F1 score for imbalanced datasets. | Complex interpretation (but one of the best ways to summarize a confusion matrix into a single value) | -1 to 1 | high = better; low = worse; 0 = no better than random guessing |
 
 ## Continuous Scores
 | Metric | Purpose | Pros | Cons | Scale | What High/Low Means |
@@ -42,4 +42,4 @@
 | **Spearman Correlation** | Measures rank-order association | Captures monotonic trends; robust to outliers | Ignores exact differences; less sensitive to linearity | -1 to 1 | 1 == strong monotonic relationship; 0 == weak or inverse relationship |
 | **Mean Squared Error (MSE)** | Measures average squared deviation | Penalizes large errors strongly | Harder to interpret; sensitive to outliers | 0 to infinity  | 0 == better; High == worse |
 | **Root Mean Squared Error (RMSE)** | root MSE, interpretable in same scale as factor (units are units of original data (e.g. dollars of error if using dollars))| Same units as target; easier to interpret | Still sensitive to outliers | 0 to infinity  | 0 == better; High == worse |
-| **Mean Absolute Error (MAE)** | Average absolute deviation | Intuitive; less sensitive to outliers than MSE | Does not penalize large errors as strongly as MSE | 0 to infinity  | 0 == better; High == worse |
+| **Mean Absolute Error (MAE)** | Average absolute deviation | Intuitive; less sensitive to outliers than MSE | Does not penalize large errors as strongly as MSE | 0 to infinity  | 0 == better; high == worse |
