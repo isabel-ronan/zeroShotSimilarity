@@ -2,7 +2,7 @@ __author__ = 'gkour'
 
 import random
 import numpy as np
-import compcor.corpus_metrics as corpus_metrics
+import comparingCorpora.compcor.corpus_metrics as corpus_metrics
 
 
 class KSC:
