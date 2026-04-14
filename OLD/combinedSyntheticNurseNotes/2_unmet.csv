@@ -1,0 +1,554 @@
+report,needs
+"1. Resident A complained of persistent back pain throughout the day, despite pain medication. ",unmet
+"2. Resident B exhibited signs of confusion and agitation, frequently calling out for loved ones who have passed. ",unmet
+"3. Resident C experienced repeated episodes of nausea and vomiting, requiring frequent anti-emetic medication. ",unmet
+"4. Resident D was observed to be restless and wandering at night, unable to settle into a restful sleep. ",unmet
+"5. Resident E expressed feelings of loneliness and isolation, lacking regular social interaction with fellow residents. ",unmet
+"6. Resident F displayed signs of apathy and disinterest in activities, showing little motivation to engage in daily tasks. ",unmet
+"7. Resident G was noted to have tightness of breath, indicating possible respiratory distress. ",unmet
+"8. Resident H struggled with incontinence issues, requiring assistance with toileting and hygiene. ",unmet
+"9. Resident I exhibited severe pressure ulcers on their heels, prompting the need for specialized wound care. ",unmet
+"10. Resident J reported chronic pain in their joints, limiting mobility and causing discomfort during daily activities. ",unmet
+"11. Resident K showed signs of dehydration and malnutrition, requiring regular monitoring of fluid intake and nutritional support. ",unmet
+"12. Resident L experienced frequent falls and near-misses, necessitating the use of walking aids and supervised mobility. ",unmet
+"13. Resident M displayed symptoms of palliative care, including increased fatigue and decreased appetite. ",unmet
+"14. Resident N expressed fears and anxiety about their worsening health condition, seeking reassurance and support. ",unmet
+"15. Resident O exhibited symptoms of terminal restlessness, displaying agitation and discomfort during their final days. ",unmet
+"16. Resident P required round-the-clock care for advanced stages of dementia, displaying disorientation and confusion. ",unmet
+"17. Resident Q struggled with the loss of independence, feeling a sense of helplessness and frustration. ",unmet
+"18. Resident R showed signs of respiratory distress, with labored breathing and low oxygen levels. ",unmet
+"19. Resident S experienced severe pain and discomfort, requiring regular pain management interventions. ",unmet
+"20. Resident T displayed symptoms of depression and hopelessness, requiring emotional support and counseling. ",unmet
+"21. Resident U exhibited signs of delirium, with confusion and disorientation worsening over time. ",unmet
+"22. Resident V reported feelings of nausea and lack of appetite, requiring specialized dietary support. ",unmet
+"23. Resident W displayed symptoms of anxiety and restlessness, seeking comfort and reassurance from caregivers. ",unmet
+"24. Resident X struggled with communication difficulties, making it challenging to express their needs and concerns. ",unmet
+"25. Resident Y exhibited signs of palliative care needs, including increased fatigue and decreased mobility. ",unmet
+"- Resident A experienced persistent nausea and vomiting throughout the day despite anti-emetic medication. Subcutaneous fluids have been initiated for hydration. Await further medical assessment. - Resident B required assistance with all daily activities, including eating and drinking. Swallowing difficulties continue to be a concern.- Resident C showed signs of agitation and restlessness during the night. Pain management needs to be reevaluated.- Resident D exhibited confusion and disorientation, requiring increased monitoring for safety. Family communication needed for care plan adjustments.- Resident E complained of severe back pain and requested medication for relief. Fall risk assessments to be reviewed.- Resident F exhibited signs of apathy and decreased social interaction. Multidisciplinary team meeting scheduled for comprehensive care planning.- Resident G experienced worsening pressure ulcers, requiring specialized wound care interventions. Pain management to be reassessed.- Resident H showed signs of respiratory distress and tightness of breath. Palliative care consultation urgently needed.- Resident I expressed worries about worsening symptoms and requested additional support from the healthcare team. Emotional support and counseling recommended.- Resident J reported frequent episodes of diarrhea and nausea, impacting nutritional intake. Review of medication side effects necessary.- Resident K experienced frequent falls and required frequent assistance with mobility. Consideration for assistive devices and physical therapy.- Resident L presented with skin irritations and itching, indicating a need for proper skincare and monitoring. Consultation with dermatology advised.- Resident M displayed increased confusion and memory lapses, necessitating close monitoring for safety. Family education on dementia care recommended.- Resident N experienced persistent sleep disturbances and nighttime wandering. Interventions for improving sleep hygiene to be implemented.- Resident O exhibited signs of depression and withdrawal, requiring mental health support and counseling services. - Resident P demonstrated difficulty in swallowing and required modified diet and feeding assistance. Speech therapy consultation recommended.- Resident Q reported ongoing pain and discomfort, necessitating frequent pain assessments and management. - Resident R exhibited signs of dehydration and malnutrition, requiring increased fluid intake and nutritional support. - Resident S showed signs of emotional distress and anxiety, necessitating psychosocial support and counseling services. - Resident T experienced recurrent falls and required constant monitoring for safety. Fall prevention strategies to be reinforced.- Resident U exhibited signs of social isolation and loneliness, necessitating activities and engagement programs. Social work intervention recommended.- Resident V displayed signs of skin breakdown and pressure sores, indicating a need for specialized wound care interventions. Dermatology consult advised.- Resident W reported worsening pain levels and requested medication adjustments for better pain control. Pain management review needed.- Resident X showed signs of respiratory distress and shortness of breath, requiring urgent palliative care interventions. - Resident Y experienced recurrent nausea and vomiting, necessitating anti-emetic medications and intravenous hydration. Medical review pending.- Resident Z displayed symptoms of anxiety and agitation, requiring behavioral interventions and calming techniques. Social work involvement recommended. ",unmet
+"1. Resident A experienced extreme pain throughout the night, despite medication. Family has been informed and requested increased pain management.",unmet
+"2. Resident B has been showing signs of restlessness and agitation, especially during mealtimes. Attempts to soothe have been unsuccessful.",unmet
+"3. Resident C complained of chronic back pain this morning, requesting extra support and therapy.",unmet
+"4. Resident D has been exhibiting signs of confusion and disorientation, requiring constant monitoring and reassurance.",unmet
+"5. Resident E has been experiencing severe nausea and vomiting, unable to keep any food or fluids down. Medical review urgently needed.",unmet
+"6. Resident F reported feeling shortness of breath and tightness in the chest, especially when laying flat. Requested oxygen therapy.",unmet
+"7. Resident G has been experiencing frequent falls and mobility issues, requiring assistance with transfers and walking aids.",unmet
+"8. Resident H has been displaying signs of apathy and disinterest in surroundings, potentially stemming from untreated pain or discomfort.",unmet
+9. Resident I has been having difficulty sleeping and has requested intervention for better rest.,unmet
+"10. Resident J has persistent pressure ulcers that have worsened in severity, requiring immediate treatment and prevention measures.",unmet
+"11. Resident K has been experiencing frequent diarrhea and dehydration, needing urgent hydration management.",unmet
+"12. Resident L has been struggling with eating and swallowing, requiring modified utensils and assistance during mealtimes.",unmet
+"13. Resident M has developed a skin condition causing itching and discomfort, needing proper assessment and treatment.",unmet
+"14. Resident N has been expressing fears and anxieties related to their condition, needing emotional support and palliative care services.",unmet
+"15. Resident O has requested a review of their care plan, as they feel it no longer meets their needs and wishes.",unmet
+"16. Resident P has been experiencing recurrent falls and injuries, necessitating interventions for safety and prevention.",unmet
+"17. Resident Q has been showing signs of dehydration and malnutrition, requiring close monitoring and nutritional support.",unmet
+"18. Resident R has been experiencing chronic pain that is not adequately managed, affecting their quality of life and wellbeing.",unmet
+"19. Resident S has been experiencing severe itching and rash, requiring dermatological assessment and treatment.",unmet
+20. Resident T has been experiencing difficulty with mobility and requires adjustments to their wheelchair for better comfort and function.,unmet
+21. Resident U is in need of specialized palliative care services due to the severity of their symptoms and decline in health.,unmet
+"22. Resident V has been experiencing persistent nausea and vomiting, needing intervention to manage symptoms and improve comfort.",unmet
+"23. Resident W has been showing signs of emotional distress and anxiety, requiring support from mental health professionals.",unmet
+"24. Resident X has been experiencing chronic fatigue and weakness, needing interventions to improve energy levels and overall wellbeing.",unmet
+"25. Resident Y has expressed fears and concerns about end-of-life care decisions, needing guidance and support from the palliative care team.",unmet
+"- Sarah experienced severe back pain overnight. She was given pain medication, but the pain persists. Awaiting further assessment from the healthcare team.",unmet
+- John is experiencing increased confusion and restlessness. He is having difficulty communicating his needs. Additional support and monitoring needed.,unmet
+- Emily has been complaining of nausea and vomiting after meals. She has lost her appetite and is unable to keep food down. Medical intervention required.,unmet
+- Michael is exhibiting signs of agitation and restlessness. He appears to be in discomfort but is unable to communicate the source of his distress. Pain assessment needed.,unmet
+- Lisa has developed a pressure ulcer on her sacrum. It has become red and is starting to breakdown. Wound care management needed.,unmet
+- James has been experiencing difficulty with mobility. He has had multiple falls in the past week and is at risk for further injury. Fall prevention measures needed.,unmet
+- Maria has shown signs of respiratory distress. She is struggling to breathe and is in discomfort. Urgent medical attention required.,unmet
+- Thomas has been feeling more fatigued and weak than usual. He has been unable to participate in daily activities. Assess for palliative care needs.,unmet
+- Rachel is showing symptoms of dehydration. She has decreased urine output and dry lips. Hydration management needed.,unmet
+- Samuel is in need of more assistance with personal care tasks. He is struggling with maintaining hygiene and grooming. Support from caregivers required.,unmet
+- Laura has been experiencing increased episodes of incontinence. She is embarrassed and requires help managing this issue. Incontinence care plan needed.,unmet
+- Daniel has been having trouble swallowing and has been choking during meals. He is at risk for aspiration. Speech therapist evaluation necessary.,unmet
+- Olivia has been showing signs of depression and apathy. She has lost interest in activities she used to enjoy. Mental health assessment required.,unmet
+- Benjamin has been expressing feelings of loneliness and isolation. He is in need of social interaction and companionship. Arrange for social visits.,unmet
+- Sophia has developed a rash on her arms and legs. It is itchy and bothersome. Skin assessment and treatment needed.,unmet
+- Ethan has been experiencing severe pain in his joints. He is having difficulty moving around and carrying out daily tasks. Pain management intervention needed.,unmet
+- Natalie has been struggling with maintaining her appetite. She has lost interest in food and has lost weight. Nutritional assessment required.,unmet
+- Liam has been experiencing increased confusion and memory loss. He is struggling to remember basic information and tasks. Cognitive assessment needed.,unmet
+- Ava has been having trouble sleeping at night. She is restless and wakes up frequently. Sleep hygiene evaluation needed.,unmet
+- Jacob has been experiencing frequent falls and is at risk for serious injury. He requires assistance with mobility and transfers. Fall prevention strategies needed.,unmet
+- Chloe has been experiencing chest pain and tightness of breath. She is anxious and in discomfort. Immediate medical attention required.,unmet
+- Oliver has been neglecting his personal hygiene. He requires assistance with bathing and grooming. Personal care plan needed.,unmet
+- Harper has been having trouble with his dentures. They are loose and causing discomfort when eating. Dental assessment needed.,unmet
+- Mia has been expressing feelings of anxiety and fear. She is in need of emotional support and reassurance. Mental health counseling needed.,unmet
+- William has been exhibiting signs of agitation and aggression. He is lashing out at caregivers and other residents. Behavior management plan needed.,unmet
+Jane complained of severe back pain today. She was given pain medication but it did not provide much relief. She appeared restless and agitated throughout the day. Awaiting further assessment for palliative care needs.,unmet
+"Mark showed signs of confusion and disorientation, possibly due to his worsening condition. He required assistance with basic tasks and seemed more withdrawn than usual. Urgent palliative care review recommended.",unmet
+Sarah experienced nausea and vomiting after breakfast. She refused to eat or drink and appeared weak. Subcutaneous fluids and anti-emetics were administered. Palliative care team informed for additional support.,unmet
+David complained of shortness of breath and chest pain. He was struggling to sleep and seemed anxious. Oxygen therapy was provided but his symptoms persisted. Palliative care consultation needed.,unmet
+"Lisa was in great discomfort today, with persistent abdominal pain and bloating. She was unable to find relief despite medication. Requesting immediate palliative care assessment for pain management.",unmet
+John showed signs of increased confusion and agitation. He had difficulty communicating his needs and seemed unusually lethargic. Discussion with palliative care team needed for holistic support.,unmet
+"Emily appeared withdrawn and tearful, expressing feelings of loneliness and sadness. She needed reassurance and emotional support throughout the day. Seeking palliative care input for psychological well-being.",unmet
+Peter had a sudden onset of severe headaches and dizziness. He was unable to participate in daily activities and seemed disoriented. Palliative care team notified for symptom management and support.,unmet
+"Karen experienced recurrent episodes of chest pain and palpitations. She seemed anxious and restless, unable to find comfort. Immediate palliative care intervention required for symptom control.",unmet
+"Michael exhibited signs of increased weakness and fatigue, requiring assistance with mobility. His pain levels were escalating, impacting his quality of life. Palliative care review essential for comprehensive care plan.",unmet
+"Laura developed a pressure ulcer on her back, causing significant discomfort. She needed constant repositioning and wound care. Palliative care input essential for pain management and wound healing.",unmet
+"Thomas reported severe abdominal cramps and bloating, affecting his appetite and mood. He was visibly distressed and in need of pain relief. Palliative care team informed for proactive management.",unmet
+"Hannah experienced frequent episodes of nausea and vomiting, leading to dehydration and weakness. Anti-emetics and fluids were administered, but her symptoms persisted. Urgent palliative care consultation required.",unmet
+"Jack displayed signs of respiratory distress, with increased breathlessness and coughing. He struggled to find relief and needed continuous oxygen therapy. Requesting palliative care review for respiratory support.",unmet
+"Olivia was in significant pain today, with worsening joint stiffness and swelling. She had difficulty moving and needed help with daily tasks. Palliative care team alerted for pain assessment and management.",unmet
+"Daniel showed signs of confusion and memory loss, becoming agitated and disoriented. He required constant supervision and support. Palliative care review recommended for cognitive and emotional needs.",unmet
+"Sophie experienced persistent diarrhea and abdominal cramps, leading to dehydration and weakness. Medication provided little relief. Palliative care consultation needed for symptom control and hydration.",unmet
+"Ethan struggled with severe fatigue and weakness, impacting his ability to engage in activities. He seemed demotivated and disinterested. Seeking palliative care input for holistic support and motivation.",unmet
+"Grace exhibited signs of increasing pain and discomfort, especially in her joints and muscles. She needed assistance with mobility and found it difficult to rest. Urgent palliative care assessment requested for pain control.",unmet
+"Alex complained of severe headaches and blurred vision, indicating neurological issues. He seemed agitated and restless, seeking relief without success. Palliative care support needed for symptom management.",unmet
+"Natalie showed signs of emotional distress, with frequent bouts of crying and anxiety. She needed reassurance and emotional support throughout the day. Requesting palliative care input for psychological well-being.",unmet
+"Sam exhibited signs of increased weakness and fatigue, struggling to maintain his usual routine. His pain levels were escalating, impacting his overall well-being. Palliative care review essential for comprehensive support.",unmet
+"Lucy developed a new pressure ulcer on her hip, causing significant discomfort and pain. She required additional wound care and monitoring. Palliative care team informed for wound management and pain relief.",unmet
+"Steven reported ongoing episodes of chest pain and shortness of breath, affecting his daily activities. He seemed anxious and in need of respiratory support. Urgent palliative care assessment required for symptom control.",unmet
+"Rebecca experienced frequent falls and mobility issues, leading to increased pain and discomfort. She needed assistance with transfers and walking. Requesting palliative care consultation for pain management and mobility support.",unmet
+1. Resident A complained of severe back pain today. Pain medication was administered but provided only minimal relief. Doctor's review scheduled for tomorrow. ,unmet
+2. Resident B experienced a bout of nausea and vomiting this morning. IV fluids started and anti-emetics given. Monitor for any further episodes. ,unmet
+3. Resident C has been restless and agitated throughout the night. Requested for palliative care team to reassess and provide additional support.,unmet
+4. Resident D reported tightness of breath during the night. Oxygen therapy started and continuous monitoring required.,unmet
+"5. Resident E exhibited signs of confusion and disorientation. Communication barrier identified, family to be informed for support. ",unmet
+"6. Resident F suffered from a fall incident in the bathroom. Minor injuries noted, cautionary measures taken and further assessments planned.",unmet
+7. Resident G showed signs of apathy and lack of interest in activities. Encouragement and motivation strategies implemented.,unmet
+8. Resident H complained of persistent abdominal pain. Consultation with pain management team initiated.,unmet
+9. Resident I reported increased restlessness and agitation post-lunch. Adjustments made to current medication regime.,unmet
+10. Resident J displayed redness and itching on skin. Dermatologist review requested for in-depth examination and treatment plan.,unmet
+11. Resident K is experiencing recurrent episodes of diarrhoea. Fluid replacement therapy started to prevent dehydration.,unmet
+12. Resident L had difficulty with toileting at night. Increased monitoring and assistance provided as needed.,unmet
+13. Resident M expressed discomfort and numbness in lower limbs. Physiotherapy session arranged for mobility improvement.,unmet
+14. Resident N presented with a pressure ulcer on the sacral area. Wound care team notified for assessment and management.,unmet
+15. Resident O showed signs of confusion and agitation. Palliative care team to review current care plan for adjustments.,unmet
+16. Resident P experienced episodes of nausea and vomiting after meals. Dietician consult scheduled to modify dietary intake.,unmet
+17. Resident Q reported insomnia and difficulty sleeping at night. Sedative therapy started with monitoring for effectiveness.,unmet
+18. Resident R complained of persistent oedema in lower limbs. Compression therapy initiated for symptom relief.,unmet
+19. Resident S expressed concern about social isolation and lack of interactions. Arrangements made for companionship visits.,unmet
+20. Resident T exhibited signs of agitation and aggression towards staff. Behavioural management plan devised for de-escalation techniques.,unmet
+21. Resident U experiencing recurrent falls due to unsteady gait. Referal made to physiotherapy for balance training and exercise regimen.,unmet
+22. Resident V had a minor choking incident during supper. Speech therapist notified for swallowing assessment.,unmet
+23. Resident W showed signs of confusion and disorientation during morning routine. Consultation with neurologist requested for further evaluation.,unmet
+24. Resident X complained of persistent abdominal pain and bloating. Specialist review requested for gastrointestinal assessment.,unmet
+25. Resident Y displayed signs of agitation and restlessness post-afternoon nap. Behavioural intervention strategies implemented for calming effect.,unmet
+1. Mary experienced significant pain in her back and required additional pain medication. She was reassessed by the nurse and then provided with a heat pack for comfort. Awaiting further review by the palliative care team.,unmet
+"2. John was restless throughout the night, getting up frequently and pacing the room. He appeared agitated and unable to settle. Additional support and reassurance provided by staff.",unmet
+3. Susan complained of tightness in her chest and difficulty breathing. She was given oxygen therapy and her respiratory rate was monitored closely. Doctor notified for further assessment.,unmet
+4. Michael experienced persistent nausea and vomiting after meals. He was given antiemetic medication but continued to have trouble keeping food down. Palpation and observation done by nurse for any signs of blockage.,unmet
+5. Patricia woke up during the night with severe diarrhea. She was assisted to the bathroom and managed with cleanliness and comfort measures. Doctor informed for possible medication adjustment.,unmet
+"6. Robert exhibited signs of confusion and disorientation, often forgetting the time and place. Reassurance and gentle redirection provided by staff to ensure his comfort and safety.",unmet
+"7. Laura complained of constant itching and redness on her skin, possibly indicating an allergic reaction. Nurse applied soothing cream and observed for any worsening of symptoms. Doctor consulted for further advice.",unmet
+8. William had a fall incident while trying to transfer from his wheelchair to the bed. He sustained minor bruises and was assessed for any underlying injuries. Safety measures reinforced by staff to prevent future falls.,unmet
+"9. Karen displayed signs of apathy and withdrawal, showing a lack of interest in activities or social interactions. Nursing staff provided companionship and encouragement to engage in simple activities for mental stimulation.",unmet
+"10. James had a restless night with frequent phone calls to his family members. He appeared agitated and anxious, requiring support and reassurance from staff. Counseling session arranged for emotional support.",unmet
+"11. Linda experienced difficulty with urination at night, requiring assistance to use the commode. Nurse monitored her fluid intake and toileting habits to ensure proper hydration and comfort.",unmet
+"12. Richard showed signs of agitation and restlessness, pacing back and forth in his room. Staff provided comfort measures and attempted to redirect his focus through calming activities. Doctor notified for medication review.",unmet
+"13. Carol had a fall incident in the bathroom, resulting in a minor head injury. She was assessed for signs of concussion and provided with pain relief. Fall prevention strategies discussed with staff for future safety measures.",unmet
+14. Steven complained of severe back pain after attempting to walk with his mobility aid. He was transferred to bed and given medication for relief. Nurse monitored his pain levels and provided comfort measures.,unmet
+15. Andrea was unable to eat due to severe nausea and vomiting spells. She received antiemetic medication and was put on intravenous fluids for hydration. Doctor informed for further assessment.,unmet
+"16. Peter experienced episodes of confusion and memory lapses, often forgetting names and faces. Nursing staff provided cognitive stimulation activities to help improve his mental function.",unmet
+"17. Emma suffered from frequent bouts of diarrhea, leading to dehydration and weakness. Nurse monitored her fluid intake and electrolyte levels closely, informing the doctor for potential medication adjustments.",unmet
+"18. Thomas exhibited signs of restlessness and agitation, appearing unable to settle or relax. Nursing staff provided reassurance and comfort measures to help him calm down. Doctor consulted for possible medication review.",unmet
+"19. Samantha complained of persistent pain in her abdomen, requiring additional pain relief medication. Nurse assessed her pain levels and monitored for any worsening symptoms. Doctor notified for further assessment.",unmet
+"20. Kevin showed signs of apathy and disinterest in activities, spending most of his time lying quietly in bed. Nursing staff provided gentle encouragement and tried to engage him in simple tasks for mental stimulation.",unmet
+"21. Sarah had difficulty sleeping at night, often waking up due to discomfort and pain. Nurse provided pain relief medication and comfort measures to help her rest. Doctor informed for further evaluation.",unmet
+"22. Daniel was restless and anxious, exhibiting signs of confusion and memory loss. Nursing staff provided gentle reassurance and redirection to help him feel more comfortable and secure. Doctor notified for cognitive assessment.",unmet
+"23. Rachel experienced severe nausea and vomiting after meals, leading to dehydration and weakness. She was put on intravenous fluids and given antiemetic medication for relief. Doctor consulted for further management.",unmet
+24. Jonathan had a fall incident while trying to transfer from the bed to his wheelchair. Nursing staff assessed him for any injuries and provided pain relief. Fall prevention measures reinforced by staff to prevent future accidents.,unmet
+"25. Melissa showed signs of agitation and restlessness, frequently moving around her room in a state of distress. Staff members provided comfort measures and engaged her in calming activities to help her relax. Doctor notified for medication review.",unmet
+"1. Mrs. Smith complained of severe back pain today and requested additional pain medication. She was reassessed, and a new pain management plan was initiated. ",unmet
+2. Mr. Johnson displayed signs of confusion and agitation throughout the day. Nursing staff provided calming reassurance and monitored his behavior closely. ,unmet
+"3. Mrs. Brown experienced a bout of nausea after breakfast and was unable to eat. Anti-emetic medication was administered, and she was encouraged to rest. ",unmet
+4. Mr. Martinez reported feeling extremely fatigued and weak today. Nursing staff assisted him with activities of daily living and ensured he was comfortable. ,unmet
+"5. Ms. Lee had difficulty breathing this morning and required oxygen support. Vital signs were monitored closely, and respiratory treatments were administered as needed. ",unmet
+6. Mr. Thompson exhibited restlessness and wandering behavior at night. A reassessment of his care plan was conducted to address his nighttime behaviors. ,unmet
+"7. Mrs. Garcia complained of persistent abdominal pain. The pain management team was consulted, and a new pain relief plan was implemented. ",unmet
+8. Mr. Adams experienced a fall incident while transferring from his wheelchair to the bed. Nursing staff responded promptly and assessed him for any injuries. ,unmet
+"9. Ms. Patel exhibited signs of skin irritation and redness in certain areas. A skin assessment was performed, and appropriate measures were taken to prevent further skin breakdown. ",unmet
+10. Mr. Nguyen reported feeling anxious and agitated throughout the day. Nursing staff provided emotional support and engaged in calming activities to help alleviate his distress. ,unmet
+11. Mrs. Kim displayed signs of dehydration and was started on intravenous fluids. Monitoring of her fluid intake and output was initiated to ensure proper hydration. ,unmet
+12. Mr. Wilson showed signs of decreased appetite and weight loss. Nutritional interventions were implemented to address his declining nutritional status. ,unmet
+13. Ms. Lopez experienced difficulty swallowing and complained of choking episodes during meals. A speech therapist was consulted to assess her swallowing function and provide recommendations. ,unmet
+14. Mrs. Carter exhibited signs of pallor and fatigue. Bloodwork was ordered to investigate the cause of her symptoms and determine appropriate interventions. ,unmet
+15. Mr. Evans reported feeling overwhelmed and anxious about his health condition. Counseling services were offered to help him cope with his emotional distress. ,unmet
+"16. Ms. White complained of pain and tenderness in her lower back. A thorough assessment was conducted, and a pain management plan was devised to address her discomfort. ",unmet
+17. Mr. Moore exhibited signs of restlessness and insomnia. Nursing staff implemented a calming bedtime routine to help promote better sleep hygiene. ,unmet
+"18. Mrs. Rodriguez displayed signs of respiratory distress and shortness of breath. Oxygen therapy was administered, and her respiratory status was closely monitored. ",unmet
+"19. Mr. Baker experienced a fall while attempting to transfer from the bed to the wheelchair. Fall prevention measures were reinforced, and his care plan was adjusted accordingly. ",unmet
+"20. Ms. Hughes reported feeling nauseous and vomited after meals. Anti-emetic medication was administered, and she was closely monitored for any further episodes of vomiting. ",unmet
+"21. Mrs. King complained of persistent pressure ulcers on her sacrum. Wound care management was initiated, and preventative measures were implemented to minimize further skin breakdown. ",unmet
+22. Mr. Thompson exhibited signs of confusion and disorientation. Nursing staff provided gentle redirection and reassurance to help him maintain a sense of orientation. ,unmet
+23. Ms. Adams complained of chronic pain in her joints and muscles. Physical therapy was recommended to help alleviate her discomfort and improve her mobility. ,unmet
+24. Mrs. Patel showed signs of agitation and anxiety throughout the day. Behavioral interventions were implemented to help her cope with her emotional distress and improve her overall well-being. ,unmet
+"25. Mr. Lee experienced episodes of diarrhea and abdominal cramping. A thorough assessment was conducted, and treatment measures were implemented to help manage his gastrointestinal symptoms. ",unmet
+1. Resident 1 experienced nausea after breakfast today. He was unable to eat and needed assistance with swallowing his medications. He has been started on anti-emetics but continues to struggle with appetite.,unmet
+2. Resident 2 complained of tightness in the chest last night. She was given pain medication but continues to feel discomfort. Slight confusion noted in her communication with staff.,unmet
+3. Resident 3 has been experiencing back pain for the past few days. He has difficulty sitting up straight and requires extra support when moving to prevent further discomfort.,unmet
+"4. Resident 4 has been restless at night, wandering the halls in confusion. Attempts to redirect her have been unsuccessful, and she often needs reassurance from staff.",unmet
+"5. Resident 5 has been experiencing frequent falls during transfers. He requires a wheelchair for mobility but struggles with coordination, leading to increased risk of injury.",unmet
+"6. Resident 6 has been feeling apathetic and withdrawn lately. She shows little interest in activities or interacting with others, indicating underlying emotional distress.",unmet
+"7. Resident 7 has developed pressure ulcers on her heels. The wounds are being monitored closely for signs of infection, and preventative measures are being implemented to promote healing.",unmet
+"8. Resident 8 has been experiencing diarrhea for the past week. Despite medication adjustments, her symptoms persist and require regular monitoring to prevent dehydration.",unmet
+"9. Resident 9 has been experiencing confusion and agitation in the evenings. He becomes disoriented and agitated, requiring extra supervision to ensure his safety and well-being.",unmet
+"10. Resident 10 has been experiencing difficulty breathing, particularly at night. He struggles to catch his breath and often requires oxygen therapy to alleviate his symptoms.",unmet
+11. Resident 11 has been restless and irritable during the day. She exhibits signs of discomfort and requires frequent reassurance from staff to help ease her distress.,unmet
+12. Resident 12 has been feeling increasingly fatigued and weak. She struggles to complete daily activities and requires extra support to conserve her energy.,unmet
+13. Resident 13 has been experiencing frequent bouts of nausea and vomiting. She struggles to keep food down and requires anti-emetic medication to alleviate her symptoms.,unmet
+14. Resident 14 has been complaining of persistent pain in her joints. She requires regular pain management to help alleviate her discomfort and improve her quality of life.,unmet
+"15. Resident 15 has been experiencing sleep disturbances, waking frequently throughout the night. She requires medication to help her rest better and improve her overall well-being.",unmet
+16. Resident 16 has been experiencing significant weight loss in recent weeks. She struggles to eat and requires assistance with meal supplementation to prevent further decline.,unmet
+17. Resident 17 has been experiencing episodes of confusion and disorientation. She struggles to recognize familiar faces and often requires reminders to help orient herself.,unmet
+18. Resident 18 has been feeling increasingly isolated and lonely. He requires regular visits from family and friends to help lift his spirits and improve his emotional well-being.,unmet
+19. Resident 19 has been experiencing recurring episodes of nausea and vomiting. She requires anti-emetic medication to help alleviate her symptoms and improve her appetite.,unmet
+20. Resident 20 has been feeling increasing pain in her back and legs. She requires regular pain management to help alleviate her discomfort and improve her mobility.,unmet
+21. Resident 21 has been experiencing difficulties with swallowing. She requires assistance with mealtime to help prevent choking episodes and ensure she receives adequate nutrition.,unmet
+22. Resident 22 has been experiencing increased restlessness and agitation. He requires frequent monitoring and interventions to help calm his nerves and improve his overall well-being.,unmet
+23. Resident 23 has been experiencing frequent falls during transfers. She requires assistance with mobility aids and proper positioning to prevent further injuries.,unmet
+24. Resident 24 has been feeling increasingly fatigued and weak. She requires extra support with daily activities to conserve her energy and prevent exhaustion.,unmet
+25. Resident 25 has been experiencing confusion and disorientation. She requires regular reminders and redirection from staff to help her stay oriented and improve her overall well-being.,unmet
+- Resident A complained of severe back pain and requested pain relief medication. ,unmet
+" - Resident B was found wandering restlessly during the night, appearing confused and disoriented. ",unmet
+ - Resident C experienced shortness of breath and requested assistance with breathing exercises. ,unmet
+" - Resident D showed signs of agitation and restlessness, needing calming techniques to be administered. ",unmet
+" - Resident E displayed symptoms of nausea and vomiting after meals, requiring constant monitoring. ",unmet
+" - Resident F expressed feelings of apathy and disinterest in daily activities, needing encouragement and motivation. ",unmet
+" - Resident G reported discomfort and itching of the skin, needing medication for relief. ",unmet
+ - Resident H was observed to have swollen limbs and requested assistance with managing oedema. ,unmet
+" - Resident I had a fall incident and suffered minor injuries, requiring wound care and monitoring for signs of infection. ",unmet
+" - Resident J showed signs of confusion and forgetfulness, needing reassurance and reminders for daily tasks. ",unmet
+ - Resident K complained of chronic pain in their joints and requested a review of their pain management plan. ,unmet
+ - Resident L had trouble sleeping through the night and requested assistance with sleep hygiene techniques. ,unmet
+ - Resident M experienced frequent episodes of diarrhoea and needed hydration and electrolyte replacement. ,unmet
+" - Resident N showed signs of agitation and aggression towards staff members, needing de-escalation strategies. ",unmet
+ - Resident O exhibited signs of pressure ulcers on their skin and required wound care management. ,unmet
+" - Resident P reported dizziness and lightheadedness when standing up, needing supervision and support for mobility. ",unmet
+" - Resident Q demonstrated signs of confusion and disorientation, needing cognitive stimulation activities. ",unmet
+ - Resident R experienced episodes of incontinence and requested assistance with maintaining hygiene and cleanliness. ,unmet
+ - Resident S showed signs of respiratory distress and required oxygen therapy for relief. ,unmet
+" - Resident T expressed feelings of loneliness and isolation, needing social interaction and companionship. ",unmet
+ - Resident U reported feeling overwhelming fatigue and requested assistance with conserving energy. ,unmet
+" - Resident V exhibited signs of depression and hopelessness, needing emotional support and counseling. ",unmet
+ - Resident W had a fall while using a walking aid and required a review of their mobility assistance devices. ,unmet
+" - Resident X displayed signs of restlessness and unease, needing comfort measures and reassurance. ",unmet
+" - Resident Y experienced recurring episodes of nausea and vomiting, needing antiemetic medications for relief. ",unmet
+ - Resident Z reported persistent pain in their abdomen and requested a referral for further evaluation and management. ,unmet
+Jane is experiencing severe back pain and has requested pain medication. She is having difficulty moving and getting comfortable in bed. Awaiting assessment from the palliative care team.,unmet
+"John appears agitated and restless, constantly fidgeting and unable to settle. He has not been sleeping well at night and is in need of reassurance and support. Palliative care team notified.",unmet
+Sarah is complaining of nausea and vomiting after meals. She is struggling to maintain her fluid intake and is showing signs of dehydration. Palliative care team consulted for further management.,unmet
+"Michael is experiencing increased confusion and irritability, often forgetting where he is and becoming disoriented. He requires constant supervision and support. Palliative care team informed.",unmet
+Emily has developed a pressure ulcer on her sacrum that is causing her significant pain and discomfort. Wound care assessment needed from the palliative care team.,unmet
+David's breathing is becoming more labored and he is struggling to catch his breath. He is in need of immediate intervention and support from the palliative care team.,unmet
+"Sophie is experiencing severe diarrhea and abdominal pain, making it difficult for her to eat or drink. Palliative care team alerted for symptom management.",unmet
+"Thomas is showing signs of agitation and restlessness, pacing around the room and unable to calm down. He is in need of medication and support from the palliative care team.",unmet
+Olivia has been experiencing increased episodes of incontinence and is unable to control her bladder. She requires assistance and guidance from the palliative care team for continence management.,unmet
+"Lucas is complaining of persistent pain in his joints and muscles, making it difficult for him to move independently. Palliative care team to assess and provide pain relief.",unmet
+Isabella is showing signs of apathy and disinterest in activities she once enjoyed. She is in need of emotional support and engagement from the palliative care team.,unmet
+Ethan has been experiencing frequent falls and requires assistance with mobility. Safety measures and assessments needed from the palliative care team.,unmet
+"Mia is displaying signs of confusion and memory loss, often forgetting where she is or who she is speaking to. Palliative care team to provide support and guidance.",unmet
+"Aiden is experiencing tightness of breath and chest pain, making it difficult for him to breathe comfortably. Palliative care team alerted for respiratory support.",unmet
+Zoe has developed a pressure ulcer on her heel that is causing her extreme discomfort. Wound care assessment and management needed from the palliative care team.,unmet
+"Nathan is experiencing severe nausea and vomiting, unable to keep any food or liquids down. Palliative care team to provide anti-emetics and hydration support.",unmet
+"Harper is showing signs of restlessness and agitation, often becoming irritable and agitated. Palliative care team to provide emotional support and reassurance.",unmet
+Liam is experiencing increased pain in his abdomen and is showing signs of discomfort. Palliative care team to assess and manage his pain effectively.,unmet
+"Ella has been complaining of fatigue and weakness, struggling to move or perform daily activities. Palliative care team to provide energy conservation strategies and support.",unmet
+"Owen is showing signs of confusion and disorientation, often forgetting where he is or what day it is. Palliative care team to provide cognitive support and memory aids.",unmet
+"Grace is experiencing severe nausea and vomiting, unable to tolerate any food or fluids. Palliative care team to assess and provide symptom management.",unmet
+Caleb has developed a pressure ulcer on his hip that is causing him significant pain and discomfort. Wound care assessment and management needed from the palliative care team.,unmet
+"Scarlett is experiencing increased confusion and agitation, often becoming agitated and restless. Palliative care team to provide behavioral support and interventions.",unmet
+"Finn is showing signs of apathy and disinterest in activities, often withdrawing from social interactions. Palliative care team to provide emotional support and engagement.",unmet
+"Ava is experiencing severe pain in her back and legs, making it difficult for her to move or sit comfortably. Palliative care team to assess and provide pain relief.",unmet
+- Margie experienced nausea after breakfast and has been unable to eat or drink since. She has been given medication for relief. Awaiting further instructions from the doctor.,unmet
+- Harold is experiencing pain in his back today. He has been provided with pain relief medication and is resting in bed. Monitoring for any changes in his condition.,unmet
+- Evelyn has been showing signs of agitation and restlessness throughout the day. Offered comfort measures and reassurance. Keeping a close eye on her for any distress.,unmet
+- Leo complained of tightness of breath this afternoon. Oxygen therapy has been initiated and he is being monitored closely. Contacting the physician for further guidance.,unmet
+- Mildred is experiencing persistent confusion today. Offered gentle redirection and support. Keeping an eye on her for any worsening symptoms.,unmet
+- Robert suffered a fall while attempting to transfer from his wheelchair. No injuries reported but monitoring for any signs of discomfort. Implemented additional safety measures.,unmet
+- Cynthia is displaying signs of apathy and lack of interest in her surroundings. Engaging in gentle activities to stimulate her. Monitoring for any changes in behavior.,unmet
+- George has been experiencing restless wandering at night. Implementing night-time interventions to ensure safety and comfort. Documenting any relevant observations.,unmet
+- Doris has been experiencing episodes of incontinence. Assisting with personal care and hygiene. Monitoring her fluid intake and output.,unmet
+- Frank is experiencing chronic pain in his joints. Providing pain management interventions and repositioning as needed. Communicating with the healthcare team for further recommendations.,unmet
+- Martha experienced a bout of nausea during dinner. Administered medication and provided comfort measures. Notifying the doctor for possible adjustments to her treatment plan.,unmet
+- Henry has been showing signs of confusion and disorientation today. Providing gentle reminders and support. Documenting any changes in his mental status.,unmet
+- Edna reported feeling unwell with symptoms of diarrhea. Keeping her hydrated and monitoring for any signs of dehydration. Notifying the healthcare provider for assessment.,unmet
+- Albert is experiencing difficulty with mobility and requires assistance with transfers. Providing support and utilizing mobility aids as needed. Implementing safety measures to prevent falls.,unmet
+- Irene has been experiencing back pain following a minor fall. Providing pain relief medication and monitoring for any signs of discomfort. Notifying the physician for evaluation.,unmet
+- Pete is exhibiting signs of restlessness and agitation. Providing reassurance and comfort measures. Monitoring his behavior for any escalation in symptoms.,unmet
+- Lillian is experiencing nausea and has been unable to eat or drink. Administered medication for symptom relief. Monitoring her tolerance to food and fluids.,unmet
+- Walter is displaying signs of confusion and disorientation. Providing a calm and structured environment for comfort. Documenting any changes in his cognitive status.,unmet
+- Betty reported feeling tightness of breath this morning. Administered oxygen therapy and monitoring her respiratory status closely. Communicating with the healthcare team for guidance.,unmet
+- Harold experienced a fall while attempting to walk with his mobility aid. Checking for any injuries and providing support. Implementing fall prevention strategies to ensure safety.,unmet
+- Vicki has been restless and agitated throughout the day. Offering comfort measures and sensory stimulation. Documenting any interventions and their effectiveness.,unmet
+- Charlie is experiencing pain in his abdomen. Administered pain relief medication and monitoring his discomfort. Notifying the physician for further assessment.,unmet
+- Greta is showing signs of apathy and disinterest in activities. Encouraging social interaction and engagement. Monitoring her mood and behavior for changes.,unmet
+- Sam is experiencing nausea and vomiting. Administered anti-emetic medication and monitoring for symptom relief. Contacting the doctor for further instructions.,unmet
+- Resident A experienced nausea after breakfast and was given medication to help. They were unable to eat afterwards and have been started on fluids. Waiting for further medical assessment.,unmet
+"- Resident B has had trouble with eating and drinking, requiring frequent assistance. They have also been experiencing restlessness at night. Palliative care plan needs to be reviewed.",unmet
+"- Resident C complained of back pain this morning. Pain relief medication was administered, but they continue to experience discomfort. Further assessment and care plan adjustment needed.",unmet
+- Resident D is showing signs of agitation and confusion. They have been restless and unable to sleep well. Palliative care needs to be reassessed and adapted.,unmet
+- Resident E has been experiencing frequent falls and requires assistance with transfers. A review of their mobility aids and care plan is needed.,unmet
+"- Resident F has been complaining of tightness in their chest and difficulty breathing. Medication has been given, but further assessment is required. Palliative care plan needs to be updated.",unmet
+"- Resident G has developed pressure ulcers on their skin. Dressings have been applied, but continuous monitoring and treatment are necessary. Palliative care adjustments needed.",unmet
+- Resident H is showing signs of apathy and disinterest in activities. They need more stimulation and social interaction. Palliative care plan should include strategies to improve well-being.,unmet
+"- Resident I has been experiencing nausea and vomiting. Medication has been provided, but they are still unable to eat. Fluid intake needs to be monitored closely. Waiting for GP review.",unmet
+- Resident J has been wandering at night and feeling unsettled. Their sleep patterns have been disrupted. Palliative care plan should address restlessness and provide comfort measures.,unmet
+"- Resident K has been receiving visitors, but they are feeling lonely and isolated. More social activities and interaction with peers are needed. Palliative care plan should include ways to promote companionship.",unmet
+- Resident L is experiencing pain in their joints and limited mobility. They need assistance with daily activities. A review of their care plan is necessary to ensure their comfort and well-being.,unmet
+"- Resident M has been restless and agitated, often confused and disorientated. They need extra support and reassurance. Palliative care plan should focus on calming and comforting measures.",unmet
+"- Resident N has been complaining of chronic back pain. Medication has been provided, but they continue to experience discomfort. Further pain management strategies need to be implemented.",unmet
+- Resident O has been showing signs of skin irritation and redness. Proper wound care and management are essential. Palliative care plan should address skin integrity and comfort.,unmet
+- Resident P has been experiencing frequent falls and accidents. A review of their mobility aids and care plan is necessary to prevent further injuries.,unmet
+- Resident Q has been experiencing shortness of breath and chest tightness. More support and monitoring are required. Palliative care plan needs to address respiratory symptoms.,unmet
+- Resident R has been restless at night and often wakes up disoriented. They need reassurance and comfort measures. Palliative care plan should focus on promoting restful sleep.,unmet
+- Resident S has been complaining of frequent nausea and loss of appetite. They need assistance with eating and fluid intake. Monitoring their hydration and nutrition levels is crucial.,unmet
+- Resident T has been experiencing confusion and disorientation. They require extra support and guidance. Palliative care plan should address cognitive impairment and provide comfort measures.,unmet
+- Resident U has been showing signs of skin breakdown and irritation. Proper wound care and management are necessary. Palliative care plan should include strategies to improve skin integrity.,unmet
+"- Resident V has been restless and agitated, often expressing discomfort and pain. They need more support and pain management strategies. Palliative care plan should focus on relieving discomfort and improving quality of life.",unmet
+- Resident W has been experiencing frequent falls and requiring assistance with transfers. A review of their mobility aids and care plan is necessary to prevent further injuries.,unmet
+"- Resident X has been complaining of persistent chest tightness and difficulty breathing. Medication has been provided, but further assessment and support are needed. Palliative care plan should address respiratory symptoms.",unmet
+- Resident Y has been showing signs of confusion and disorientation. They require extra support and reassurance. Palliative care plan should include strategies to address cognitive impairment and provide comfort measures.,unmet
+- Resident Z has been experiencing chronic back pain and limited mobility. They need assistance with daily activities and pain management. A review of their care plan is essential to ensure their comfort and well-being.,unmet
+"Jane appeared agitated and restless throughout the day, constantly asking for her family. She was comforted by staff but continued to express sadness and confusion.",unmet
+"John experienced increased pain in his back, making it difficult for him to move independently. He was given pain medication as needed but continued to be uncomfortable.",unmet
+Mary complained of tightness in her chest and difficulty breathing. Oxygen levels were monitored and she was provided with respiratory support.,unmet
+"David was restless at night, constantly getting up from bed and wandering around the facility. Staff had to encourage him to return to his room for safety.",unmet
+"Sarah was unable to eat or drink throughout the day, experiencing severe nausea and vomiting. She was given antiemetics but continued to feel unwell.",unmet
+"Michael was found lying crookedly in bed, unable to reposition himself due to limited mobility. Staff assisted with turning him to prevent discomfort.",unmet
+"Linda showed signs of apathy and disinterest in activities, spending most of the day alone in her room. Staff tried to engage her in conversations but with little success.",unmet
+"Robert suffered from pressure ulcers on his back and buttocks, requiring frequent repositioning and wound care. He was monitored closely for signs of infection.",unmet
+"Alicia complained of severe back pain, making it difficult for her to sit up or move around. Pain medication was administered but provided only temporary relief.",unmet
+Mark experienced frequent falls when attempting to walk without his walking aid. Staff implemented a fall prevention plan and assisted him with mobility.,unmet
+"Barbara had persistent nausea and diarrhea, causing her to feel weak and fatigued. Hydration and nutrition levels were closely monitored to prevent dehydration.",unmet
+"Kevin had difficulty sleeping at night, frequently waking up and calling out for assistance. Staff provided comfort and reassurance to help him relax.",unmet
+"Michelle showed signs of confusion and disorientation, often forgetting where she was or why she was in the facility. Staff provided constant reminders and support.",unmet
+"Daniel exhibited signs of agitation and restlessness, constantly fidgeting and unable to sit still. Staff tried to engage him in calming activities to help him relax.",unmet
+"Catherine experienced constant itching and redness on her skin, indicating a possible allergic reaction. Medications were adjusted and skin care routines were followed closely.",unmet
+"William had difficulty using his wheelchair independently, often requiring assistance for transfers and mobility. Staff provided support and guidance to ensure his safety.",unmet
+"Evelyn suffered from chronic pain in her joints, making it hard for her to move or perform daily tasks. Pain management strategies were explored to alleviate her discomfort.",unmet
+"Steven had frequent episodes of nausea and vomiting, leading to dehydration and weakness. IV fluids were administered to maintain his hydration levels.",unmet
+"Lisa showed signs of restlessness and confusion, frequently wandering around the facility without a clear purpose. Staff provided supervision to ensure her safety.",unmet
+"Thomas exhibited signs of apathy and disengagement, showing little interest in social interaction or activities. Staff attempted to engage him in stimulating conversations.",unmet
+"Geraldine experienced severe back pain that radiated down her legs, causing extreme discomfort. Pain medication was adjusted to provide better relief for her symptoms.",unmet
+"Patrick suffered from chronic pressure ulcers on his heels, requiring meticulous wound care and frequent monitoring. Staff implemented pressure-relieving devices to prevent further skin breakdown.",unmet
+"Grace had episodes of confusion and disorientation, often forgetting where she was or who her visitors were. Staff provided gentle reminders and reorientation techniques to help her feel more grounded.",unmet
+"Edward experienced frequent episodes of diarrhea and abdominal pain, causing distress and discomfort. Dietary modifications and medication adjustments were made to manage his symptoms.",unmet
+"Rachel showed signs of agitation and restlessness, constantly pacing and unable to sit still. Staff provided calming interventions and reassurance to help her feel more at ease.",unmet
+1. Resident A complained of severe back pain and was provided with pain relief medication. A review with the palliative care team is scheduled for tomorrow. ,unmet
+2. Resident B is experiencing nausea and vomiting. They were given anti-emetic medication and are being closely monitored. A consult with the palliative care nurse has been requested. ,unmet
+3. Resident C has been displaying signs of agitation and restlessness. Additional support from the palliative care team has been arranged to address this issue. ,unmet
+4. Resident D has developed pressure ulcers on their sacrum. A wound assessment has been scheduled with the palliative care nurse. ,unmet
+5. Resident E has been experiencing extreme fatigue and is struggling to get out of bed. The palliative care team has been informed and a care plan adjustment is being discussed. ,unmet
+6. Resident F has been showing signs of confusion and disorientation. A cognitive assessment with the palliative care team has been requested. ,unmet
+7. Resident G has been experiencing shortness of breath and wheezing. The palliative care team has been notified and a review of their symptom management is underway. ,unmet
+8. Resident H has been refusing to eat and drink. An evaluation by the palliative care team is scheduled to assess their nutritional needs. ,unmet
+9. Resident I has been experiencing persistent vomiting. The palliative care nurse has been informed and further intervention is being considered. ,unmet
+10. Resident J has been complaining of excruciating pain in their joints. The palliative care team has been alerted and medication adjustments are being made. ,unmet
+11. Resident K has been experiencing severe diarrhea. The palliative care team has been contacted for assistance with managing this symptom. ,unmet
+12. Resident L has been experiencing frequent falls. A review with the palliative care team is scheduled to assess their mobility and safety needs. ,unmet
+13. Resident M has been showing signs of apathy and withdrawal. The palliative care team has been informed and social engagement strategies are being explored. ,unmet
+14. Resident N has developed a wound infection in their leg. The palliative care nurse has been informed and antibiotics have been prescribed. ,unmet
+15. Resident O has been experiencing severe itching and reddening of the skin. The palliative care team has been notified for assessment and management. ,unmet
+16. Resident P has been experiencing difficulty with transfers and mobility. The palliative care team has been contacted to assist with providing appropriate support. ,unmet
+17. Resident Q has been experiencing persistent coughing and chest tightness. The palliative care nurse has been notified for further evaluation and intervention. ,unmet
+18. Resident R has been waking up frequently at night in a state of confusion. The palliative care team has been informed and a review of their nighttime routine is underway. ,unmet
+19. Resident S has been showing signs of respiratory distress and panting. The palliative care team has been alerted for urgent intervention. ,unmet
+20. Resident T has been experiencing severe urinary retention. The palliative care nurse has been informed and a review of their bladder management plan is in progress. ,unmet
+21. Resident U has been refusing to take medication. The palliative care team has been contacted for assistance with managing this challenge. ,unmet
+22. Resident V has been displaying signs of distress and restlessness. The palliative care nurse has been notified for assessment and support. ,unmet
+23. Resident W has developed a severe headache and dizziness. The palliative care team has been informed and a review of their symptom management is underway. ,unmet
+24. Resident X has been experiencing severe diarrhea and dehydration. The palliative care team has been contacted for assistance with managing this acute issue. ,unmet
+25. Resident Y has been showing signs of skin breakdown and inflammation. The palliative care nurse has been informed for wound assessment and treatment. ,unmet
+1. Mr. Smith experienced severe nausea after lunch and is unable to eat or drink. Subcutaneous fluids and anti-emetic medication have been administered. Awaiting further medical review. ,unmet
+2. Mrs. Johnson has developed a pressure ulcer on her back. It is causing her significant discomfort and requires immediate attention from the healthcare team. ,unmet
+3. Ms. Brown is exhibiting signs of restlessness and agitation throughout the day and night. Palliative care interventions are needed to provide her with comfort and support. ,unmet
+4. Mr. White has been complaining of severe back pain. He is unable to get out of bed without assistance and requires pain management interventions to alleviate his discomfort. ,unmet
+5. Mrs. Martinez has been experiencing episodes of confusion and disorientation. Additional support and monitoring are needed to enhance her quality of life. ,unmet
+6. Mr. Lee has been having difficulty breathing and is experiencing tightness in his chest. Prompt intervention is required to address his respiratory symptoms and provide relief. ,unmet
+7. Ms. Adams has been exhibiting signs of apathy and withdrawal. She is in need of emotional support and companionship to improve her overall well-being. ,unmet
+8. Mr. Clark has been experiencing frequent falls and requires assistance with transfers and mobility. Proper care planning is crucial to prevent further incidents. ,unmet
+9. Mrs. Rodriguez has been suffering from severe pain and requires constant monitoring and medication management to ensure her comfort and well-being. ,unmet
+"10. Ms. Thomas has been showing signs of agitation and restlessness, especially during the night. A holistic approach to her care is necessary to address her behavioral changes. ",unmet
+"11. Mr. Harris is experiencing nausea and vomiting, making it difficult for him to eat or drink. Immediate medical attention and symptom management are essential for his comfort. ",unmet
+"12. Mrs. Nguyen has developed a pressure ulcer on her hip, causing her significant pain and discomfort. Prompt wound care interventions are needed to prevent further complications. ",unmet
+"13. Ms. Patel has been complaining of severe back pain, making it challenging for her to move or sleep comfortably. Pain management strategies need to be implemented to improve her quality of life. ",unmet
+"14. Mr. Kim has been displaying signs of confusion and disorientation, requiring increased monitoring and support from the healthcare team. ",unmet
+"15. Mrs. Gonzales has been experiencing shortness of breath and difficulty breathing, indicating the need for close respiratory monitoring and intervention. ",unmet
+"16. Ms. Wright has been showing signs of apathy and lethargy, affecting her engagement in daily activities. Social and emotional support interventions are necessary to improve her mood and well-being. ",unmet
+17. Mr. Patel has been experiencing frequent falls and requires assistance with transfers and ambulation. Fall prevention strategies must be implemented to ensure his safety. ,unmet
+"18. Mrs. Johnson has been suffering from severe pain and discomfort, necessitating regular pain management interventions to alleviate her symptoms. ",unmet
+"19. Ms. Thomas has been exhibiting agitation and restlessness, especially during the night. Behavioral support and interventions are needed to address her nighttime behaviors. ",unmet
+"20. Mr. Harris has been experiencing severe nausea and vomiting, impacting his ability to eat and drink. Symptom management and supportive care are essential for his comfort. ",unmet
+"21. Mrs. Nguyen has developed a pressure ulcer on her back, causing significant pain and discomfort. Wound care interventions are required to promote healing and prevent infection. ",unmet
+"22. Ms. Lee has been complaining of persistent back pain, requiring ongoing pain management interventions for relief. Assistive devices and comfort measures should be implemented to improve her quality of life. ",unmet
+"23. Mr. Clark has been showing signs of confusion and disorientation, necessitating increased monitoring and support from the healthcare team. ",unmet
+24. Mrs. Martinez has been experiencing difficulty breathing and tightness in her chest. Respiratory support and symptom management are crucial for her comfort and well-being. ,unmet
+"25. Ms. Adams has been displaying signs of apathy and withdrawal, indicating the need for emotional support and engagement in meaningful activities. ",unmet
+- Beth complained of severe back pain today. She was given pain medication but continues to be uncomfortable. Awaiting further assessment from the palliative care team.,unmet
+- Tom displayed signs of agitation and restlessness throughout the day. Attempts to calm him down were unsuccessful. Possible need for adjustment in pain management.,unmet
+- Maria experienced nausea and vomiting after breakfast. Anti-emetics were administered but symptoms persist. Considering alternative interventions for relief.,unmet
+- John reported feeling shortness of breath and tightness in his chest. Oxygen levels were monitored and a review with the healthcare team is scheduled.,unmet
+- Sarah showed signs of confusion and disorientation today. Educating the family on managing her symptoms at home. Palliative care team to provide additional support.,unmet
+- David had a fall in his room this morning. No significant injuries reported but increased risk of further falls. Recommending a review of his care plan.,unmet
+"- Rebecca had a restless night, constantly getting up and wandering. Monitoring her behavior closely for any safety concerns.",unmet
+- Michael experienced a sudden onset of diarrhea this evening. Increased fluids and monitoring for dehydration. Pending review by the medical team.,unmet
+- Emily complained of severe headaches throughout the day. Pain management strategies implemented with limited relief. Considering alternative treatment options.,unmet
+- Daniel continues to have difficulty with swallowing and frequent choking episodes. Speech therapy consult needed for further evaluation and management.,unmet
+- Laura had a fall incident during transfer to the wheelchair. No injuries reported but increased risk of falls. Recommending a review of mobility aids.,unmet
+- Steven exhibited signs of apathy and withdrawal from activities today. Encouraging social interaction and engagement to improve his mood.,unmet
+- Olivia experienced significant discomfort from pressure ulcers on her lower back. Implementing wound care protocols and monitoring for improvement.,unmet
+- Henry appeared more confused and disoriented than usual. Reviewing his medication regimen for potential side effects contributing to his symptoms.,unmet
+- Rachel showed signs of agitation and restlessness this afternoon. Implementing calming strategies and reassurance to help manage her behavior.,unmet
+- Patrick reported persistent pain in his joints and muscles. Adjusting his pain medication to provide better symptom management.,unmet
+- Lauren had an episode of severe nausea and vomiting after lunch. Palliative care team alerted for additional support and interventions.,unmet
+- Richard displayed signs of anxiety and distress throughout the day. Providing emotional support and reassurance to help alleviate his symptoms.,unmet
+- Anna reported feeling weak and exhausted with no appetite. Monitoring her hydration status and considering different meal options that may be more appealing.,unmet
+- William had a fall while using his walking aid. No injuries reported but increased risk of falls identified. Recommending a review of mobility equipment.,unmet
+- Sophia experienced severe back pain that worsened over the day. Immediate pain relief measures implemented but further assessment needed for adequate management.,unmet
+"- Jack was restless and irritable, refusing to participate in any activities today. Implementing strategies to improve his mood and engagement in daily routines.",unmet
+- Emma exhibited signs of confusion and memory loss. Collaborating with the healthcare team to assess for possible underlying causes and interventions.,unmet
+- Nathan reported feeling short of breath and experiencing chest tightness. Oxygen therapy initiated and monitoring for any changes in his respiratory status.,unmet
+- Isabella had difficulty sleeping and was up frequently during the night. Reviewing her sleep patterns and exploring strategies to promote better rest.,unmet
+- Patient A complained of severe back pain throughout the day. Medication provided little relief. ,unmet
+"- Patient B appeared restless and agitated during the evening, frequently calling out for assistance. ",unmet
+- Patient C experienced significant nausea and vomiting after each meal. Anti-emetics were ineffective in providing relief. ,unmet
+"- Patient D showed signs of confusion and disorientation, requiring constant reassurance and guidance. ",unmet
+"- Patient E exhibited symptoms of shortness of breath and chest tightness, necessitating increased oxygen therapy. ",unmet
+"- Patient F suffered from persistent diarrhoea, leading to dehydration and weakness. ",unmet
+- Patient G displayed an increasing apathy towards daily activities and interactions with staff and fellow residents. ,unmet
+"- Patient H complained of severe abdominal pain, which worsened throughout the day despite pain medication. ",unmet
+"- Patient I demonstrated signs of agitation and restlessness, frequently pacing the halls and unable to settle down. ",unmet
+- Patient J experienced frequent falls and required assistance with transfers and mobility. ,unmet
+"- Patient K exhibited signs of pressure ulcers on their sacrum and heels, requiring careful wound care and monitoring. ",unmet
+- Patient L showed signs of palliative care needs with the development of terminal restlessness and agitation. ,unmet
+"- Patient M complained of severe nausea and vomiting, unable to tolerate any food or fluids. ",unmet
+"- Patient N displayed signs of confusion and disorientation, frequently forgetting where they were or what time it was. ",unmet
+"- Patient O suffered from persistent back pain and muscle stiffness, requiring regular pain management interventions. ",unmet
+"- Patient P exhibited signs of increasing weakness and fatigue, struggling to perform even basic self-care tasks. ",unmet
+"- Patient Q experienced severe respiratory distress, requiring continuous monitoring and oxygen therapy. ",unmet
+"- Patient R showed signs of worsening agitation and restlessness, becoming increasingly difficult to calm and comfort. ",unmet
+"- Patient S complained of persistent pain and discomfort in their joints and muscles, limiting mobility and causing distress. ",unmet
+"- Patient T exhibited signs of nausea and vomiting, unable to keep any food or fluids down. ",unmet
+"- Patient U displayed signs of confusion and disorientation, frequently becoming disoriented to time and place. ",unmet
+"- Patient V showed signs of increasing apathy and withdrawal from social interactions, preferring to be left alone. ",unmet
+"- Patient W complained of severe abdominal pain and bloating, requiring close monitoring and pain management interventions. ",unmet
+"- Patient X exhibited signs of respiratory distress and shortness of breath, necessitating increased oxygen support. ",unmet
+"- Patient Y suffered from persistent back pain and muscle stiffness, making movement and mobility difficult. ",unmet
+"- Patient Z displayed signs of anxiety and agitation, frequently expressing fear and unease about their condition. ",unmet
+- Mr. Johnson complained of severe back pain this morning and requested additional pain relief. He was reassessed and given a higher dose of pain medication. He is now resting comfortably.,unmet
+- Mrs. Smith is experiencing increased restlessness and agitation today. She has been comforted and reassured by staff members. A sedative was given as needed to help her relax.,unmet
+- Mr. Brown has been showing signs of confusion and forgetfulness. He has been closely monitored for any changes in behavior. Family has been informed of his condition.,unmet
+- Mrs. White is struggling with nausea and vomiting after meals. Anti-emetics have been provided to help alleviate her symptoms. A review of her medications is scheduled.,unmet
+- Mr. Lee is experiencing difficulty breathing and has a persistent cough. He has been given oxygen therapy to help with his respiratory distress. A referral to the respiratory team has been made.,unmet
+- Mrs. Garcia has developed pressure ulcers on her sacrum and heels. Wound care management has been initiated to prevent further skin breakdown. A pressure-relieving mattress has been requested.,unmet
+- Mr. Patel is complaining of severe abdominal pain and bloating. He has been examined by a physician and started on a new pain management regimen. Further investigations are being planned.,unmet
+- Mrs. Williams has been experiencing frequent falls and unsteady gait. A referral to the physiotherapy team has been made for strength training and balance exercises. Hip protectors have been provided.,unmet
+- Mr. Nguyen is exhibiting signs of apathy and lack of interest in activities. Staff members are encouraging him to participate in social interactions and engage in meaningful activities. A psychological assessment is scheduled.,unmet
+- Mrs. Kim has been experiencing chronic constipation and discomfort. She has been prescribed stool softeners and laxatives to improve bowel motility. Dietary modifications have been recommended.,unmet
+- Mr. Ortiz is displaying symptoms of anxiety and confusion. He has been provided with calming strategies and relaxation techniques. A mental health assessment is planned to address his concerns.,unmet
+- Mrs. Jones has been experiencing severe pain in her joints and muscles. She has been referred to the pain management team for further evaluation and treatment. A review of her mobility aids is scheduled.,unmet
+- Mr. Singh is suffering from frequent episodes of diarrhea and dehydration. He has been placed on a fluid replacement regimen and electrolyte monitoring. A review of his dietary intake is planned.,unmet
+- Mrs. Ahmed is showing signs of agitation and aggression towards staff members. She has been given sedative medications as needed to manage her behavior. A review of her care plan is scheduled.,unmet
+- Mr. Torres is experiencing difficulty swallowing and choking episodes during meals. Speech and language therapy has been arranged to assess his swallowing function and provide strategies for safe eating. Modified textures and fluids have been recommended.,unmet
+- Mrs. Fernandez has developed a cough and shortness of breath that is worsening. She has been referred to the respiratory team for further evaluation and management. Oxygen therapy and nebulizers have been provided.,unmet
+- Mr. O'Connor is experiencing increasing weakness and fatigue. He has been provided with mobility aids and assistance with transfers. Physiotherapy exercises have been prescribed.,unmet
+- Mrs. Khan has been exhibiting signs of sadness and withdrawal from social interactions. A mental health assessment has been scheduled to address her emotional needs. Counseling support has been offered.,unmet
+- Mr. Rodriguez is experiencing weight loss and decreased appetite. Nutritional supplements and meal assistance have been provided to improve his calorie intake. A review of his dietary preferences is scheduled.,unmet
+- Mrs. Chang is displaying signs of confusion and disorientation. She has been reassured and comforted by staff members. A review of her medications and sleep patterns is planned.,unmet
+- Mr. Baker is experiencing severe nausea and vomiting after meals. Anti-nausea medications have been provided to help manage his symptoms. Fluid replacement therapy has been initiated.,unmet
+- Mrs. Lopez has developed bed sores on her buttocks and heels. Wound care management has been implemented to promote healing and prevent infection. Debridement and dressing changes have been performed.,unmet
+- Mr. Patel is experiencing severe chest pain and shortness of breath. He has been assessed by a physician and started on oxygen therapy. A referral to the cardiology team for further evaluation is pending.,unmet
+- Mrs. Nguyen is experiencing excessive fatigue and weakness. She has been provided with rest periods and assistance with activities of daily living. A review of her medications for potential side effects is scheduled.,unmet
+- Mildred experienced nausea this morning and was given medication for relief. She has been unable to eat since then and is being closely monitored by the nursing team. Awaiting further instructions from the medical team. ,unmet
+"- Raymond is showing signs of restlessness and agitation, especially during the evenings. He is being provided with comfort measures and regular reassurance. ",unmet
+- Dorothy complained of back pain this afternoon and was given pain medication as per her care plan. She is resting comfortably now. ,unmet
+- Henry was found wandering in the hallway late at night. Staff members are ensuring his safety and implementing appropriate measures to prevent further incidents. ,unmet
+- Margaret is experiencing increased confusion and apathy. The medical team has been notified for further assessment and management. ,unmet
+- Charles is having difficulty with transfers and is at an increased risk of falls. Special precautions are being taken to ensure his safety at all times. ,unmet
+- Lillian is having trouble sleeping and has requested assistance to help her rest more comfortably. Nursing staff are providing additional support as needed. ,unmet
+- George is experiencing tightness of breath and has been provided with oxygen therapy as per his care plan. Continuous monitoring is in place. ,unmet
+- Evelyn's family has requested a meeting to discuss her ongoing medical care and treatment options. A care conference has been scheduled to address their concerns. ,unmet
+- Arthur's pressure ulcers have worsened and are now requiring more intensive wound care. The nursing team is closely monitoring the situation and following up with the medical team. ,unmet
+- Edna is exhibiting signs of dehydration and has been started on IV fluids to maintain her hydration status. Close monitoring is in place to ensure improvement. ,unmet
+- Harold has been experiencing persistent pain in his joints and muscles. He has been given pain relief medication and is under close observation for any changes. ,unmet
+- Mildred's nausea and vomiting have persisted despite medication. The medical team has been updated and further interventions are being considered. ,unmet
+"- Florence's appetite has decreased significantly, and she requires assistance with eating and drinking. Nursing staff are providing support to ensure she receives adequate nutrition. ",unmet
+"- Richard is showing signs of agitation and restlessness, particularly in the evenings. Staff are implementing calming strategies to help him relax and settle down. ",unmet
+"- Marjorie's confusion has worsened in the past few days, and she is exhibiting signs of disorientation. The medical team has been informed for further evaluation. ",unmet
+"- Albert's mobility has declined, and he is experiencing difficulties with walking. The nursing team is coordinating with physical therapy for rehabilitation interventions. ",unmet
+- Joan is experiencing ongoing bouts of diarrhea and has been started on medication to manage her symptoms. Monitoring for hydration status is ongoing. ,unmet
+- Walter's pressure ulcers have developed into more severe wounds requiring specialized wound care. The wound care team has been consulted for appropriate management. ,unmet
+- Edith's family has requested additional visits and communication updates regarding her care. Nursing staff are accommodating their requests and providing regular updates. ,unmet
+- Harold has been experiencing severe back pain that is impacting his ability to move and perform daily activities. Pain management strategies are being adjusted for better relief. ,unmet
+"- Mildred's agitation and restlessness have increased, and she is requiring more frequent reassurance and support. Nursing staff are providing additional comfort measures as needed. ",unmet
+"- Elizabeth is experiencing increased confusion and disorientation, leading to safety concerns. The medical team has been informed for further assessment and intervention. ",unmet
+"- Robert's appetite has significantly decreased, and he is only taking minimal food and fluids. Nursing staff are closely monitoring his intake and providing encouragement for better nutrition. ",unmet
+"- Patricia has been showing signs of fatigue and weakness, especially during the afternoons. The nursing team is monitoring her closely and providing necessary assistance for her comfort. ",unmet
+1. Resident A complained of severe back pain today. He was given pain medication but continues to experience discomfort. Awaiting GP review.,unmet
+2. Resident B exhibited signs of agitation and restlessness throughout the day. Attempts to soothe her were unsuccessful. Monitoring closely.,unmet
+3. Resident C experienced episodes of nausea and vomiting after meals. Medication provided with limited relief. Continuing to monitor for any changes.,unmet
+4. Resident D reported feeling shortness of breath during the night. Oxygen levels checked and found to be below normal. Increased oxygen therapy prescribed.,unmet
+5. Resident E was observed to have redness and itching on the skin. Applying soothing creams but condition persists. Seeking further medical advice.,unmet
+"6. Resident F had a fall incident while transferring from bed to wheelchair. No injuries reported, but increased supervision required during transfers.",unmet
+7. Resident G displayed signs of confusion and disorientation. Unable to communicate effectively. Seeking clarification on current medication regime.,unmet
+8. Resident H complained of chronic pain in the joints. Pain medication administered but no significant improvement noted. Considering alternative treatment options.,unmet
+9. Resident I experienced persistent diarrhea for the past few days. Hydration levels monitored closely. Adjusting diet to alleviate symptoms.,unmet
+10. Resident J showed signs of apathy and lack of engagement in activities. Encouraging social interactions but minimal response observed. Collaborating with therapy team for intervention.,unmet
+11. Resident K has been restless and wandering during nighttime hours. Safety measures in place to prevent falls and injury. Exploring possible causes for agitation.,unmet
+12. Resident L reported instances of choking during meals. Modified diet plan implemented to reduce risk of aspiration. Ongoing monitoring for improvement.,unmet
+13. Resident M exhibited symptoms of pressure ulcers on the skin. Implementing pressure relief strategies and wound care management. Consulting wound care specialist for further assessment.,unmet
+14. Resident N has been experiencing difficulty with mobility and walking. Assessing need for walking aids or assistive devices to improve independence.,unmet
+15. Resident O showed signs of increased confusion and memory loss. Family informed of changes in cognitive function. Monitoring closely for any further decline.,unmet
+16. Resident P complained of persistent chest pain and tightness of breath. Monitoring vital signs and considering additional diagnostic tests. Referral to cardiologist for further evaluation.,unmet
+17. Resident Q experienced severe nausea and vomiting episodes. Medication provided for symptom relief but continuous monitoring required. Collaborating with medical team for additional support.,unmet
+18. Resident R displayed signs of agitation and restlessness throughout the night. Implementing calming techniques to promote relaxation. Concerned about impact on quality of life.,unmet
+19. Resident S reported difficulty with eating and swallowing. Speech therapist consulted for evaluation and recommendations. Implementing strategies to improve mealtime experience.,unmet
+20. Resident T showed signs of dehydration and poor fluid intake. Initiating fluid replacement therapy to maintain hydration levels. Educating on the importance of adequate hydration.,unmet
+21. Resident U experienced episodes of severe pain and discomfort. Pain management plan adjusted to provide better relief. Monitoring response to treatment closely.,unmet
+22. Resident V exhibited signs of apathy and disinterest in activities. Exploring recreational options to promote engagement and social interaction. Collaborating with recreation therapist for support.,unmet
+23. Resident W reported chronic back pain and difficulty with mobility. Recommending physiotherapy for pain management and improved mobility. Implementing exercises and stretching regimen.,unmet
+24. Resident X displayed signs of skin irritation and redness. Applying topical creams for relief but seeking further assessment from dermatologist.,unmet
+25. Resident Y has been experiencing persistent vomiting and abdominal pain. Medical investigation underway to determine underlying cause. Providing supportive care and monitoring for any changes in symptoms.,unmet
+- Resident A experienced severe nausea and vomiting today. Anti-emetics were administered with no relief. Patient remains unable to eat or drink. Palliative care team has been alerted.,unmet
+- Resident B exhibits signs of dehydration and confusion. Difficulty in swallowing food or liquids. Nurse notified for evaluation.,unmet
+"- Resident C reported increased pain levels, especially in the lower back area. Inadequate relief from pain medication. Physician to be consulted for adjustment.",unmet
+- Resident D shows significant weight loss and decreased appetite. Concern for malnutrition. Dietary assessment and intervention needed.,unmet
+- Resident E complained of shortness of breath and tightness in the chest. Oxygen saturation levels to be monitored closely.,unmet
+- Resident F displays constant restlessness and agitation. Unable to find comfort in any position. Awaiting review by palliative care team.,unmet
+- Resident G has been experiencing frequent falls and episodes of dizziness. Fall prevention measures to be implemented immediately.,unmet
+- Resident H is experiencing severe pressure ulcers on buttocks and heels. Wound care team to be notified for assessment and treatment.,unmet
+- Resident I is in need of regular repositioning due to discomfort and pain. Pressure relief strategies to be discussed with the care team.,unmet
+- Resident J has been showing signs of anxiety and distress. Supportive counseling and reassurance required.,unmet
+- Resident K has constant requests for pain medication due to uncontrolled pain. Pain management plan to be reassessed.,unmet
+- Resident L has been isolating themselves and refusing social interactions. Evaluation for depression and emotional support needed.,unmet
+- Resident M is experiencing recurrent episodes of vomiting and diarrhea. Potential hydration issues to be addressed promptly.,unmet
+- Resident N shows signs of confusion and disorientation. Cognitive assessment and management plan required.,unmet
+- Resident O has frequent episodes of vomiting and severe abdominal pain. Gastrointestinal specialist to be consulted.,unmet
+- Resident P is displaying signs of discomfort and distress when walking. Mobility aid assessment needed for safety.,unmet
+- Resident Q shows signs of dehydration and dry skin. Fluid intake monitoring and hydration plan implementation needed.,unmet
+- Resident R has reported severe pain in the joints and muscles. Physiotherapy assessment required for pain management strategies.,unmet
+- Resident S has expressed difficulty in swallowing and coughing during meals. Speech therapist referral for assessment.,unmet
+- Resident T displays severe fatigue and weakness. Palliative care team to evaluate for supportive measures.,unmet
+- Resident U has uncontrolled diarrhea and abdominal cramping. Nursing team to monitor for fluid balance and electrolyte levels.,unmet
+- Resident V is experiencing persistent insomnia and restlessness at night. Sleep hygiene assessment needed for improved rest.,unmet
+- Resident W presents with signs of respiratory distress and wheezing. Palliative care team to discuss symptom management options.,unmet
+- Resident X shows signs of apathy and disinterest in daily activities. Mental health assessment and intervention required.,unmet
+- Resident Y exhibits signs of persistent itching and redness on the skin. Dermatologist consult for evaluation and treatment plan.,unmet
+- Resident Z has reported worsening pain and discomfort. Regular pain assessments and adjustments to pain regimen to be made.,unmet
+1. Resident A experienced difficulty breathing and requested pain medication.,unmet
+2. Resident B displayed signs of restlessness throughout the day and was noted to have shallow breathing.,unmet
+3. Resident C complained of severe back pain and was administered a heating pad for comfort.,unmet
+4. Resident D exhibited increased confusion and agitation after dinner.,unmet
+"5. Resident E was found crying in their room, expressing feelings of loneliness.",unmet
+6. Resident F was observed to have poor appetite and refused all meals.,unmet
+7. Resident G experienced significant nausea and vomiting after breakfast.,unmet
+8. Resident H was noted to have a pressure ulcer on their lower back that required dressing changes.,unmet
+9. Resident I exhibited signs of dehydration and was started on IV fluids.,unmet
+10. Resident J complained of severe abdominal pain and was given medication for relief.,unmet
+11. Resident K was noted to have peeling skin on their arms and legs.,unmet
+12. Resident L exhibited signs of confusion and disorientation during morning activities.,unmet
+13. Resident M reported feeling dizzy and unsteady while walking with their cane.,unmet
+"14. Resident N was observed to have swollen feet and ankles, indicating possible fluid retention.",unmet
+15. Resident O was found to have difficulty swallowing and required supervision during meals.,unmet
+16. Resident P displayed symptoms of respiratory distress and was monitored closely.,unmet
+17. Resident Q complained of persistent headaches and requested pain relief.,unmet
+18. Resident R expressed fear and anxiety regarding their health condition.,unmet
+19. Resident S was observed to have difficulty sleeping and reported frequent nightmares.,unmet
+20. Resident T exhibited signs of fatigue and was unable to participate in daily activities.,unmet
+21. Resident U experienced frequent episodes of diarrhea and required assistance with clean-up.,unmet
+22. Resident V was agitated and tearful following a phone call with their family.,unmet
+"23. Resident W displayed signs of depression and isolation, avoiding interactions with others.",unmet
+24. Resident X complained of severe joint pain and requested a joint support brace.,unmet
+"25. Resident Y exhibited signs of skin irritation and itching, possibly due to a reaction to medication.",unmet
