@@ -18,6 +18,7 @@ from scipy import spatial
 from scipy.stats import wasserstein_distance
 from sklearn.metrics import f1_score
 import scipy
+import dcor
 
 from compcor.text_embedder import TextTokenizer, TextEmbedder
 import compcor.utils as utils
@@ -625,3 +626,75 @@ def zero_shot_biber_distance_wasserstein_distance(corpus1: Corpus, corpus2: Corp
 
 	# Final score is the average wasserstein across all factors.
 	return np.mean(wasserstein_per_dim)
+
+
+#  ZERO-SHOT DISTANCE 
+def zero_shot_biber_distance_energy_distance(corpus1: Corpus, corpus2: Corpus):
+	texts = corpus1 + corpus2
+	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
+
+	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
+
+	all_dfs = []
+	for model_name, classifier in CLASSIFIERS.items():
+		# Initialize factor storage
+		temp_factors_list = {
+			'model_name': [model_name] * len(doc_ids),
+			'doc_id': doc_ids,
+			**{factor: [] for factor in BIBER_LABEL_MAP}
+		}
+
+		# Dictionary to accumulate scores per factor across templates
+		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
+		# Loop over all templates
+		for template in TEMPLATES:
+
+			with torch.no_grad():
+				outputs = classifier(
+					texts,
+					candidate_labels=all_labels,
+					hypothesis_template=template,
+					multi_label=True,
+					batch_size = BATCH_SIZE
+				)
+
+				if isinstance(outputs, dict):
+					outputs = [outputs]
+
+				# Accumulate weighted scores per factor
+				for j, output in enumerate(outputs):
+					for label, score in zip(output['labels'], output['scores']):
+						f = label_to_factor[label]
+						weight = BIBER_LABEL_MAP[f][label]
+						factor_scores_accum[f][j] += weight * score
+
+		# Average over templates
+		n_templates = len(TEMPLATES)
+		for factor in BIBER_LABEL_MAP:
+			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
+			temp_factors_list[factor].extend(factor_scores_accum[factor])
+
+		# Convert to DataFrame and append to all_dfs
+		all_dfs.append(pd.DataFrame(temp_factors_list))
+
+	df = pd.concat(all_dfs)
+
+	# Get factor columns.
+	factor_cols = [c for c in df.columns if c.startswith("factor")]
+	# Z-score normalize factors (to reduce model bias / scale differences).
+	df[factor_cols] = df[factor_cols].apply(zscore)
+	# Average across models per document.
+	df = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
+	# Extract corpus label from doc_id
+	df['category'] = df['doc_id'].apply(lambda x: x.split('_')[0])
+
+	# Split corpora at document level.
+	corpus1 = df[df["category"] == "corpus1"][factor_cols].values
+	corpus2 = df[df["category"] == "corpus2"][factor_cols].values
+
+	# Remove NaNs safely.
+	corpus1 = corpus1[~np.isnan(corpus1).any(axis=1)]
+	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
+
+	energy_distance_out = dcor.homogeneity.energy_test(corpus1, corpus2, num_resamples=200, random_state=1)
+	return energy_distance_out.statistic

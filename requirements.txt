@@ -10,6 +10,7 @@ anyio==4.12.1
 appnope==0.1.4
 argon2-cffi==25.1.0
 argon2-cffi-bindings==25.1.0
+array-api-compat==1.14.0
 arrow==1.4.0
 asgiref==3.11.1
 astor==0.8.1
@@ -45,6 +46,7 @@ cupy-cuda12x==14.0.1
 cycler==0.12.1
 cymem==2.0.13
 datasets==4.7.0
+dcor==0.7
 debugpy==1.8.20
 decorator==5.2.1
 defusedxml==0.7.1
