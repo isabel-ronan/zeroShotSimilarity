@@ -485,8 +485,6 @@ def traditional_biber_distance(corpus1: Corpus, corpus2: Corpus):
 	return sklearn.metrics.pairwise.euclidean_distances(u, v)[0, 0] / np.sqrt(len(u[0])) # Dimension-invariant euclidean distance. 
 
 
-
-#  ZERO-SHOT DISTANCE 
 def old_wasserstein_distance_zero(corpus1: Corpus, corpus2: Corpus):
 	texts = corpus1 + corpus2
 	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
@@ -566,442 +564,94 @@ def old_wasserstein_distance_zero(corpus1: Corpus, corpus2: Corpus):
 	# Final score is the average wasserstein across all factors.
 	return np.mean(wasserstein_per_dim)
 
-
-
-# Helper functions for new divergence metrics. 
-def to_distribution(values, metric, bin_edges=50):
-	hist, _ = np.histogram(values, bins=bin_edges, density=False)
-	hist = hist.astype(float)
-	if metric in ['kl', 'js']: 
-		hist = hist + EPS  # avoid zeros
-	hist = hist / hist.sum()
-	return hist
-
-def compute_distance(x, y, metric="wasserstein", bins=50):
-	if metric == "wasserstein":
-		return wasserstein_distance(x, y)
-
-	bin_edges = np.histogram_bin_edges(
-		np.concatenate([x, y]), bins=bins
-	)
-
-	# Compute probability distributions.
-	p = to_distribution(x, metric, bin_edges)
-	q = to_distribution(y, metric, bin_edges)
-
-	if metric == "kl":
-		return entropy(p, q) 
-
-	elif metric == "js":
-		return jensenshannon(p, q) # Square root of JS divergence (sqrt is the proper metric as it satisfies triangle inequality).
-
-	elif metric == "hellinger":
-		return np.sqrt(0.5 * np.sum((np.sqrt(p) - np.sqrt(q)) ** 2))
-
-	elif metric == "tv":
-		return 0.5 * np.sum(np.abs(p - q))
-
-	else:
-		raise ValueError(f"Unknown metric: {metric}")
-	
-def kl_distance_zero(corpus1: Corpus, corpus2: Corpus, metric="kl", bins=50):
-	texts = corpus1 + corpus2
-	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
-
-	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
-
-	all_dfs = []
-	for model_name, classifier in CLASSIFIERS.items():
-		# Initialize factor storage
-		temp_factors_list = {
-			'model_name': [model_name] * len(doc_ids),
-			'doc_id': doc_ids,
-			**{factor: [] for factor in BIBER_LABEL_MAP}
-		}
-
-		# Dictionary to accumulate scores per factor across templates
-		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
-		# Loop over all templates
-		for template in TEMPLATES:
-
-			with torch.no_grad():
-				outputs = classifier(
-					texts,
-					candidate_labels=all_labels,
-					hypothesis_template=template,
-					multi_label=True,
-					batch_size = BATCH_SIZE
-				)
-
-				if isinstance(outputs, dict):
-					outputs = [outputs]
-
-				# Accumulate weighted scores per factor
-				for j, output in enumerate(outputs):
-					for label, score in zip(output['labels'], output['scores']):
-						f = label_to_factor[label]
-						weight = BIBER_LABEL_MAP[f][label]
-						factor_scores_accum[f][j] += weight * score
-
-		# Average over templates
-		n_templates = len(TEMPLATES)
-		for factor in BIBER_LABEL_MAP:
-			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
-			temp_factors_list[factor].extend(factor_scores_accum[factor])
-
-		# Convert to DataFrame and append to all_dfs
-		all_dfs.append(pd.DataFrame(temp_factors_list))
-
-	df = pd.concat(all_dfs)
-
-	# Get factor columns.
-	factor_cols = [c for c in df.columns if c.startswith("factor")]
-	# Z-score normalize factors (to reduce model bias / scale differences).
-	df[factor_cols] = df[factor_cols].apply(zscore)
-	# Average across models per document.
-	df = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
-	# Extract corpus label from doc_id
-	df['category'] = df['doc_id'].apply(lambda x: x.split('_')[0])
-
-	# Split corpora at document level.
-	corpus1 = df[df["category"] == "corpus1"][factor_cols].values
-	corpus2 = df[df["category"] == "corpus2"][factor_cols].values
-
-	# Remove NaNs safely.
-	corpus1 = corpus1[~np.isnan(corpus1).any(axis=1)]
-	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
-
-	distances = []
-
-	for i in range(len(factor_cols)):
-		d = compute_distance(
-			corpus1[:, i],
-			corpus2[:, i],
-			metric=metric,
-			bins=bins
-		)
-		distances.append(d)
-
-	return np.mean(distances)
-
-def js_distance_zero(corpus1: Corpus, corpus2: Corpus, metric="js", bins=50):
-	texts = corpus1 + corpus2
-	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
-
-	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
-
-	all_dfs = []
-	for model_name, classifier in CLASSIFIERS.items():
-		# Initialize factor storage
-		temp_factors_list = {
-			'model_name': [model_name] * len(doc_ids),
-			'doc_id': doc_ids,
-			**{factor: [] for factor in BIBER_LABEL_MAP}
-		}
-
-		# Dictionary to accumulate scores per factor across templates
-		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
-		# Loop over all templates
-		for template in TEMPLATES:
-
-			with torch.no_grad():
-				outputs = classifier(
-					texts,
-					candidate_labels=all_labels,
-					hypothesis_template=template,
-					multi_label=True,
-					batch_size = BATCH_SIZE
-				)
-
-				if isinstance(outputs, dict):
-					outputs = [outputs]
-
-				# Accumulate weighted scores per factor
-				for j, output in enumerate(outputs):
-					for label, score in zip(output['labels'], output['scores']):
-						f = label_to_factor[label]
-						weight = BIBER_LABEL_MAP[f][label]
-						factor_scores_accum[f][j] += weight * score
-
-		# Average over templates
-		n_templates = len(TEMPLATES)
-		for factor in BIBER_LABEL_MAP:
-			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
-			temp_factors_list[factor].extend(factor_scores_accum[factor])
-
-		# Convert to DataFrame and append to all_dfs
-		all_dfs.append(pd.DataFrame(temp_factors_list))
-
-	df = pd.concat(all_dfs)
-
-	# Get factor columns.
-	factor_cols = [c for c in df.columns if c.startswith("factor")]
-	# Z-score normalize factors (to reduce model bias / scale differences).
-	df[factor_cols] = df[factor_cols].apply(zscore)
-	# Average across models per document.
-	df = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
-	# Extract corpus label from doc_id
-	df['category'] = df['doc_id'].apply(lambda x: x.split('_')[0])
-
-	# Split corpora at document level.
-	corpus1 = df[df["category"] == "corpus1"][factor_cols].values
-	corpus2 = df[df["category"] == "corpus2"][factor_cols].values
-
-	# Remove NaNs safely.
-	corpus1 = corpus1[~np.isnan(corpus1).any(axis=1)]
-	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
-
-	distances = []
-
-	for i in range(len(factor_cols)):
-		d = compute_distance(
-			corpus1[:, i],
-			corpus2[:, i],
-			metric=metric,
-			bins=bins
-		)
-		distances.append(d)
-
-	return np.mean(distances)
-
-def hellinger_distance_zero(corpus1: Corpus, corpus2: Corpus, metric="hellinger", bins=50):
-	texts = corpus1 + corpus2
-	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
-
-	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
-
-	all_dfs = []
-	for model_name, classifier in CLASSIFIERS.items():
-		# Initialize factor storage
-		temp_factors_list = {
-			'model_name': [model_name] * len(doc_ids),
-			'doc_id': doc_ids,
-			**{factor: [] for factor in BIBER_LABEL_MAP}
-		}
-
-		# Dictionary to accumulate scores per factor across templates
-		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
-		# Loop over all templates
-		for template in TEMPLATES:
-
-			with torch.no_grad():
-				outputs = classifier(
-					texts,
-					candidate_labels=all_labels,
-					hypothesis_template=template,
-					multi_label=True,
-					batch_size = BATCH_SIZE
-				)
-
-				if isinstance(outputs, dict):
-					outputs = [outputs]
-
-				# Accumulate weighted scores per factor
-				for j, output in enumerate(outputs):
-					for label, score in zip(output['labels'], output['scores']):
-						f = label_to_factor[label]
-						weight = BIBER_LABEL_MAP[f][label]
-						factor_scores_accum[f][j] += weight * score
-
-		# Average over templates
-		n_templates = len(TEMPLATES)
-		for factor in BIBER_LABEL_MAP:
-			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
-			temp_factors_list[factor].extend(factor_scores_accum[factor])
-
-		# Convert to DataFrame and append to all_dfs
-		all_dfs.append(pd.DataFrame(temp_factors_list))
-
-	df = pd.concat(all_dfs)
-
-	# Get factor columns.
-	factor_cols = [c for c in df.columns if c.startswith("factor")]
-	# Z-score normalize factors (to reduce model bias / scale differences).
-	df[factor_cols] = df[factor_cols].apply(zscore)
-	# Average across models per document.
-	df = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
-	# Extract corpus label from doc_id
-	df['category'] = df['doc_id'].apply(lambda x: x.split('_')[0])
-
-	# Split corpora at document level.
-	corpus1 = df[df["category"] == "corpus1"][factor_cols].values
-	corpus2 = df[df["category"] == "corpus2"][factor_cols].values
-
-	# Remove NaNs safely.
-	corpus1 = corpus1[~np.isnan(corpus1).any(axis=1)]
-	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
-
-	distances = []
-
-	for i in range(len(factor_cols)):
-		d = compute_distance(
-			corpus1[:, i],
-			corpus2[:, i],
-			metric=metric,
-			bins=bins
-		)
-		distances.append(d)
-
-	return np.mean(distances)
-
-
-def tv_distance_zero(corpus1: Corpus, corpus2: Corpus, metric="tv", bins=50):
-	texts = corpus1 + corpus2
-	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
-
-	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
-
-	all_dfs = []
-	for model_name, classifier in CLASSIFIERS.items():
-		# Initialize factor storage
-		temp_factors_list = {
-			'model_name': [model_name] * len(doc_ids),
-			'doc_id': doc_ids,
-			**{factor: [] for factor in BIBER_LABEL_MAP}
-		}
-
-		# Dictionary to accumulate scores per factor across templates
-		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
-		# Loop over all templates
-		for template in TEMPLATES:
-
-			with torch.no_grad():
-				outputs = classifier(
-					texts,
-					candidate_labels=all_labels,
-					hypothesis_template=template,
-					multi_label=True,
-					batch_size = BATCH_SIZE
-				)
-
-				if isinstance(outputs, dict):
-					outputs = [outputs]
-
-				# Accumulate weighted scores per factor
-				for j, output in enumerate(outputs):
-					for label, score in zip(output['labels'], output['scores']):
-						f = label_to_factor[label]
-						weight = BIBER_LABEL_MAP[f][label]
-						factor_scores_accum[f][j] += weight * score
-
-		# Average over templates
-		n_templates = len(TEMPLATES)
-		for factor in BIBER_LABEL_MAP:
-			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
-			temp_factors_list[factor].extend(factor_scores_accum[factor])
-
-		# Convert to DataFrame and append to all_dfs
-		all_dfs.append(pd.DataFrame(temp_factors_list))
-
-	df = pd.concat(all_dfs)
-
-	# Get factor columns.
-	factor_cols = [c for c in df.columns if c.startswith("factor")]
-	# Z-score normalize factors (to reduce model bias / scale differences).
-	df[factor_cols] = df[factor_cols].apply(zscore)
-	# Average across models per document.
-	df = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
-	# Extract corpus label from doc_id
-	df['category'] = df['doc_id'].apply(lambda x: x.split('_')[0])
-
-	# Split corpora at document level.
-	corpus1 = df[df["category"] == "corpus1"][factor_cols].values
-	corpus2 = df[df["category"] == "corpus2"][factor_cols].values
-
-	# Remove NaNs safely.
-	corpus1 = corpus1[~np.isnan(corpus1).any(axis=1)]
-	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
-
-	distances = []
-
-	for i in range(len(factor_cols)):
-		d = compute_distance(
-			corpus1[:, i],
-			corpus2[:, i],
-			metric=metric,
-			bins=bins
-		)
-		distances.append(d)
-
-	return np.mean(distances)
-
-#  ZERO-SHOT DISTANCE 
-def new_wasserstein_distance_zero(corpus1: Corpus, corpus2: Corpus, metric="wasserstein", bins=50):
-	texts = corpus1 + corpus2
-	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
-
-	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
-
-	all_dfs = []
-	for model_name, classifier in CLASSIFIERS.items():
-		# Initialize factor storage
-		temp_factors_list = {
-			'model_name': [model_name] * len(doc_ids),
-			'doc_id': doc_ids,
-			**{factor: [] for factor in BIBER_LABEL_MAP}
-		}
-
-		# Dictionary to accumulate scores per factor across templates
-		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
-		# Loop over all templates
-		for template in TEMPLATES:
-
-			with torch.no_grad():
-				outputs = classifier(
-					texts,
-					candidate_labels=all_labels,
-					hypothesis_template=template,
-					multi_label=True,
-					batch_size = BATCH_SIZE
-				)
-
-				if isinstance(outputs, dict):
-					outputs = [outputs]
-
-				# Accumulate weighted scores per factor
-				for j, output in enumerate(outputs):
-					for label, score in zip(output['labels'], output['scores']):
-						f = label_to_factor[label]
-						weight = BIBER_LABEL_MAP[f][label]
-						factor_scores_accum[f][j] += weight * score
-
-		# Average over templates
-		n_templates = len(TEMPLATES)
-		for factor in BIBER_LABEL_MAP:
-			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
-			temp_factors_list[factor].extend(factor_scores_accum[factor])
-
-		# Convert to DataFrame and append to all_dfs
-		all_dfs.append(pd.DataFrame(temp_factors_list))
-
-	df = pd.concat(all_dfs)
-
-	# Get factor columns.
-	factor_cols = [c for c in df.columns if c.startswith("factor")]
-	# Z-score normalize factors (to reduce model bias / scale differences).
-	df[factor_cols] = df[factor_cols].apply(zscore)
-	# Average across models per document.
-	df = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
-	# Extract corpus label from doc_id
-	df['category'] = df['doc_id'].apply(lambda x: x.split('_')[0])
-
-	# Split corpora at document level.
-	corpus1 = df[df["category"] == "corpus1"][factor_cols].values
-	corpus2 = df[df["category"] == "corpus2"][factor_cols].values
-
-	# Remove NaNs safely.
-	corpus1 = corpus1[~np.isnan(corpus1).any(axis=1)]
-	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
-
-	distances = []
-
-	for i in range(len(factor_cols)):
-		d = compute_distance(
-			corpus1[:, i],
-			corpus2[:, i],
-			metric=metric,
-			bins=bins
-		)
-		distances.append(d)
-
-	return np.mean(distances)
+def zero_wasserstein_distance_zero(corpus1: Corpus, corpus2: Corpus):
+    texts = corpus1 + corpus2
+    n_texts = len(texts)
+
+    doc_ids = np.array(
+        [f"corpus1_{i}" for i in range(len(corpus1))] +
+        [f"corpus2_{i}" for i in range(len(corpus2))]
+    )
+
+    assert n_texts == len(doc_ids), "texts and doc_ids are not of the same length"
+
+    # Precompute label → (factor_index, weight)
+    factors = list(BIBER_LABEL_MAP.keys())
+    factor_to_idx = {f: i for i, f in enumerate(factors)}
+    label_map = {
+        label: (factor_to_idx[f], BIBER_LABEL_MAP[f][label])
+        for f in BIBER_LABEL_MAP
+        for label in BIBER_LABEL_MAP[f]
+    }
+
+    all_model_results = []
+
+    for model_name, classifier in CLASSIFIERS.items():
+        # Use numpy for fast accumulation
+        factor_scores_accum = np.zeros((len(factors), n_texts), dtype=np.float32)
+
+        for template in TEMPLATES:
+            with torch.no_grad():
+                outputs = classifier(
+                    texts,
+                    candidate_labels=all_labels,
+                    hypothesis_template=template,
+                    multi_label=True,
+                    batch_size=BATCH_SIZE
+                )
+
+                if isinstance(outputs, dict):
+                    outputs = [outputs]
+
+                for j, output in enumerate(outputs):
+                    labels = output['labels']
+                    scores = output['scores']
+
+                    for label, score in zip(labels, scores):
+                        f_idx, weight = label_map[label]
+                        factor_scores_accum[f_idx, j] += weight * score
+
+        # Average over templates
+        factor_scores_accum /= len(TEMPLATES)
+
+        # Build DataFrame directly (no intermediate dict/list growth)
+        df_model = pd.DataFrame(
+            factor_scores_accum.T,
+            columns=factors
+        )
+        df_model["doc_id"] = doc_ids
+        df_model["model_name"] = model_name
+
+        all_model_results.append(df_model)
+
+    df = pd.concat(all_model_results, ignore_index=True)
+
+    factor_cols = factors  # already known
+
+    # Z-score normalize
+    df[factor_cols] = df[factor_cols].apply(zscore)
+
+    # Average across models
+    df = df.drop(columns='model_name').groupby("doc_id", sort=False).mean().reset_index()
+
+    # Extract category
+    df['category'] = np.where(
+        df['doc_id'].str.startswith("corpus1"),
+        "corpus1",
+        "corpus2"
+    )
+
+    corpus1_arr = df[df["category"] == "corpus1"][factor_cols].values
+    corpus2_arr = df[df["category"] == "corpus2"][factor_cols].values
+
+    # Remove NaNs
+    corpus1_arr = corpus1_arr[~np.isnan(corpus1_arr).any(axis=1)]
+    corpus2_arr = corpus2_arr[~np.isnan(corpus2_arr).any(axis=1)]
+
+    # Compute Wasserstein per dimension
+    wasserstein_per_dim = [
+        wasserstein_distance(corpus1_arr[:, i], corpus2_arr[:, i])
+        for i in range(len(factor_cols))
+    ]
+
+    return np.mean(wasserstein_per_dim)
