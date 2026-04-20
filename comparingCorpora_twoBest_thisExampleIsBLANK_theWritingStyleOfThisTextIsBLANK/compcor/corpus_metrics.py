@@ -16,6 +16,7 @@ from sklearn import svm
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy import spatial
 from scipy.stats import wasserstein_distance
+from scipy.spatial.distance import cdist
 from sklearn.metrics import f1_score
 import scipy
 import dcor
@@ -479,8 +480,9 @@ def traditional_biber_distance(corpus1: Corpus, corpus2: Corpus):
 	v = v[mask].reshape(1, -1) 
 	return sklearn.metrics.pairwise.euclidean_distances(u, v)[0, 0] / np.sqrt(len(u[0])) # Dimension-invariant euclidean distance. 
 
+
 #  ZERO-SHOT DISTANCE 
-def zero_shot_biber_distance_averages_and_euclidean(corpus1: Corpus, corpus2: Corpus):
+def euclidean_distance_zero(corpus1: Corpus, corpus2: Corpus):
 	texts = corpus1 + corpus2
 	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
 
@@ -535,20 +537,184 @@ def zero_shot_biber_distance_averages_and_euclidean(corpus1: Corpus, corpus2: Co
 	df[factor_cols] = df[factor_cols].apply(zscore)
 	mean_scores = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
 	mean_scores['category'] = [doc_id.split('_')[0] for doc_id in mean_scores['doc_id']]
-	mean_scores = mean_scores.groupby('category').mean(numeric_only=True)
 
-	u = mean_scores.loc['corpus1'].values
-	v = mean_scores.loc['corpus2'].values
+	# Split into corpora.
+	U = mean_scores[mean_scores['category'] == 'corpus1'][factor_cols].values
+	V = mean_scores[mean_scores['category'] == 'corpus2'][factor_cols].values
 
-	mask = ~np.isnan(u) & ~np.isnan(v)
-	u = u[mask].reshape(1, -1) 
-	v = v[mask].reshape(1, -1) 
-	return sklearn.metrics.pairwise.euclidean_distances(u, v)[0, 0] / np.sqrt(len(u[0])) # Dimension-invariant euclidean distance. 
+	# Pairwise Euclidean distances.
+	D = sklearn.metrics.pairwise.euclidean_distances(U, V)
+
+	# Dimension-normalized Euclidean.
+	D = D / np.sqrt(U.shape[1])
+
+	return D.mean()
 
 
 
 #  ZERO-SHOT DISTANCE 
-def zero_shot_biber_distance_wasserstein_distance(corpus1: Corpus, corpus2: Corpus):
+def cosine_distance_zero(corpus1: Corpus, corpus2: Corpus):
+	texts = corpus1 + corpus2
+	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
+
+	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
+
+	all_dfs = []
+	for model_name, classifier in CLASSIFIERS.items():
+		# Initialize factor storage
+		temp_factors_list = {
+			'model_name': [model_name] * len(doc_ids),
+			'doc_id': doc_ids,
+			**{factor: [] for factor in BIBER_LABEL_MAP}
+		}
+
+		# Dictionary to accumulate scores per factor across templates
+		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
+		# Loop over all templates
+		for template in TEMPLATES:
+
+			with torch.no_grad():
+				outputs = classifier(
+					texts,
+					candidate_labels=all_labels,
+					hypothesis_template=template,
+					multi_label=True,
+					batch_size = BATCH_SIZE
+				)
+
+				if isinstance(outputs, dict):
+					outputs = [outputs]
+
+				# Accumulate weighted scores per factor
+				for j, output in enumerate(outputs):
+					for label, score in zip(output['labels'], output['scores']):
+						f = label_to_factor[label]
+						weight = BIBER_LABEL_MAP[f][label]
+						factor_scores_accum[f][j] += weight * score
+
+		# Average over templates
+		n_templates = len(TEMPLATES)
+		for factor in BIBER_LABEL_MAP:
+			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
+			temp_factors_list[factor].extend(factor_scores_accum[factor])
+
+		# Convert to DataFrame and append to all_dfs
+		all_dfs.append(pd.DataFrame(temp_factors_list))
+
+	df = pd.concat(all_dfs)
+
+	# Simple averaging will prevent over-confidence. 
+	factor_cols = [c for c in df.columns if c.startswith("factor")]
+	df[factor_cols] = df[factor_cols].apply(zscore)
+	mean_scores = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
+	mean_scores['category'] = [doc_id.split('_')[0] for doc_id in mean_scores['doc_id']]
+
+	# Split into corpora.
+	U = mean_scores[mean_scores['category'] == 'corpus1'][factor_cols].values
+	V = mean_scores[mean_scores['category'] == 'corpus2'][factor_cols].values
+
+	# Pairwise cosine distances.
+	D = sklearn.metrics.pairwise.cosine_distances(U, V)
+	return D.mean()
+
+
+def sinkhorn_distance(X, Y, epsilon=0.1, n_iters=50):
+	C = cdist(X, Y, metric="euclidean")
+	a = np.ones((X.shape[0],)) / X.shape[0]
+	b = np.ones((Y.shape[0],)) / Y.shape[0]
+
+	K = np.exp(-C / epsilon)
+	K = K + 1e-12
+
+	u = np.ones_like(a)
+	v = np.ones_like(b)
+
+	for _ in range(n_iters):
+		u = a / (K @ v)
+		v = b / (K.T @ u)
+
+	P = np.outer(u, v) * K
+
+	return np.sum(P * C)
+
+
+
+#  ZERO-SHOT DISTANCE 
+def sinkhorn_distance_zero(corpus1: Corpus, corpus2: Corpus):
+	texts = corpus1 + corpus2
+	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
+
+	assert len(texts) == len(doc_ids), "texts and doc_ids are not of the same length"
+
+	all_dfs = []
+	for model_name, classifier in CLASSIFIERS.items():
+		# Initialize factor storage
+		temp_factors_list = {
+			'model_name': [model_name] * len(doc_ids),
+			'doc_id': doc_ids,
+			**{factor: [] for factor in BIBER_LABEL_MAP}
+		}
+
+		# Dictionary to accumulate scores per factor across templates
+		factor_scores_accum = {factor: [0.0] * len(texts) for factor in BIBER_LABEL_MAP}
+		# Loop over all templates
+		for template in TEMPLATES:
+
+			with torch.no_grad():
+				outputs = classifier(
+					texts,
+					candidate_labels=all_labels,
+					hypothesis_template=template,
+					multi_label=True,
+					batch_size = BATCH_SIZE
+				)
+
+				if isinstance(outputs, dict):
+					outputs = [outputs]
+
+				# Accumulate weighted scores per factor
+				for j, output in enumerate(outputs):
+					for label, score in zip(output['labels'], output['scores']):
+						f = label_to_factor[label]
+						weight = BIBER_LABEL_MAP[f][label]
+						factor_scores_accum[f][j] += weight * score
+
+		# Average over templates
+		n_templates = len(TEMPLATES)
+		for factor in BIBER_LABEL_MAP:
+			factor_scores_accum[factor] = [s / n_templates for s in factor_scores_accum[factor]]
+			temp_factors_list[factor].extend(factor_scores_accum[factor])
+
+		# Convert to DataFrame and append to all_dfs
+		all_dfs.append(pd.DataFrame(temp_factors_list))
+
+	df = pd.concat(all_dfs)
+
+	# Get factor columns.
+	factor_cols = [c for c in df.columns if c.startswith("factor")]
+	# Z-score normalize factors (to reduce model bias / scale differences).
+	df[factor_cols] = df[factor_cols].apply(zscore)
+	# Average across models per document.
+	df = df.drop(columns='model_name').groupby("doc_id").mean().reset_index()
+	# Extract corpus label from doc_id
+	df['category'] = df['doc_id'].apply(lambda x: x.split('_')[0])
+
+	# Split corpora at document level.
+	corpus1 = df[df["category"] == "corpus1"][factor_cols].values
+	corpus2 = df[df["category"] == "corpus2"][factor_cols].values
+
+	# Remove NaNs safely.
+	corpus1 = corpus1[~np.isnan(corpus1).any(axis=1)]
+	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
+
+	wasserstein_distance_out = sinkhorn_distance(corpus1, corpus2)
+	# Final score is the multi-variate wasserstein distance.
+	return wasserstein_distance_out
+
+
+
+#  ZERO-SHOT DISTANCE 
+def wasserstein_distance_zero(corpus1: Corpus, corpus2: Corpus):
 	texts = corpus1 + corpus2
 	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
 
@@ -629,7 +795,7 @@ def zero_shot_biber_distance_wasserstein_distance(corpus1: Corpus, corpus2: Corp
 
 
 #  ZERO-SHOT DISTANCE 
-def zero_shot_biber_distance_energy_distance(corpus1: Corpus, corpus2: Corpus):
+def energy_distance_zero(corpus1: Corpus, corpus2: Corpus):
 	texts = corpus1 + corpus2
 	doc_ids = [f"corpus1_{i}" for i in range(len(corpus1))] + [f"corpus2_{i}" for i in range(len(corpus2))]
 
@@ -697,4 +863,4 @@ def zero_shot_biber_distance_energy_distance(corpus1: Corpus, corpus2: Corpus):
 	corpus2 = corpus2[~np.isnan(corpus2).any(axis=1)]
 
 	energy_distance_out = dcor.homogeneity.energy_test(corpus1, corpus2, num_resamples=200, random_state=1)
-	return energy_distance_out.statistic
+	return energy_distance_out.pvalue
