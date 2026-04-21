@@ -40,6 +40,8 @@ import pandas as pd
 from scipy.stats import zscore
 from transformers import pipeline
 
+
+
 # Variables for zero-shot and traditional biber metrics.
 BATCH_SIZE = 8
 DEVICE = 0 if torch.cuda.is_available() else -1
@@ -474,104 +476,124 @@ def traditional_biber_distance(corpus1: Corpus, corpus2: Corpus):
 	factor_cols = [c for c in biber_dimensions.columns if c.startswith("factor")]
 	biber_dimensions = biber_dimensions.to_pandas()
 	biber_dimensions[factor_cols] = biber_dimensions[factor_cols].apply(zscore)
-	biber_dimensions = biber_dimensions.groupby('doc_cat').mean(numeric_only=True)
+	biber_dimensions["category"] = (biber_dimensions["doc_cat"].str.split("_").str[0])
+	corpus1_arr = biber_dimensions[biber_dimensions["category"] == "corpus1"][factor_cols].values
+	corpus2_arr = biber_dimensions[biber_dimensions["category"] == "corpus2"][factor_cols].values
 
-	u = biber_dimensions.loc['corpus1'].values
-	v = biber_dimensions.loc['corpus2'].values
+	wasserstein_per_dim = []
 
-	mask = ~np.isnan(u) & ~np.isnan(v)
-	u = u[mask].reshape(1, -1) 
-	v = v[mask].reshape(1, -1) 
-	return sklearn.metrics.pairwise.euclidean_distances(u, v)[0, 0] / np.sqrt(len(u[0])) # Dimension-invariant euclidean distance. 
+	for i in range(len(factor_cols)):
+		dim1 = corpus1_arr[:, i]
+		dim2 = corpus2_arr[:, i]
+
+		# Remove per-dimension nans.
+		dim1 = dim1[~np.isnan(dim1)]
+		dim2 = dim2[~np.isnan(dim2)]
+
+		if len(dim1) == 0 or len(dim2) == 0:
+			continue
+
+		wasserstein_per_dim.append(
+			wasserstein_distance(dim1, dim2)
+		)
+
+	return np.mean(wasserstein_per_dim)
 
 def zero_wasserstein_distance(corpus1: Corpus, corpus2: Corpus):
-    texts = corpus1 + corpus2
-    n_texts = len(texts)
+	texts = corpus1 + corpus2
+	n_texts = len(texts)
 
-    doc_ids = np.array(
-        [f"corpus1_{i}" for i in range(len(corpus1))] +
-        [f"corpus2_{i}" for i in range(len(corpus2))]
-    )
+	doc_ids = np.array(
+		[f"corpus1_{i}" for i in range(len(corpus1))] +
+		[f"corpus2_{i}" for i in range(len(corpus2))]
+	)
 
-    assert n_texts == len(doc_ids), "texts and doc_ids are not of the same length"
+	assert n_texts == len(doc_ids), "texts and doc_ids are not of the same length"
 
-    # Precompute label → (factor_index, weight)
-    factors = list(BIBER_LABEL_MAP.keys())
-    factor_to_idx = {f: i for i, f in enumerate(factors)}
-    label_map = {
-        label: (factor_to_idx[f], BIBER_LABEL_MAP[f][label])
-        for f in BIBER_LABEL_MAP
-        for label in BIBER_LABEL_MAP[f]
-    }
+	# Precompute label → (factor_index, weight)
+	factors = list(BIBER_LABEL_MAP.keys())
+	factor_to_idx = {f: i for i, f in enumerate(factors)}
+	label_map = {
+		label: (factor_to_idx[f], BIBER_LABEL_MAP[f][label])
+		for f in BIBER_LABEL_MAP
+		for label in BIBER_LABEL_MAP[f]
+	}
 
-    all_model_results = []
+	all_model_results = []
 
-    for model_name, classifier in CLASSIFIERS.items():
-        # Use numpy for fast accumulation
-        factor_scores_accum = np.zeros((len(factors), n_texts), dtype=np.float32)
+	for model_name, classifier in CLASSIFIERS.items():
+		# Use numpy for fast accumulation
+		factor_scores_accum = np.zeros((len(factors), n_texts), dtype=np.float32)
 
-        for template in TEMPLATES:
-            with torch.no_grad():
-                outputs = classifier(
-                    texts,
-                    candidate_labels=all_labels,
-                    hypothesis_template=template,
-                    multi_label=True,
-                    batch_size=BATCH_SIZE
-                )
+		for template in TEMPLATES:
+			with torch.no_grad():
+				outputs = classifier(
+					texts,
+					candidate_labels=all_labels,
+					hypothesis_template=template,
+					multi_label=True,
+					batch_size=BATCH_SIZE
+				)
 
-                if isinstance(outputs, dict):
-                    outputs = [outputs]
+				if isinstance(outputs, dict):
+					outputs = [outputs]
 
-                for j, output in enumerate(outputs):
-                    labels = output['labels']
-                    scores = output['scores']
+				for j, output in enumerate(outputs):
+					labels = output['labels']
+					scores = output['scores']
 
-                    for label, score in zip(labels, scores):
-                        f_idx, weight = label_map[label]
-                        factor_scores_accum[f_idx, j] += weight * score
+					for label, score in zip(labels, scores):
+						f_idx, weight = label_map[label]
+						factor_scores_accum[f_idx, j] += weight * score
 
-        # Average over templates
-        factor_scores_accum /= len(TEMPLATES)
+		# Average over templates
+		factor_scores_accum /= len(TEMPLATES)
 
-        # Build DataFrame directly (no intermediate dict/list growth)
-        df_model = pd.DataFrame(
-            factor_scores_accum.T,
-            columns=factors
-        )
-        df_model["doc_id"] = doc_ids
-        df_model["model_name"] = model_name
+		# Build DataFrame directly (no intermediate dict/list growth)
+		df_model = pd.DataFrame(
+			factor_scores_accum.T,
+			columns=factors
+		)
+		df_model["doc_id"] = doc_ids
+		df_model["model_name"] = model_name
 
-        all_model_results.append(df_model)
+		all_model_results.append(df_model)
 
-    df = pd.concat(all_model_results, ignore_index=True)
+	df = pd.concat(all_model_results, ignore_index=True)
 
-    factor_cols = factors  # already known
+	factor_cols = factors  # already known
 
-    # Z-score normalize
-    df[factor_cols] = df[factor_cols].apply(zscore)
+	# Z-score normalize
+	df[factor_cols] = df[factor_cols].apply(zscore)
 
-    # Average across models
-    df = df.drop(columns='model_name').groupby("doc_id", sort=False).mean().reset_index()
+	# Average across models
+	df = df.drop(columns='model_name').groupby("doc_id", sort=False).mean().reset_index()
 
-    # Extract category
-    df['category'] = np.where(
-        df['doc_id'].str.startswith("corpus1"),
-        "corpus1",
-        "corpus2"
-    )
+	# Extract category
+	df['category'] = np.where(
+		df['doc_id'].str.startswith("corpus1"),
+		"corpus1",
+		"corpus2"
+	)
 
-    corpus1_arr = df[df["category"] == "corpus1"][factor_cols].values
-    corpus2_arr = df[df["category"] == "corpus2"][factor_cols].values
+	corpus1_arr = df[df["category"] == "corpus1"][factor_cols].values
+	corpus2_arr = df[df["category"] == "corpus2"][factor_cols].values
 
-    # Remove NaNs
-    corpus1_arr = corpus1_arr[~np.isnan(corpus1_arr).any(axis=1)]
-    corpus2_arr = corpus2_arr[~np.isnan(corpus2_arr).any(axis=1)]
+	wasserstein_per_dim = []
 
-    # Compute Wasserstein per dimension
-    wasserstein_per_dim = [
-        wasserstein_distance(corpus1_arr[:, i], corpus2_arr[:, i])
-        for i in range(len(factor_cols))
-    ]
+	for i in range(len(factor_cols)):
+		dim1 = corpus1_arr[:, i]
+		dim2 = corpus2_arr[:, i]
 
-    return np.mean(wasserstein_per_dim)
+		# Remove per-dimension nans.
+		dim1 = dim1[~np.isnan(dim1)]
+		dim2 = dim2[~np.isnan(dim2)]
+
+		if len(dim1) == 0 or len(dim2) == 0:
+			continue
+
+		wasserstein_per_dim.append(
+			wasserstein_distance(dim1, dim2)
+		)
+
+	return np.mean(wasserstein_per_dim)
