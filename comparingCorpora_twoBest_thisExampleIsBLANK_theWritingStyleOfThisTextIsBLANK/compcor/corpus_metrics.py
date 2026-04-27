@@ -1,5 +1,6 @@
 import random
 random.seed(1618)
+
 import statsmodels.stats.multitest
 from collections import Counter, namedtuple
 from operator import itemgetter
@@ -15,13 +16,10 @@ from scipy.stats import chisquare, ttest_ind
 from sklearn import svm
 from sklearn.metrics.pairwise import cosine_similarity
 from scipy import spatial
-from scipy.stats import wasserstein_distance
-from scipy.spatial.distance import cdist
+from scipy.stats import wasserstein_distance, zscore
 from sklearn.metrics import f1_score
 import scipy
-import dcor
-from scipy.stats import wasserstein_distance, entropy
-from scipy.spatial.distance import jensenshannon
+from scipy.stats import wasserstein_distance
 
 from compcor.text_embedder import TextTokenizer, TextEmbedder
 import compcor.utils as utils
@@ -31,14 +29,28 @@ from compcor.text_tokenizer_embedder import STTokenizerEmbedder
 
 # ----------------------------------------------------------------
 # Added libraries to run zero-shot and traditional biber metrics.
-import gc
 import torch
-import sklearn
 import pybiber as pb
 import polars as pl
 import pandas as pd
-from scipy.stats import zscore
 from transformers import pipeline
+
+
+# Remove transformers verbosity to clean up space.
+from transformers import logging as transformers_logging
+transformers_logging.set_verbosity_error()
+
+# Silence HuggingFace
+import os
+os.environ["TOKENIZERS_PARALLELISM"] = "false"
+os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
+
+# Silence Python warnings.
+import warnings
+warnings.filterwarnings("ignore")
+
+import logging
+logging.getLogger("pybiber").setLevel(logging.ERROR)
 
 
 
